@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <title>Document</title>
+    {% load static %}
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'testingstyles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+      function centerLightbox() {
+        // Calculate the top position based on scroll position and window height
+        const windowHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+        const lightboxHeight = $("#lightbox").outerHeight();
+        const topPosition = windowHeight / 2 + scrollPosition - lightboxHeight / 2;
+        $("#lightbox").css("top", `${topPosition}px`);
+      }
+    
+      // Show the lightbox when the share button is clicked
+      $("#share-btn").click(function() {
+        $("body").css("overflow", "hidden"); // Hide scrollbar
+        centerLightbox();
+        $("#lightbox, #overlay").fadeIn();
+      });
+    
+      // Hide the lightbox and overlay when the close button or overlay is clicked
+      $("#close-btn, #overlay").click(function() {
+        $("body").css("overflow", "auto"); // Restore scrollbar
+        $("#lightbox, #overlay").fadeOut();
+      });
+    
+    });
+  </script>    
+
+  <style>
+        .lodaone {
+        
+        padding: 10px 30px;
+        font-size: 1rem;
+        border-radius: 0px;
+        background-color: #027d67;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        left: 40px;
+        transition: 0.2s ease-in;
+      
+      }
+      
+      .lodatwo {
+       
+        padding: 10px 30px;
+        font-size: 1rem;
+        border-radius: 0px;
+        background-color: #027D67;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s ease-in;
+      
+      }
+      .lodaone:hover{
+      transform: scale(1.05);
+    }
+    .lodatwo:hover{
+      transform: scale(1.05);
+    }
+  </style>
+
+  
+  <script>
+$(document).ready(function() {
+  // Show Description content by default
+  $('#comment-content').show();
+  $('#updates-content').hide();
+
+  // Handle tab clicks
+  $('.blogflex li').click(function() {
+    // Remove active class from all tabs
+    $('.blogflex li').removeClass('active');
+
+    // Hide all content sections
+    $('.tab-content').hide();
+
+    // Get the clicked tab ID
+    var tabId = $(this).attr('id');
+
+    // Show the corresponding content section
+    $('#' + tabId + '-content').show();
+
+    // Add active class to the clicked tab
+    $(this).addClass('active');
+  });
+
+  // Trigger click on Description tab to show it by default
+  $('#description-tab').addClass('active');
+
+  // Show Description content on initial load
+  $('#description-tab').click(function() {
+    $('.tab-content').hide(); // Hide all content sections
+    $('#description-content').show(); // Show Description content
+  });
+
+  // Show Comments content on tab click
+  $('#comment-tab').click(function() {
+    $('.tab-content').hide(); // Hide all content sections
+    $('#comment-content').show(); // Show Comments content
+  });
+
+  // Show Updates content on tab click
+  $('#updates-tab').click(function() {
+    $('.tab-content').hide(); // Hide all content sections
+    $('#updates-content').show(); // Show Updates content
+  });
+});
+
+  </script>
+
+
+
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+      </style>
+
+</head>
+   
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+
+        <div class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+       <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+       <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+        <li></li>
+        <li></li>
+       <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+         {% if user.is_authenticated %}
+         <li>
+          <div class="dropdown">
+            {% if user.profile.cropped_image_data %}
+            <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% endif %}
+            </div>
+          </div>
+       </li>
+         {% else %}
+         <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+         {% endif %}
+         
+
+     </ul>
+
+     <div class="overlayy" id="overlayy">
+      <div class="close-btn">
+        <i class="fas fa-times fa-lg"></i>
+      </div>
+      <div class="menu">
+        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 200px; height:auto;"></a>
+      
+      <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
+      <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out <i class="fas fa-face-sad-tear" style="margin-left: 10px;"></i></a>
+      {% else %}
+       <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
+       {% endif %}
+     <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
+    {% else %}
+    <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
+    {% endif %}
+  </div> 
+    </div>
+  </div>
+
+
+</header>
+<body>
+    {% if request.user.is_authenticated %}
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; margin-bottom: 20px;"> 
+        <h2 style="font-family: 'Raleway', sans-serif;">Update your followers on progress in </h2>
+        <h2 style="font-family: 'Raleway', sans-serif;" >{{project.project_title}}</h2>
+      </div>
+        
+       <hr>
+       
+<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+       <div style="display: flex; flex-direction: column; margin-left: 5%;">
+        <p style="margin-bottom: 5px;">Title (required)</p>
+        {{form.update_title}}
+      </div>
+      <div style="display: flex; flex-direction: column; margin-left: 5%;">
+        <p style="margin-bottom: 5px;">Description</p>
+        {{form.update_description}}  
+      </div>
+    
+      <div style="display: flex; flex-direction: column; margin-left: 5%;">
+        <p style="margin-bottom: 5px;">Video</p>
+        <div id="dropBox" class="drag-drop-area" onclick="openFileSelector()">
+            <div class="upload-icon">
+                <i class="fa fa-cloud-upload"></i>
+              </div>
+            <p style="color: #0a383fae;">Drag and drop your video here or</p>
+            <label for="fileInput" class="browse-button">Browse file</label>
+            <input type="file" id="fileInput" class="file-input" accept="video/*" onchange="handleFileSelect(event)">
+            <span id="videoName"></span>
+          </div>
+        {{form.update_video}}
+        <input type="file" id="hiddenFormVideo" name="{{ form.update_video.name }}" style="display: none;">
+      </div>
+      <div style="display: flex; flex-direction: column; margin-left: 5%;">
+        <p style="margin-bottom: 5px;">Thumbnail</p>
+        <div class="custom-image-upload">
+          <label for="id_update_thumbnail" class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+              <i class="fa fa-cloud-upload"></i>
+            </div>
+            <span class="upload-text">Drag and drop image or click to browse</span>
+          </label>
+          {{ form.update_thumbnail }}
+        </div>
+      </div>
+      <hr style="margin-top: 40px;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 10px; margin-bottom: 20px;">
+        <h2 style="font-family: 'Montserrat',sans-serif;">Preview</h2>
+            <div style="display: flex; flex-direction: row; gap: 30px;">
+
+                 <img id="previewImage" src="{{project.project_thumbnail.url}}" style="width: 350px; height: 200px; border-radius: 10px;">
+    
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+             <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0;" id="previewTitle"></p>
+             <p style="font-family: 'Roboto',sans-serif; color: gray; font-size: 0.9rem;">0 views - 0 days ago</p>
+             <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+                {% if project.user.profile.cropped_image_data %}
+            <img src="{{ project.user.profile.cropped_image_data.url }}" style="width: 30px; height: 30px; border-radius: 50%;"> 
+                {% else %}
+            <img src ="{% static 'profilepic.png'%}" style="width: 30px; height: 30px; border-radius: 50%;">
+                {% endif %}
+            <p style="font-family: 'Roboto',sans-serif; color: gray; font-size: 0.9rem; font-weight: 200;">{{ project.user.username }} (creator)</p>
+              </div>
+            <P id="previewDescription" style="max-width: 300px;font-family: 'Roboto',sans-serif; color: gray; font-size: 0.9rem; font-weight: 200;"></P>
+                </div>
+                
+            </div>
+         
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 100px;">
+    <button type="submit" class="lodatwo" style="margin: 0;">Post Update</button>
+</div>
+</form>
+
+    {% else %}
+
+     You're not supposed to be here (and you know it).
+
+    {% endif %}
+
+    <script>
+        // Function to handle image preview and update the <img> tag src attribute
+        function previewImage(event) {
+            var image = document.getElementById('previewImage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = 'block';
+        }
+        
+        // Add event listener to the file input
+        var fileInput = document.getElementById('id_update_thumbnail');
+        fileInput.addEventListener('change', previewImage);
+        </script>
+    
+              
+              <script>
+                // Function to update the preview
+                function updatePreview() {
+                  // Get the values from the form elements
+                  const titleValue = document.getElementById('id_update_title').value;
+                  const descriptionValue = document.getElementById('id_update_description').value;
+                  
+                  // Update the preview elements with the new values
+                  document.getElementById('previewTitle').textContent = titleValue;
+                  document.getElementById('previewDescription').textContent = descriptionValue;
+                }
+              
+                // Add event listeners to the form elements
+                document.getElementById('id_update_title').addEventListener('input', updatePreview);
+                document.getElementById('id_update_description').addEventListener('input', updatePreview);
+              </script>        
+
+
+<script>
+    function handleFileSelect(event) {
+      var files = event.target.files;
+      if (files.length > 0) {
+        var fileName = files[0].name;
+        document.getElementById("videoName").textContent = fileName;
+        document.getElementById("hiddenFormVideo").files = event.target.files;
+      }
+    }
+  
+    function openFileSelector() {
+      document.getElementById("fileInput").click();
+    }
+  </script>
+</body>
+</html>

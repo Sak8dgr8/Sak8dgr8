@@ -1,0 +1,80 @@
+
+
+.rip{
+background-image: url('castration.svg') ;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.welx{
+ font-family: 'Raleway',sans-serif;
+ font-size: 2rem; font-weight: 600;
+}
+.selx{
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.1rem;
+}
+
+
+.kokoro{
+  display: flex;
+  flex-direction: column;
+ position: relative; left: 100px;
+  gap: 4vh;
+  justify-content: center;
+  width: 40vw;
+  height: 100vh;
+  
+
+}
+.ily{
+  width: 100%;
+  height: 50px;
+  border: none;
+  background-color: #307261;
+  font-weight:bold ;
+  color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+.ily:hover{
+  background-color: #42c09e;
+  transition: 0.2s ease-in;
+}
+.rip-phone{
+  display: flex; 
+  flex-direction: column;
+  gap: 40px;
+
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.logo{
+    width: 200px;
+    height: auto;
+  }
+
+
+.form-container {
+    max-height: 260px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+
+@media(min-width:951px){
+  .rip-phone{
+    display: none;
+  }
+}
+
+@media(max-width:950px) {
+  .rip{
+    display: none;
+  }
+  .body{
+    background-image: none;
+  }
+}
+
+ 

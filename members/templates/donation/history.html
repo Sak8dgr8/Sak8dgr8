@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load widget_tweaks %}
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'fundingnowstyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar-testing');
+          var menuItems= document.querySelector('.menu-items');
+          if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            menuItems.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+            menuItems.classList.remove('scrolled');
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <script>
+        function handleFileSelect(event) {
+          var files = event.target.files;
+          if (files.length > 0) {
+            var fileName = files[0].name;
+            document.getElementById("videoName").textContent = fileName;
+            document.getElementById("hiddenFormVideo").files = event.target.files;
+          }
+        }
+      
+        function openFileSelector() {
+          document.getElementById("fileInput").click();
+        }
+      </script>
+      <style>
+        @import url('https://fonts.cdnfonts.com/css/youtube-sans');
+        </style>
+      <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
+      
+</head>
+   
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+       <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+       <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+        <li></li>
+        <li></li>
+       <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+         {% if user.is_authenticated %}
+         <li>
+          <div class="dropdown">
+            {% if user.profile.cropped_image_data %}
+            <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% endif %}
+            </div>
+          </div>
+       </li>
+         {% else %}
+         <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+         {% endif %}
+         
+
+     </ul>
+
+     <div class="overlay" id="overlay">
+      <div class="close-btn">
+        <i class="fas fa-times fa-lg"></i>
+      </div>
+      <div class="menu">
+          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 200px; height:auto;"></a>
+        
+        <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
+        <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out</a>
+        {% else %}
+         <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
+         {% endif %}
+       <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
+      {% else %}
+      <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
+      {% endif %}
+    </div> 
+      </div>
+    </div>
+
+
+</header>
+<body>
+    <br>
+<h2 align="center" style="font-family: 'Raleway',sans-serif;">Track your donations</h2>
+<h3 align="center" style="font-family: 'Raleway', sans-serif;">View updates on projects you've funded!</h3>
+    <br>
+<hr>
+<div class="row">
+{% if donations %}
+  {% for donation in donations %}
+    <div class="col-md-4">
+      <a href="{% url 'user_channel' username=donation.project.user.username %}" style="text-decoration: none;">
+        <div class="cuntainer">
+          <!-- Display project information here -->
+          <img src="{{ donation.project.project_thumbnail.url }}" style="height: 40%; width: auto;">
+          <h2 class="title">{{ donation.project.project_title }}</h2>
+          <div class="container">
+            <p class="description">{{ donation.project.project_description }}</p>
+          </div>
+            <br>
+          <div style="margin-top: auto; margin-bottom: 15px;">
+            <div style="display: flex; flex-direction: row; margin-left: 10px; align-items: center; gap: 10px;">
+              {% if donation.project.user.profile.cropped_image_data %}
+          <img src="{{ donation.project.user.profile.cropped_image_data.url }}" style="width: 30px; height: 30px; border-radius: 50%;"> 
+              {% else %}
+          <img src ="{% static 'profilepic.png'%}" style="width: 30px; height: 30px; border-radius: 50%;">
+              {% endif %}
+          <p class="username">{{ donation.project.user.username }}</p>
+            </div>
+          <div class="progress-bar">
+            <div id="progress-bar-fill" style="width: {{ donation.percentage_achieved }}% ;"></div>
+          </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <p class="fg" style="margin-top: 10px;">${{ donation.project.total_donations }} raised </p>
+                    <p class="fg" style="margin-top: 10px;"> You donated ${{donation.amount}}</p>
+                </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                    <p class="fg" style="color: gray;">X days to go</p>
+                    <p class="fg" style="color: gray;">{{ donation.donation_date }}</p>
+            </div>
+          <p class="fg" style="color: gray;"><i class="fa-solid fa-location-dot" style="color: #c7c7c7; margin-right: 5px;"></i>{{donation.project.city}}, {{donation.project.state}}</p>
+        </div>
+    
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+
+</div>
+{% else %}
+<div style="display: flex; flex-direction: column; height: 40vh; width: auto; align-items: center; justify-content: center; gap: 2vh;">
+
+    No donations? Let's fix that.
+    <a href="{% url 'funding_now' %}" class="sexting"><i class="fa fa-search"></i> Funding Now</a> 
+</div>
+{% endif %}
+
+
+
+
+<script>
+  document.querySelector(".menu-btn").addEventListener("click", function () {
+    document.getElementById("overlay").style.display = "block";
+  });
+  
+  document.getElementById("overlay").addEventListener("click", function (event) {
+    if (event.target.classList.contains("overlay")) {
+      document.getElementById("overlay").style.display = "none";
+    }
+  });
+  
+  document.querySelector(".close-btn").addEventListener("click", function () {
+    document.getElementById("overlay").style.display = "none";
+  });
+  </script>
+</body>
+</html>

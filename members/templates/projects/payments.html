@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load widget_tweaks %}
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'fundinginfostyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar-testing');
+          var menuItems= document.querySelector('.menu-items');
+          if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            menuItems.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+            menuItems.classList.remove('scrolled');
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <script>
+        function handleFileSelect(event) {
+          var files = event.target.files;
+          if (files.length > 0) {
+            var fileName = files[0].name;
+            document.getElementById("videoName").textContent = fileName;
+            document.getElementById("hiddenFormVideo").files = event.target.files;
+          }
+        }
+      
+        function openFileSelector() {
+          document.getElementById("fileInput").click();
+        }
+      </script>
+      <style>
+        @import url('https://fonts.cdnfonts.com/css/youtube-sans');
+        </style>
+      <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
+      
+     
+  </head>
+     
+  <header>
+  
+    <nav class="navbar-testing">
+      <div class="logo">
+        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+      </div> 
+      <ul class="navbar-nav">
+  
+          
+        <a href="{% url 'user_channel' username=request.user.username %}">  <button class="lodaone"><i class="fa fas-light fa-eye fa-lg" style="margin-right: 10px;"></i>Preview</button></a>
+          
+           
+            <a href="{% url 'edit_project' pk=project.pk %}"><button class="lodatwo"><i class="fa fa-pen-to-square fa-lg" style="margin-right: 10px;"></i>Edit Project</button> </a>
+         
+  
+           
+  
+       </ul>
+  </header>
+<body>
+    
+    <div style=" display: flex; flex-direction: column; align-items: center;">
+    <h2  class="heding">Verify your details and link a bank account</h2>
+    <h3  class="beding" style="width: 70%; text-align: center; color: gray; font-weight: 300;">Confirm who’s raising funds and receiving them if this project reaches its funding goal. Double-check your information—you agree the details you provide are true to your fullest knowledge.</h3>
+    </div>
+    
+   <hr>
+
+
+   <div class="rip">
+<div class="ashaye">
+    <div class="column">
+      <h2 class="headingstyle">Contact Email</h2>
+      <p class="estyle">Confirm the email address we should use for correspondence about this project.</p>
+      <p class="estyle">If the incorrect email is shown here, update it on your account.</p>
+    </div>
+    {% if project.verification_status == 'not_verified' %}
+            <div class="kuntainer" style="position: relative; top: 65px;">
+              <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;">  {{user.email}} </p>
+                <form method="post">
+                {% csrf_token %}
+                <button class="verifybutton" type="submit">Send verification email<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
+                </form>
+            </div>
+    {% elif project.verification_status == 'email_sent' %}
+    <div class="kuntainer" style="position: relative; top: 65px;">
+        <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
+        </i>Verifying the email sent to {{user.email}}</p>
+          <form method="post">
+          {% csrf_token %}
+          <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
+          </form>
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<div class="rip-phone">
+
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px;">
+    <h2 class="headingstyle">Contact Email</h2>
+    <div style="display: flex; flex-direction: column;">
+    <p class="pstyle" style="margin-bottom: 0;">Confirm the email address we should use for correspondence about this project.</p>
+    <p class="pstyle" style="margin-top: 0;">If the incorrect email is shown here, <a href="{%url 'channel_customization'%}" style="color: gray;">update it on your account.</a></p>
+    </div>
+
+    {% if project.verification_status == 'not_verified' %}
+    <div class="kuntainer">
+      <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;">  {{user.email}} </p>
+        <form method="post">
+        {% csrf_token %}
+        <button class="verifybutton" type="submit">Send verification email<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
+        </form>
+    </div>
+    {% elif project.verification_status == 'email_sent' %}
+    <div class="kuntainer">
+        <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
+        </i>Verifying the email sent to {{user.email}}</p>
+          <form method="post">
+          {% csrf_token %}
+          <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
+          </form>
+      </div>
+
+  </div>
+
+
+
+{% endif %}
+</div>

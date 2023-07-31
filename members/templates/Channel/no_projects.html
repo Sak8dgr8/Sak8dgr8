@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'testingstyles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+      </style>
+
+</head>
+   
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+       </div>
+       <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+       <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+        <li></li>
+        <li></li>
+       <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+         {% if user.is_authenticated %}
+         <li>
+         <div class="dropdown">
+           {% if user.profile.cropped_image_data %}
+           <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+           <div class="dropdown-content" id="dropdown-content">
+             <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+             <a href="{% url 'logout'%}">Log Out</a>
+           {% else %}
+           <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+           <div class="dropdown-content" id="dropdown-content">
+             <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+             <a href="{% url 'logout'%}">Log Out</a>
+           {% endif %}
+           </div>
+         </div>
+       </li>
+         {% else %}
+         <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+         {% endif %}
+         
+
+     </ul>
+</header>
+<body>
+ 
+  {% if user.id == request.user.id  %}
+        {% if user.profile.cropped_image_data %}
+              <img src="{{ user.profile.cropped_image_data.url }}" class="toosexy">
+        {% else %}
+              <img src="{% static 'profilepic.png' %}" class="toosexy">
+        {% endif %}
+   {% else %}    
+        {% if user.profile.cropped_image_data %}
+          <img src="{{ user.profile.cropped_image_data.url }}" class="toosexy">
+        {% else %}
+          <img src="{% static 'profilepic.png' %}" class="toosexy">
+        {% endif %}
+    {% endif %}
+  
+
+    <p class="usernamae">{{user.username}}</p>
+
+    
+   <a href="{% url 'channel_customization' %}"> <button class="sexy-button">Customize Channel</button></a>  
+  <hr class="hrforchannel">
+  
+  <div style="display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100vw; height: auto; position: absolute; top: 50vh;">
+  <h3>You have no on-going projects. </h3>
+  <a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold; width: 25vw; height: auto;"> Start a Project</button></a>
+</div>
+
+
+
+</body>
+</html>

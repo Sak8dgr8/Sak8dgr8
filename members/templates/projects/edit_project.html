@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load widget_tweaks %}
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'fundinginfostyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar-testing');
+          var menuItems= document.querySelector('.menu-items');
+          if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            menuItems.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+            menuItems.classList.remove('scrolled');
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <script>
+        function handleFileSelect(event) {
+          var files = event.target.files;
+          if (files.length > 0) {
+            var fileName = files[0].name;
+            document.getElementById("videoName").textContent = fileName;
+            document.getElementById("hiddenFormVideo").files = event.target.files;
+          }
+        }
+      
+        function openFileSelector() {
+          document.getElementById("fileInput").click();
+        }
+      </script>
+      
+    
+      <style>
+        @import url('https://fonts.cdnfonts.com/css/youtube-sans');
+        </style>
+      <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
+</head>
+   
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+        <button class="lodaone" id="previewButton"><i class="fa fas-light fa-eye fa-lg" style="margin-right: 10px;"></i>Preview</button>
+
+          <a href="{% url 'payment_info' %}"><button class="lodatwo"><i class="fas fa-duotone fa-sack-dollar fa-lg" style="margin-right: 10px;"></i>Payments</button> </a>
+
+         
+
+     </ul>
+</header>
+<body>
+{% if user.is_authenticated %}
+  {% if project.user.id == request.user.id %}
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; margin-bottom: 20px;"> 
+    <h2  class="heding">Edit your Our-Tube project</h2>
+    <h3  class="beding">Make it easy for people to learn about your project</h3>
+  </div>
+
+<hr>
+<div class="rip">
+    <form id="myForm" method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
+        <div class="ashaye">
+          <div class="column">
+            <h2 class="headingstyle">Project Location</h2>
+            <p class="pstyle">Enter the location that best describes where your project is based.</p>
+          </div>
+        <div style="display: flex; flex-direction: row; gap: 100px;">
+          <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px;">
+            <label for="{{ form.project_title.id_for_label }}" class="form-label">State</label>
+            {{ form.state }}
+          </div>
+          <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px;">
+            <label for="{{ form.project_title.id_for_label }}" class="form-label">City</label>
+            {{ form.city }}
+          </div>
+        </div>
+        </div>
+        <hr>
+
+      <div class="ashaye">
+        <div class="column">
+          <h2 class="headingstyle">Project Title</h2>
+          <p class="pstyle">Write a clear, brief title to help people quickly understand your project. This will appear on your on-going project and pre-launch pages.</p>
+        </div>
+        <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px;">
+          <label for="{{ form.project_title.id_for_label }}" class="form-label">Title</label>
+          {{ form.project_title }}
+        </div>
+      </div>
+      <br>
+     <hr>
+      <div class="ashaye-description">
+        <div class="column">
+          <p class="headingstyle">Project Description</p>
+          <p class="pstyle"> Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are.</p>
+          </div>
+        <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px;">
+          <label for="{{ form.project_description.id_for_label }}" class="form-label">Description</label>
+          {{ form.project_description }}
+        </div>
+      </div>
+       <hr>
+      <div class="ashaye-funding">
+        <div class="column">
+          <p class="headingstyle">Funding Goal</p>
+          <p class="pstyle"> Set an achievable goal that covers what you need to complete your project.</p>
+          <p class="pstyle">Funding is all-or-nothing. If you don’t meet your goal, you won’t receive any money.</p>
+          </div>
+        <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px;">
+          <label for="{{ form.project_description.id_for_label }}" class="form-label">Goal Amount</label>
+          {{ form.funding_goal }}
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div class="ashaye-target-date">
+        <div class="column">
+          <h2 class="headingstyle">Target completion date</h2>
+          <p class="pstyle">Build credibility for your project by setting a deadline for its execution. Update your backers on your progress via the updates section of your campaign. </p>
+        </div>
+        <div style="display: flex; flex-direction: row; gap: 20px; align-items: center; position: relative; top: 30px; left: 108px;">
+          {{ form.target_date }}
+          <p class="headingstyle" style="position: relative; top: -10px; font-weight: 400;">days after receiving funds.</p>
+        
+        </div>
+      </div>
+      <br><br><br>
+     <hr>
+
+      <div class="ashaye-thumbnail">
+        <div class="column">
+          <p class="headingstyle">Project Thumbnail</p>
+          <p class="pstyle">Upload an image as a thumbnail for your project. This will be shown when your project is displayed on Our-Tube or when shared via social media.</p>
+        </div>
+        <h1></h1>
+        <div class="column" style="display: flex; flex-direction: column; align-items: first baseline; margin-top: 20px;">
+          <label for="{{ form.project_thumbnail.id_for_label }}" class="form-label">Project Thumbnail</label>
+          {{ form.project_thumbnail }}
+        </div>
+      </div>
+       <hr>
+      <div class="ashaye">
+        <div class="column">
+          <p class="headingstyle">Project Video</p>
+          <p class="pstyle">  Add a video that describes your project. Tell people what you’re raising funds to do, how you plan to make it happen, who you are, and why you care about this project.</p>
+          </div>
+          <h1></h1>
+        <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px;">
+         
+            <div id="dropBox" class="drag-drop-area" onclick="openFileSelector()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p style="color: #0a383fae;">Drag and drop your video here or</p>
+              <label for="fileInput" class="browse-button">Browse file</label>
+              <input type="file" id="fileInput" class="file-input" accept="video/*" onchange="handleFileSelect(event)">
+              <span id="videoName"></span>
+            </div>
+            <!-- Hidden default file field submission field -->
+            {{ form.project_video }}
+            <input type="file" id="hiddenFormVideo" name="{{ form.project_video.name }}" style="display: none;">
+       
+          <br>
+          <button type="submit" style="display: none;">Sbumit</button>
+        
+    </form>
+        
+        </div>
+      </div>
+</div>
+
+<div class="rip-phone">
+<form id="myForm" method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
+
+
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px;">
+    <h2 class="headingstyle">Project Location</h2>
+    <p class="pstyle">Enter the location that best describes where your project is based.</p>
+      <div style="display: flex; flex-direction: row; gap: 75px;">
+         {{form.state}}
+         {{form.city}}
+      </div>
+  </div>
+  <hr style="width: 100%;">
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px; margin-top: 20px;">
+    <h2 class="headingstyle">Project Title</h2>
+    <p class="pstyle">Write a clear, brief title to help people quickly understand your project. This will appear on your on-going project and pre-launch pages.</p>
+    {{form.project_title}}
+  </div>
+  <hr style="width: 100%;">
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px">
+      <p class="headingstyle">Project Description</p>
+      <p class="pstyle"> Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are.</p>
+      {{form.project_description}} 
+  </div>
+  <hr style="width: 100%;">
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px">
+  <p class="headingstyle">Funding Goal</p>
+  <p class="pstyle" style="margin-bottom: 0;"> Set an achievable goal that covers what you need to complete your project.</p>
+  <p class="pstyle" style="margin-top: 0;">Funding is all-or-nothing. If you don’t meet your goal, you won’t receive any money.</p>
+  {{form.funding_goal}}
+  </div>
+  <hr style="width: 100%;">
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px">
+    <h2 class="headingstyle">Target completion date</h2>
+    <p class="pstyle">Build credibility for your project by setting a deadline for its execution. Update your backers on your progress via the updates section of your campaign. </p>
+    <div style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
+      {{ form.target_date }}
+      <p class="headingstyle" style="position: relative; top: -10px; font-weight: 400; margin-bottom: 0;margin-top: 20px">days after receiving funds.</p>
+    </div>
+  </div>
+  <hr style="width: 100%;">
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px">
+    <p class="headingstyle">Project Thumbnail</p>
+    <p class="pstyle">Upload an image as a thumbnail for your project. This will be shown when your project is displayed on Our-Tube or when shared via social media.</p>
+    {{form.project_thumbnail}}
+  </div>
+  <hr>
+  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px">
+  <p class="headingstyle">Project Video</p>
+  <p class="pstyle">  Add a video that describes your project. Tell people what you’re raising funds to do, how you plan to make it happen, who you are, and why you care about this project.</p>
+  <div class="column" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px;margin-top: 20px">
+         
+    <div id="dropBox" class="drag-drop-area" onclick="openFileSelector()">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p style="color: #0a383fae;">Drag and drop your video here or</p>
+      <label for="fileInput" class="browse-button">Browse file</label>
+      <input type="file" id="fileInput" class="file-input" accept="video/*" onchange="handleFileSelect(event)">
+      <span id="videoName"></span>
+    </div>
+    <!-- Hidden default file field submission field -->
+    {{ form.project_video }}
+    <input type="file" id="hiddenFormVideo" name="{{ form.project_video.name }}" style="display: none;">
+  </div>
+
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+  {% else %}
+  <p style="position: absolute; left: 35%; top: 50%;"> You're not supposed to be here (and you know it).</p>
+      {% endif %}
+  {% else %}
+  <p style="position: absolute; left: 35%; top: 50%;"> You're not supposed to be here (and you know it).</p>
+  {% endif %}
+        
+
+
+  <script>
+    // Get references to the buttons and the form
+    const previewButton = document.getElementById('previewButton');
+    const myForm = document.getElementById('myForm');
+
+    // Handle click event of the preview button
+    previewButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Trigger the form submission programmatically
+        myForm.submit();
+    });
+
+    // Handle form submission (optional - to hide the preview button after form is submitted)
+    myForm.addEventListener('submit', function () {
+        // Hide the preview button after the form is submitted
+        previewButton.style.display = 'none';
+    });
+</script>
+
+
+</body>
+</html>

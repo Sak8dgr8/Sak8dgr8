@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'userchannelstyle.css'%}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
+    <!-- Include Cropper.js library -->
+   
+    
+
+
+
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar-testing');
+          var menuItems= document.querySelector('.menu-items');
+          if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            menuItems.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+            menuItems.classList.remove('scrolled');
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <style>
+        @import url('https://fonts.cdnfonts.com/css/youtube-sans');
+        </style>
+      <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
+     
+
+</head>
+   
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+       </div>
+       <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+       <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+        <li></li>
+        <li></li>
+       <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+         {% if user.is_authenticated %}
+         <li>
+          <div class="dropdown">
+            {% if user.profile.cropped_image_data %}
+            <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% endif %}
+            </div>
+          </div>
+       </li>
+         {% else %}
+         <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+         {% endif %}
+         
+
+     </ul>
+</header>
+<body>
+
+
+    <nav class="edit-bar">
+        <ul class="throatgoat">
+            <h1 style="font-size: 2rem;">Customize your channel</h1>
+            <li class="gapfap"></li>
+            <a href="{% url 'user_channel' username=request.user.username %}">  <li class="litems"><button style="background-color: #ffffff; color: #1774e5; width: 130px; height: 40px; font-size: large; cursor: pointer; border: none;" >View channel</button></li></a>
+           <li></li>
+        </ul>
+    </nav>
+
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div style="display: flex; flex-direction: column; max-width: 40vw; font-size: 0.9rem ;font-family: 'Roboto', sans-serif; color: gray; font-weight: 400; margin-left: 6%; position:absolute; top: 35vh;">
+    <h3 style="color: black;">Profile Picture</h3>
+    <p>Your profile picture will appear where your channel is presented on Our-Tube, like next to your projects or comments.</p>
+
+          <div style="display: flex; flex-direction: row; gap: 2vw;">
+            <img id="preview-image" src="
+            {% if user.profile.cropped_image_data %}
+            {{ user.profile.cropped_image_data.url }}
+              {% else %}
+              {% static 'profilepic.png' %}{% endif %}" style="   width: 150px;
+              height: 150px;
+              border-radius: 50%;"> 
+                <div style="display: flex; flex-direction: column">
+            <p style="align-self: flex-start;"> It is reccomended to use a picture that's at least 98 x 98 pixels and 4mb or less. Use a PNG or GIF (no animations) file. Make sure your picture follows
+            the Our-Tube community guidelines. </p>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'channel_customization' %}">{% csrf_token %}
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                 
+                  {{form.profile_pic}}
+                  <input type="hidden" id="cropped-image-data" name="cropped_image_data">
+            <button type="submit" name="submit_profile_pic" style="background-color: #1774e5; border-radius: 4px; margin: 0;
+            border: none; color: #ffffff; width: 100px; height: 40px; align-items: center; cursor: pointer; font-size: medium;">PUBLISH</button>
+                </form>
+            </div>
+                 </div>
+
+              
+            </div>
+         
+  </div>
+          <form method="POST" action="{% url 'channel_customization' %}">{% csrf_token %}
+            <div style="position: absolute; top: 82vh; left: 6vw; display: flex; flex-direction: column; max-width: 42.5vw;">
+              <h3>Channel Bio</h3>
+              <p style="font-size: 0.9rem ;font-family: 'Roboto', sans-serif; color: gray;">Enter a description of your channel that can be up to 150 characters long. This will sit at the very top of your channel page next to your profile picture.</p>
+              <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">  
+                    {{ form.bio }} 
+                    <button type="submit" name="submit_bio" style="background-color: #1774e5; border-radius: 4px; margin: 0;
+            border: none; color: #ffffff; width: 100px; height: 40px; align-items: center; cursor: pointer; font-size: medium; justify-content: space-between;">PUBLISH</button>
+                          </form>
+                        </div>
+           </div>
+  
+
+ 
+</form>
+
+<div id="cropping-modal" class="modal">
+  <div class="modal-content">
+    <img id="cropping-preview" src="{% if form.profile_pic.value %}{{ form.profile_pic.value.url }}{% else %}{% if user.profile.profile_pic %}{{ user.profile.profile_pic.url }}{% else %}{% static 'profilepic.png' %}{% endif %}{% endif %}" alt="Cropping Preview" class="toosexy">
+    <button id="crop-button" class="crop-button">Crop</button>
+  </div>
+</div>
+
+<!-- Cropping Preview -->
+
+
+<!-- Cropping Preview -->
+
+<input type="hidden" id="cropped-image-data" name="cropped_image_data">
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+<script>
+  // Select the file input element
+  const fileInput = document.getElementById('id_profile_pic');
+
+  // Select the cropping preview image element
+  const croppingPreview = document.getElementById('cropping-preview');
+
+  // Select the crop button element
+  const cropButton = document.getElementById('crop-button');
+
+  // Create a FileReader instance
+  const reader = new FileReader();
+
+  // Initialize Cropper.js on the cropping preview image element
+  let cropper;
+
+  // Add an event listener for the file selection
+  fileInput.addEventListener('change', function(event) {
+    // Get the selected file
+    const file = event.target.files[0];
+
+    // Read the selected file as a data URL
+    reader.readAsDataURL(file);
+  });
+
+  // Add an event listener for the file reader's "load" event
+  reader.addEventListener('load', function(event) {
+    // Update the cropping preview image source with the loaded file
+    croppingPreview.src = event.target.result;
+    
+    // Show the cropping modal
+    showModal();
+
+    // Re-initialize Cropper.js on the updated image element
+    if (cropper) {
+      cropper.destroy();
+    }
+    cropper = new Cropper(croppingPreview, {
+      aspectRatio: 1, // Set the aspect ratio to maintain a square crop
+      viewMode: 1, // Set the view mode to restrict the cropping area to the image size
+      autoCrop: true, // Enable automatic cropping
+      crop: function(event) {
+        // Handle crop event if needed
+      }
+    });
+  });
+
+  // Add a click event listener to the crop button
+  cropButton.addEventListener('click', function() {
+    // Get the cropped image data from the cropping library
+    const croppedImageData = cropper.getCroppedCanvas().toDataURL();
+
+    // Update the hidden input field with the cropped image data
+    document.getElementById('cropped-image-data').value = croppedImageData;
+
+    // Hide the cropping modal
+    hideModal();
+
+    // Update the preview image with the cropped image data
+    const previewImage = document.getElementById('preview-image');
+    previewImage.src = croppedImageData;
+  });
+
+  // Function to show the cropping modal
+  function showModal() {
+    const modal = document.getElementById('cropping-modal');
+    modal.style.display = 'block';
+  }
+
+  // Function to hide the cropping modal
+  function hideModal() {
+    const modal = document.getElementById('cropping-modal');
+    modal.style.display = 'none';
+  }
+</script>
+
+
+
+
+</body>
+</html>

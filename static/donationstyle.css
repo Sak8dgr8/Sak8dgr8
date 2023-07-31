@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+.logo{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+.logo img{
+    width: 100%;
+    
+}
+
+.navbar-nav{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    margin: auto;
+    height: 5.6rem;
+  
+  }
+  
+.vinsmoke{
+  text-decoration: none;
+  color: #000000;
+  font-family: 'Roberto', sans-serif;
+  font-weight: 600;
+}
+li:hover{
+  color: #555;
+  transition: 0.2s ease-in;
+}
+.navbar-testing {
+  background-color: #ffffff;
+  width: 100%;
+  
+  position: absolute;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  top: 0;
+}
+
+
+
+
+
+
+
+
+
+:root {
+  font-size: 16px;
+  font-family: sans-serif;
+  
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+main{
+  margin-top: 5rem;
+}
+
+
+
+
+body{
+  margin-top: 5.6rem;
+  margin-left: 0;
+  margin-right: 0;
+  background-color:  #f2eded9d;
+}
+
+.container{
+    width: 50%;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.donation-box{
+    
+    width: 200px;
+    height: 61px;
+    padding-left: 130px;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: 'Lato', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 0.8em;
+    
+}
+.thumbnail{
+  width: 40%; height: auto;
+}
+
+.platform-box{
+  width: 100px;
+  height: 46px;
+  padding-left: 50px;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 0.8em;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px;
+  min-width: 160px;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-content a {
+  display: block;
+  color: #333333;
+  text-decoration: none;
+  padding: 8px 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown img {
+  width: 50px; /* Adjust the width to fit your button image */
+  height: 50px; /* Adjust the height to fit your button image */
+  cursor: pointer;
+}
+.email{
+  width: 100%;
+
+}
+
+.firstname{
+  width: 40%;
+  margin-top: 20px;
+
+}
+.lastname{
+  width: 40%;
+  margin-top: 20px;
+}
+.card-number{
+  width: 40%;
+  margin-top: 20px;
+}
+.card-expiry{
+  width: 20%;
+  margin-top: 20px;
+}
+.cvv{
+  width: 20%;
+  margin-top: 20px;
+}
+.holder{
+  width: 100%;
+  margin-top: 20px;
+}
+.sexycards {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.carddetails{
+  margin-top: 20px;
+  width: 90%;
+  height: auto;
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 10px; /* Rounded corners */
+    padding-left: 20px; /* Add some padding inside the container */
+    padding-right: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.kodakblack{
+  display: flex; flex-direction: row; justify-content: center; margin-top: 25vh;
+}
+.boat{
+  display: flex; flex-direction: column; max-width: 70%; align-items: center;
+}
+.joyner{
+  display: flex; flex-direction: column; gap: 1vh; margin-top: 10px; align-items: center;
+}
+.nle{
+  position: relative; right: 5vw; top: 50px; font-family: 'Lato',sans-serif;
+}
+.eminem{
+  position: relative; top:38px; left: 30px; font-family: 'Lato',sans-serif;
+}
+
+@media(max-width:1001px){
+  .container{
+    width: 100%;
+    border-radius: 0;
+    
+    
+  }
+  .thumbnail{
+    display: none;
+  }
+ .kodakblack{
+  margin-top: 0;
+ }
+ .boat{
+  flex-direction: row; gap: 5px; width: 100%;
+ }
+ .joyner{
+  align-items: flex-start;
+  margin-top: 0;
+  gap: 0px;
+ }
+ .nle{
+  left: 20px;
+  top: 43px;
+ }
+ .donation-box{
+  width: calc(100% - 50px);
+  padding-left: 50px;
+  margin-bottom: 0.6em;
+ }
+ .platform-box{
+  width: calc(100% - 50px);
+ }
+ .eminem{
+  top: 35px;
+  left: 23px;
+ }
+}
+
+
+@media(max-width:851px){
+  .navbar-nav{
+    height: 4.8rem;
+    justify-content: space-between;
+    margin-right: 6vw;
+    margin-left: 6vw;
+   }
+   body{
+    margin-top: 4.8rem;
+   }
+   h1{
+    font-size: 2.5rem;
+   }
+   .lichenbg{
+    min-height: 65vh ;
+   }
+  .menu-items{
+    display: none;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .guts{
+    display: block;
+  }
+  .logo{
+    width: 140px;
+    height: 140px;
+  }
+  .hudini{
+    display: none;
+  }
+  .donate-btn-btn{
+    width: 18rem;
+  }
+ 
+}
+
+@media(max-width:600px){
+ .navbar-nav{
+  height: 4.4rem;
+  justify-content: space-between;
+  margin-right: 2rem;
+  margin-left: 2rem;
+
+ }
+ .logo{
+    width: 125px;
+    height: 125px;
+  }
+
+ body{
+  margin-top: 4.4rem;
+ }
+ h1{
+  font-size: 2rem;
+ }
+ .lichenbg{
+  min-height: 60vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 20px;
+    height: 2px;
+  }
+  .logo-testing img{
+    width: 130px;
+ 
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .donate-btn-btn{
+    width: 14rem;
+    height: 2.5rem;
+    font-size: medium;
+
+  }
+
+  .dropdown img{
+    width: 45px;
+    height: 45px;
+  }
+
+  
+}
+
+
+@media(max-width:483px){
+ .navbar-nav{
+  height: 4rem;
+ }
+ .logo{
+    width: 120px;
+    height: 120px;
+    top: 5px;
+  }
+
+ body{
+  margin-top: 4rem;
+ }
+ h1{
+  font-size: 1.6rem;
+ }
+ .lichenbg{
+  min-height: 55vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 15px;
+    height: 1.9px;
+  }
+  .logo-testing img{
+    width: 110px;
+    
+    left: 38vw;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .guts{
+    display: block;
+  }
+ 
+  .donate-btn-btn{
+    font-size: small;
+    width: 11rem;
+    height: 2.2rem;
+  }
+  .dropdown img{
+    height: 40px;
+    width: 40px;
+
+  }
+}
+
+@media(max-width:392px){
+  h1{
+    font-size: 1.4rem;
+  }
+  .lichenbg{
+    min-height: 48vh ;
+   }
+
+   .logo{
+width: 90px;
+height: 90px;
+top: 10px;
+
+
+   }
+
+   .dropdown img{
+    width: 37px;
+    height: 37px;
+   }
+
+   .donate-btn-btn{
+    width: 10rem;
+    height: 2rem;
+    font-size: 0.7rem;
+   }
+   .navbar-nav{
+    margin-left: 5vw;
+    margin-right: 5vw;
+   }
+}
+
+@media(max-width:323px){
+
+h1{
+    font-size: 1.3rem;
+}
+
+}

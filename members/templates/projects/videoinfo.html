@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load widget_tweaks %}
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'fundinginfostyle.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar-testing');
+          var menuItems= document.querySelector('.menu-items');
+          if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            menuItems.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+            menuItems.classList.remove('scrolled');
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("dropdown");
+        var dropdownContent = document.getElementById("dropdown-content");
+  
+        dropdown.addEventListener("click", function() {
+          dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+        });
+  
+        document.addEventListener("click", function(event) {
+          var targetElement = event.target;
+          if (!targetElement.closest(".dropdown")) {
+            dropdownContent.style.display = "none";
+          }
+        });
+      });
+      </script>
+      <style>
+        @import url('https://fonts.cdnfonts.com/css/youtube-sans');
+        </style>
+      <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
+      
+      <script>
+     function handleDragOver(event) {
+        event.preventDefault();
+        document.getElementById("dropBox").classList.add("dragover");
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        document.getElementById("dropBox").classList.remove("dragover");
+
+        var files = event.dataTransfer.files;
+        if (files.length > 0) {
+            var fileName = files[0].name;
+            document.getElementById("videoName").textContent = fileName;
+        }
+    }
+
+    function handleFileSelect(event) {
+        var files = event.target.files;
+        if (files.length > 0) {
+            var fileName = files[0].name;
+            document.getElementById("videoName").textContent = fileName;
+        }
+    }
+        function handleFileSelect(event) {
+            var files = event.target.files;
+            if (files.length > 0) {
+                var fileName = files[0].name;
+                document.getElementById("videoName").textContent = fileName;
+            }
+        }
+        function openFileSelector() {
+        document.getElementById("fileInput").click();
+    }
+    </script>
+    <script>
+      function handleFileSelect(event) {
+        var files = event.target.files;
+        if (files.length > 0) {
+          var fileName = files[0].name;
+          document.getElementById("videoName").textContent = fileName;
+          document.getElementById("hiddenFormVideo").files = event.target.files;
+        }
+      }
+    
+      function openFileSelector() {
+        document.getElementById("fileInput").click();
+      }
+    </script>
+</head>
+   
+<header>
+    <nav class="navbar-testing">
+     
+      <ul class="navbar-nav">
+        <li class="menu-items"><a href="#">How it Works</a></li>
+        <li class="menu-items"><a href="ProjectDisplaytoviewers.html">Funding Now</a> </li>
+        <div class="logo-testing">
+          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg'%}"></a>
+        </div> 
+        <a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a>
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+        <img src="{% static 'defaultProfilepic.svg' %}" alt="Button Image" id="dropdown">
+        <div class="dropdown-content" id="dropdown-content">
+          <a href="{%url 'user_channel'%}">Your Channel</a>
+          <a href="{% url 'logout'%}">Log Out</a>
+        </div>
+      </div>
+      {% else %}
+       <li class="menu-items"> <a href="members/login_user">Login</a> </li>
+       {% endif %}
+       <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+       </div>
+    </ul>
+</header>
+<body>
+    <div style="margin-top: 6.6rem; margin-bottom: 1rem; font-family: 'Open Sans', sans-serif;">
+    <h2 align="center" style="font-size: 1.5rem;">Project video</h2>
+    <h3 align="center" style="font-size: 1rem ;">Shed light on the execution of your campaign and why you're passionate about it.</h3>
+</div>
+    <div class="form-container-two">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.project_video }}
+    
+            <div id="dropBox" class="drag-drop-area" onclick="openFileSelector()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag and drop your video here or</p>
+                <br>
+                <label for="fileInput" class="browse-button">Browse file</label>
+                <input type="file" id="fileInput" class="file-input" accept="video/*" name="{{ form.video.name }}" onchange="handleFileSelect(event)">
+            </div>
+        
+            <span id="videoName"></span>
+        
+            {{ form.video.errors }}
+        
+            <button type="submit" class="form-button">Save Draft</button></a>
+        </form>
+    </div>
+    {% if form.video.errors %}
+        <div class="error">{{ form.video.errors }}</div>
+    {% endif %}
+</body>
+</html>

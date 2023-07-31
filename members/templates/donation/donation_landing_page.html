@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&Raleway:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.donation-box').on('keydown', function(e) {
+        var keyCode = e.keyCode || e.which;
+        
+        if (keyCode === 190 || keyCode === 110 || keyCode === 189) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+  </script>
+    <script>
+      $(document).ready(function() {
+        $('.platform-box').on('keydown', function(e) {
+          var keyCode = e.keyCode || e.which;
+          
+          if (keyCode === 190 || keyCode === 110 || keyCode === 189) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      });
+    </script>
+  <style>
+    input.donation-box::-webkit-inner-spin-button,
+input.donation-box::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    /* Add any additional styling as needed */
+}
+  </style>
+  <style>
+      input.platform-box::-webkit-inner-spin-button,
+      input.platform-box::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+          /* Add any additional styling as needed */
+      }
+      </style>
+  
+ {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our-tube</title>
+    <link rel="stylesheet" href="{% static 'donationstyle.css' %}">
+   
+    <script>
+      window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar-testing');
+        var menuItems= document.querySelector('.menu-items');
+        if (window.scrollY > 0) {
+          navbar.classList.add('scrolled');
+          menuItems.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+          menuItems.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      var dropdown = document.getElementById("dropdown");
+      var dropdownContent = document.getElementById("dropdown-content");
+
+      dropdown.addEventListener("click", function() {
+        dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+      });
+
+      document.addEventListener("click", function(event) {
+        var targetElement = event.target;
+        if (!targetElement.closest(".dropdown")) {
+          dropdownContent.style.display = "none";
+        }
+      });
+    });
+    </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  </style>
+</head>
+<header>
+
+      <nav class="navbar-testing">
+        <div class="logo">
+          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+        </div> 
+        <ul class="navbar-nav">
+       
+        <a href="{% url 'user_channel' username=project.user %}" class="vinsmoke"><li><i class="fas fa-arrow-alt-circle-down fa-rotate-90"></i>
+            Fundraiser</li></a> 
+
+          {% if user.is_authenticated %}
+          <li>
+          <div class="dropdown">
+            {% if user.profile.cropped_image_data %}
+            <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% endif %}
+            </div>
+          </div>
+        </li>
+          {% else %}
+          <a href="{% url 'login_user' %}" class="vinsmoke"><li>Log in</li></a>
+          {% endif %}
+          
+
+      </ul>
+</header>
+
+<body>
+  
+<div class="kodakblack">
+    <div class="container">
+        <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center;">
+
+            <img src="{{project.project_thumbnail.url}}" class="thumbnail">
+
+            
+              
+                <p style="font-family: 'Lato', sans-serif;">  You're supporting <strong>@{{project.user}}</strong> in 
+           
+           <strong>{{project.project_title}}</strong></p>
+
+          
+       
+        
+       </div>
+       <form method="POST" action="">
+        {% csrf_token %}
+                    <div class="joyner">
+                        <p style="margin: 0; padding: 0; font-weight: bold; margin-left: 5px; font-family: 'Lato', sans-serif;">Enter your donation</p>
+                        <i class="fa-sharp fa-light fa-dollar-sign fa-2xl nle"></i>   {{form.amount}}
+                        <hr style="width: 100%;">
+                    </div>
+                    
+             
+                    
+                    
+               
+                <div style="display: flex; flex-direction: column; gap: 1vw; width: 100%;">
+               <strong><p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 1em;"> Tip Our-Tube services. </p> </strong>
+               <p style="margin: 0; font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Our-Tube has a 0% platform fee. Our-Tube will continue offering its services thanks to donors who will leave an optional amount here:</p>
+               <i class="fa-sharp fa-light fa-dollar-sign fa-xl eminem"></i>  {{form.platform_donation}}
+               <hr style="width: 100%;">
+               <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em; font-weight: bold;">Your donation</p>
+                  <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;">Donation to @{{project.user}}</p>
+                    <p id="display-amount" style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;"></p>
+                  </div>
+                  <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;">Our-Tube tip</p>
+                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;" id="display-platform-amount"></p>
+                  </div>
+                <hr style="width: 100%;">
+                <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                  <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em; font-weight: bold; margin-bottom: 0.3em;">Total due today</p>
+                  <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;" id="display-total"></p>
+                </div>
+                <hr style="width: 100%;">
+
+                  
+<div style="width: 50%; align-self: center; margin-top: 30px;">
+ 
+
+</div>
+    
+
+              </div>
+              
+              
+ 
+
+            <button type="submit">Donate</button>
+            </form>
+    </div>
+    
+ 
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the input elements and the element to display the total amount
+    const donationAmountInput = document.getElementById("id_amount");
+    const platformDonationInput = document.getElementById("id_platform_donation");
+    const displayAmountElement = document.getElementById("display-amount");
+    const displayPlatformAmountElement = document.getElementById("display-platform-amount");
+    const displayTotalElement = document.getElementById("display-total");
+
+    // Add event listeners to the input fields for the "input" event
+    donationAmountInput.addEventListener("input", updateTotal);
+    platformDonationInput.addEventListener("input", updateTotal);
+
+    // Function to update the total amount
+    function updateTotal() {
+      // Get the values the user typed in the input fields
+      const typedAmount = donationAmountInput.value;
+      const typedPlatformAmount = platformDonationInput.value;
+
+      // Convert the input values to valid numbers, or consider them as 0 if not valid numbers
+      const amount = parseFloat(typedAmount) || 0;
+      const platformAmount = parseFloat(typedPlatformAmount) || 0;
+
+      // Update the elements to display the typed values with dollar signs
+      displayAmountElement.textContent = "$" + amount.toFixed(2);
+      displayPlatformAmountElement.textContent = "$" + platformAmount.toFixed(2);
+
+      // Calculate the total amount
+      const totalAmount = amount + platformAmount;
+
+      // Update the element to display the total amount with a dollar sign
+      displayTotalElement.textContent = "$" + totalAmount.toFixed(2);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
+ {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <title>Our-tube</title>
+    <link rel="stylesheet" href="{% static 'testingstyles.css' %}">
+   
+    <script>
+      window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar-testing');
+        var menuItems= document.querySelector('.menu-items');
+        if (window.scrollY > 0) {
+          navbar.classList.add('scrolled');
+          menuItems.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+          menuItems.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      var dropdown = document.getElementById("dropdown");
+      var dropdownContent = document.getElementById("dropdown-content");
+
+      dropdown.addEventListener("click", function() {
+        dropdownContent.style.display = (dropdownContent.style.display === "none") ? "block" : "none";
+      });
+
+      document.addEventListener("click", function(event) {
+        var targetElement = event.target;
+        if (!targetElement.closest(".dropdown")) {
+          dropdownContent.style.display = "none";
+        }
+      });
+    });
+    </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  </style>
+</head>
+<header>
+
+  <nav class="navbar-testing">
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+    </div> 
+    <ul class="navbar-nav">
+
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+       <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+       <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+        <li></li>
+        <li></li>
+       <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+         {% if user.is_authenticated %}
+         <li>
+          <div class="dropdown">
+            {% if user.profile.cropped_image_data %}
+            <img src="{{ user.profile.cropped_image_data }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+              <a href="{% url 'donation_history' %}">Your Donations</a>
+              <a href="{% url 'logout'%}">Log Out</a>
+            {% endif %}
+            </div>
+          </div>
+       </li>
+         {% else %}
+         <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+         {% endif %}
+         
+
+     </ul>
+
+     <div class="overlay" id="overlay">
+      <div class="close-btn">
+        <i class="fas fa-times fa-lg"></i>
+      </div>
+      <div class="menu">
+          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 200px; height:auto;"></a>
+        
+        <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
+        <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out</a>
+        {% else %}
+         <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
+         {% endif %}
+       <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
+      {% else %}
+      <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
+      {% endif %}
+    </div> 
+      </div>
+    </div>
+
+</header>
+<body>
+    <h2 align="center" style="font-family: 'Montserrat',sans-serif; font-weight: 400; margin-top: 120px ;margin-bottom: 40px;">Update #{{update_number}} in <a href="{% url 'user_channel' username=project.user %}" style="color: #000000;"> {{project.project_title}}</a></h2>
+
+    
+<div style="display: flex; flex-direction: row; justify-content: space-around;">
+  <div class="dek">
+      <video controls class="xvid">
+          <source src="{{ update.update_video.url }}" type="{{ update.update_video.content_type }}">
+          Your browser does not support the video tag.
+      </video>
+      <p class="title-update">{{update.update_title }}</p>
+
+    
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+
+          <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+              {% if project.user.profile.cropped_image_data %}
+              <img src="{{ project.user.profile.cropped_image_data }}" class="xvidpfp"> 
+                {% else %}
+              <img src ="{% static 'profilepic.png'%}" class="xvidpfp">
+                {% endif %}
+                <div style="display: flex; flex-direction: column;">
+                  <p class="xvidusername"><a href="{% url 'user_channel' username=project.user %}" style="color: #000000; text-decoration: none; font-weight: 600;">@{{ project.user.username }}</a></p>
+                  <p style="margin: 0; font-size: 0.9rem; color: gray;">{{number_of_subscribers}} subscribers</p>
+                </div>     
+            </div>
+                      {% if is_subscribed %}
+              <form method="post" action="{% url 'remove_subscriber' username=project.user.username %}?next={{ request.path }}">
+                {% csrf_token %}
+                <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
+              </form> 
+              {% else %}
+                  {% if user.is_authenticated %}
+              <form method="post" action="{% url 'add_subscriber' username=project.user.username %}?next={{ request.path }}">
+                {% csrf_token %}
+              <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
+              </form> 
+                  {% else %}
+              <a href="{% url 'login_user' %}">  <button class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i> subscribe </button>  </a>
+                {% endif %}
+              {% endif %}
+        
+              
+        </div>
+
+
+                    <hr style="width: 100%;">
+                    <div style="display: flex; flex-direction: column;">
+                      <div style="display: flex; flex-direction: row;">
+                      <p style="font-family: 'Open sans',sans-serif; font-size: 0.85rem; margin-top: 0.5em; margin-left: 2.5%; margin-right: 2.5%; font-weight: 200;">{{update.views}} views</p>
+              
+                      <p style="font-family: 'Open sans',sans-serif; font-size: 0.85rem; margin-top: 0.5em; margin-left: 2.5%; margin-right: 2.5%; font-weight: 200;">{{update.updated_at}}</p>
+                      </div>
+                      <p style="font-family: 'Lato',sans-serif; font-size: 1rem; margin-top: 0em; margin-left: 2.5%; margin-right: 2.5%;">{{ update.update_description }}</p>
+                  </div>
+                <hr style="width: 100%;">
+
+                <div class="pekoms"> 
+                        <div style="display: flex; flex-direction: column;">
+
+                          <div class="progress-bar-phone">
+                            <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
+                          </div>
+                          <div style="display: flex; flex-direction: row; gap: 5px; align-items: flex-end; margin-top: 0.5em;">
+                            <p class="donation-text-phone">${{project.total_donations}}</p>
+                            <p class="pforfundinggoal-phone">raised of ${{ project.funding_goal }} goal</p>
+                            
+                          </div>
+                          <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{project.donations.count}} people donated</p>
+                        </div>
+                
+                        <hr>
+                        {% if channel_owner %}
+                            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                            {% if project.user.profile.cropped_image_data %}
+                              <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+                            {% else %}
+                              <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                            {% endif %}
+                                <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                                  <a href="{% url 'user_channel' username=project.user.username %}" style="text-decoration: none; color: #000000;"> <p style="margin: 0;">@{{ project.user.username }}</p></a>
+                                      <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                    <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.amount}} </p>
+                                    <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">   Creator Contribution         </p>
+                                      </div>
+                                </div>
+                            </div>
+                          {% endif %}
+                          {% if highest_donation %}
+                            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                            {% if highest_donation.donor.profile.cropped_image_data %}
+                              <img src="{{highest_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+                            {% else %}
+                            <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                            {% endif %}
+                                <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                          <a href="{% url 'user_channel' username=highest_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ highest_donation.donor.username }}</p></a>        
+                                    <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                      <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                                      <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
+                                    </div>
+                                </div>
+                            </div>
+                          {% endif %}
+                          {% if most_recent_donation %}
+                            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px; margin-bottom: 10px;">
+                            {% if most_recent_donation.donor.profile.cropped_image_data %}
+                              <img src="{{most_recent_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+                              {% else %}
+                              <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                            {% endif %}
+                                <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                                  <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>
+                                    <div style="display: flex; flex-direction: row; gap: 1vw;">
+                                    <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                                    <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                          <hr>
+                          <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
+                          <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
+                            <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
+                            </button>
+                
+                            <hr style="width: 100%;">
+                    </div>
+                    <p>Comments ({{comment_count}})</p>
+
+                    {% if not update.updatecomments.all %}
+                              <p style="margin-bottom: 0; display: flex; justify-content: center; align-items: center;">No comments yet...</p>
+                  
+                                {% if user.is_authenticated %}
+                  
+                                <form class="comment-form" method="POST" action="">
+                                  {% csrf_token %}
+                                  <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; width: 100%; margin-bottom: 4vh;">
+                                    {% if user.profile.cropped_image_data %}
+                                    <img src="{{user.profile.cropped_image_data.url}}" style="border-radius: 50%; height: 5vw; width: 5vw;">
+                                    {% else %}
+                                    <img src="{% static 'profilepic.png' %}" style="border-radius: 50%; height: 5vw; width: 5vw;">
+                                    {% endif %}
+                                
+                                      <div style="display: flex; flex-direction: column;">
+                                        {{ comment_form.as_p }}
+                                        <button type="submit" >Comment</button>
+                                      </div>
+                                  </div>
+                                  
+                                </form>
+                  
+                                {% else %}
+                  
+                                <h3> <a href="{% url 'login_user' %}" style="text-decoration: underline;">Log in</a> to comment.</h3><br>
+                  
+                                {% endif %}
+                              {% else %}
+                  
+                              <!-- Iterate over comments and display them -->
+                              {% if user.is_authenticated %}
+                              <form class="comment-form" method="POST" action="">
+                                {% csrf_token %}
+                                <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; width: 100%; margin-bottom: 4vh;">
+                                  {% if user.profile.cropped_image_data %}
+                                  <img src="{{user.profile.cropped_image_data.url}}" style="border-radius: 50%; height: 55px; width: 55px;">
+                                  {% else %}
+                                  <img src="{% static 'profilepic.png' %}" style="border-radius: 50%; height: 55px; width: 55px;">
+                                  {% endif %}
+                              
+                                    <div style="display: flex; flex-direction: column;">
+                                      {{ comment_form.as_p }}
+                                      <button type="submit" >Comment</button>
+                                    </div>
+                                </div>
+                                
+                              </form>
+                              {% else %}
+                  
+                              <h3><a href="{% url 'login_user' %}" style="text-decoration: underline;">Log in</a> to comment. </h3><br>
+                  
+                              {% endif %}
+                  
+                  
+                              {% for updatecomment in update.updatecomments.all %}
+                                <div class="comment">
+                                  {% if updatecomment.user.profile.cropped_image_data %}
+                                  <img src="{{ updatecomment.user.profile.cropped_image_data.url }}" alt="Profile Picture" style="border-radius: 50%; height: 55px; width: 55px;">
+                                  {% else %}
+                                  <img src="{% static 'profilepic.png' %}" style="border-radius: 50%; height: 55px; width: 55px;">
+                                  {% endif %}
+                                                  <div style="display: flex; flex-direction: column;"> 
+                                                      <div class="comment-header">
+                                                      <strong> <a href="{% url 'user_channel' username=updatecomment.user.username %}" style="text-decoration: none; cursor: pointer; color: inherit;"> <p>@{{ updatecomment.user.username }}</p></a></strong>
+                                                        <p style="color: gray;">{{ updatecomment.created_at }}</p>
+                                                      </div>
+                                                      <div class="comment-body">
+                                                        <p>{{ updatecomment.body }}</p>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                  
+                              {% endfor %}
+                              {% endif %}
+      </div> 
+    
+  
+    
+
+    <div class="sexy-hot-container">
+
+      <div style="display: flex; flex-direction: row; gap: 5px; justify-content: center; align-items: flex-end; margin: 0;">
+      <p style="font-size: 1.5rem; font-family: 'Lato', sans-serif; margin: 0;">${{project.total_donations}}</p>
+   
+          <p class="pforfundinggoal" style="margin: 0;">raised of ${{ project.funding_goal }} goal</p>
+     
+  
+      </div>
+  
+  
+      <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: auto; width: 24vw; gap: 20px;">
+        
+        <div class="progress-bar">
+          <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
+        </div>
+        
+        <button id="shareButton" class="sexysex-button share-button"
+        data-title="{{ project.project_title }}"
+        data-thumbnail="{{ project.project_thumbnail.url }}"
+        data-url="{{ request.build_absolute_uri }}">
+         <i class="fas fa-share"></i> Share
+         </button>
+
+
+
+      <button class="sexysex-button donate-button" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
+      <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
+      </button>
+      <div class="donation-info">
+      <p class="donation-text">{{project.donations.count}} people donated</p>
+      </div>
+  
+        </div>
+      <hr>
+      {% if channel_owner %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          {% if project.user.profile.cropped_image_data %}
+            <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% else %}
+            <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% endif %}
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                <a href="{% url 'user_channel' username=project.user.username %}" style="text-decoration: none; color: #000000;"> <p style="margin: 0;">@{{ project.user.username }}</p></a>
+                    <div style="display: flex; flex-direction: row; gap: 2vw;">
+                  <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.amount}} </p>
+                  <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">   Creator Contribution         </p>
+                     </div>
+              </div>
+          </div>
+        {% endif %}
+        {% if highest_donation %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          {% if highest_donation.donor.profile.cropped_image_data %}
+            <img src="{{highest_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% else %}
+           <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+           {% endif %}
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+        <a href="{% url 'user_channel' username=highest_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ highest_donation.donor.username }}</p></a>        
+                   <div style="display: flex; flex-direction: row; gap: 2vw;">
+                     <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                     <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
+                   </div>
+              </div>
+          </div>
+        {% endif %}
+        {% if most_recent_donation %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          {% if most_recent_donation.donor.profile.cropped_image_data %}
+            <img src="{{most_recent_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+            {% else %}
+            <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% endif %}
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>
+                  <div style="display: flex; flex-direction: row; gap: 1vw;">
+                  <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                  <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
+                  </div>
+              </div>
+          </div>
+          {% endif %}
+  </div>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+    document.querySelector(".menu-btn").addEventListener("click", function () {
+      document.getElementById("overlay").style.display = "block";
+    });
+    
+    document.getElementById("overlay").addEventListener("click", function (event) {
+      if (event.target.classList.contains("overlay")) {
+        document.getElementById("overlay").style.display = "none";
+      }
+    });
+    
+    document.querySelector(".close-btn").addEventListener("click", function () {
+      document.getElementById("overlay").style.display = "none";
+    });
+    </script>
+</body>
+</html>

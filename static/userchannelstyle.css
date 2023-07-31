@@ -1,0 +1,386 @@
+
+.navbar-testing {
+    background-color: #42c09e;
+    width: 100%;
+    z-index: 900;
+    position: fixed;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    left: 0;
+    top: 0;
+  }
+
+.navbar-nav{
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        list-style: none;
+        margin: auto;
+        height: 5.6rem;
+        
+      }
+
+      .vinsmoke{
+        text-decoration: none;
+        color: white;
+        font-family: 'Roberto', sans-serif;
+        font-weight: 600;
+      }
+      li:hover{
+        color: #555;
+      }
+
+.dropdown {
+        position: relative;
+        display: inline-block;
+        z-index: 999;
+      }
+      
+.dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 4px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        padding: 10px;
+        min-width: 160px;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+.dropdown-content a {
+        display: block;
+        color: #333333;
+        text-decoration: none;
+        padding: 8px 10px;
+      }
+      
+.dropdown-content a:hover {
+        background-color: #f1f1f1;
+        z-index: 999;
+      }
+      
+.dropdown img {
+        width: 50px; /* Adjust the width to fit your button image */
+        height: 50px; /* Adjust the height to fit your button image */
+        cursor: pointer;
+      }
+
+.logo-testing img {
+        width: 9.5rem; 
+        height: auto;
+        margin-right: 0;
+      
+      }
+
+.guts{
+        display: none;
+      }
+
+.donate-btn {
+        background-color: #28a745;
+        padding: 10px 25px;
+        border-radius: 30px;
+        border: none;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+      }
+      
+.donate-btn a {
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      
+.donate-btn:hover {
+        background-color: #69DDED;
+      }
+    
+body{
+        margin-top: 5.6rem;
+        margin-left: 0;
+        margin-right: 0;
+        font-family: 'Roboto', sans-serif;
+    
+      }
+
+.bar{
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #ffffff;
+      }
+.hamburger{
+        display: none;
+        cursor: pointer;
+      }
+
+h1 {
+  color: #0a383f;
+  font-size: 2.5rem;
+  padding: 0px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.toosexy{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}
+
+
+textarea {
+  margin: 0;
+  width: 70%;
+  height: 50px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+textarea :focus {
+  outline: none;
+
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.sexy-button {
+    background-color: #bebebe;
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 20vh;
+    left: 80%;
+  }
+
+  .sexy-button:hover {
+    background-color: #666666;
+  }
+
+  .throatgoat{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    background-color: #ffffff;
+    z-index: 999;
+
+  }
+  .pstyle{
+    font-family: 'Open Sans', sans-serif; font-size: 1rem;font-weight: 400; color: gray; 
+  }
+  
+
+  .gapfap{
+    flex-grow: 0.1;
+  }
+ 
+  .edit-bar{
+    width: 100%;
+    height: 5%;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 100;
+    
+  }
+
+  .litems{
+    font-size: large;
+  }
+
+  /* Updated CSS for a modern and visually appealing form */
+
+/* Style the form container */
+.form-container {
+    margin-top: 8vh;
+    max-width: 600px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    
+  }
+  
+  /* Style form rows */
+  .form-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 5vw;
+    margin-bottom: 20px;
+  }
+  
+  /* Style form fields */
+  .form-group {
+    flex-basis: 50%; /* Adjust the width of each form group */
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333333;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    box-shadow: 0 1px 4px rgba(0, 123, 255, 0.4);
+  }
+  
+  /* Style form button */
+  .form-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional styles */
+  /* Add your own custom styles here */
+
+  .title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    color: #0a383f;
+    position: absolute; 
+    left: 50vw;
+  }
+
+  .video-player {
+    width: 50%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  
+  .video-player::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .video-player::-webkit-media-controls-play-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+  }
+
+  .sexy-container {
+    width: 30vw;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    /* Add more sexy styles as needed */
+  }
+
+  .usernamae{
+    font-family: 'Roboto', sans-serif; position: absolute; left: 20%; top: 20vh;   color: #0a383f;
+    font-size: 2.5rem;
+  }
+
+  #cropping-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    width: 25vw;
+    height: 25vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 40vw;
+    height: 40vh;
+  }
+
+  .crop-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .logo{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 1.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+.logo img{
+    width: 100%;
+    
+}
+
+
+  .crop-button:hover {
+    background-color: #45a049;
+  }
+  

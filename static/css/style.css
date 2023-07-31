@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.navbar-testing {
+  background-color: #42c09ebc;
+  width: 100%;
+  
+  position: fixed;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  top: 0;
+}
+
+.donate-btn {
+  background-color: #28a745;
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+}
+
+.donate-btn a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.donate-btn:hover {
+  background-color: #69DDED;
+}
+
+
+.logo-testing img {
+  width: 9.5rem; 
+  height: auto;
+  margin-right: 0;
+
+}
+
+.menu-items {
+ text-decoration: none;
+ align-items: center;
+ font-family: 'Roboto', sans-serif;
+}
+
+
+
+.menu-items a {
+  text-decoration: none;
+
+  color: #ffffff;
+font-weight: 600;
+font-size: 15px;
+transition: color 0.3s ease;
+}
+
+.menu-items a:hover {
+color: #555;
+}
+
+.navbar-testing.scrolled {
+background-color: #ffffff;
+}
+
+.menu-items.scrolled a{
+  color: #000000;
+}
+
+:root {
+  font-size: 16px;
+  font-family: sans-serif;
+  
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+main{
+  margin-top: 5rem;
+}
+
+.navbar-nav{
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+  margin: auto;
+  height: 5.6rem;
+
+}
+.hamburger{
+  display: none;
+  cursor: pointer;
+}
+
+body{
+  margin-top: 5.6rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.bar{
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #ffffff;
+}
+
+.guts{
+  display: none;
+}
+
+h1 {
+  color: #0a383f;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.content{
+  text-align: center;
+  color: #fff;
+  padding: 15px;
+}
+
+.lichenbg{
+  background: url('images/stock-photo-vintage-engraving-flower-background-with-hand-drawn-daisy-or-chamomile-elements-for-organic-1797769294.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  min-height: 70vh;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px;
+  min-width: 160px;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-content a {
+  display: block;
+  color: #333333;
+  text-decoration: none;
+  padding: 8px 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown img {
+  width: 50px; /* Adjust the width to fit your button image */
+  height: 50px; /* Adjust the height to fit your button image */
+  cursor: pointer;
+}
+.hudini{
+  display: block;
+}
+
+@media(max-width:768px){
+  .navbar-nav{
+    height: 4.8rem;
+   }
+   body{
+    margin-top: 4.8rem;
+   }
+   h1{
+    font-size: 2.5rem;
+   }
+   .lichenbg{
+    min-height: 65vh ;
+   }
+  .menu-items{
+    display: none;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .guts{
+    display: block;
+  }
+  .navbar-nav{
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+  .logo-testing{
+   left: 40vw;
+    position: absolute;
+  }
+ 
+}
+
+@media(max-width:600px){
+ .navbar-nav{
+  height: 4.4rem;
+ }
+ body{
+  margin-top: 4.4rem;
+ }
+ h1{
+  font-size: 2rem;
+ }
+ .lichenbg{
+  min-height: 60vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 20px;
+    height: 2px;
+  }
+  .logo-testing img{
+    width: 120px;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .guts{
+    display: block;
+  }
+  .navbar-nav{
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-left: 0.5rem;
+  }
+  .donate-btn{
+    display: none;
+  }
+  
+}
+
+
+@media(max-width:483px){
+ .navbar-nav{
+  height: 4rem;
+ }
+ body{
+  margin-top: 4rem;
+ }
+ h1{
+  font-size: 1.6rem;
+ }
+ .lichenbg{
+  min-height: 55vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 15px;
+    height: 1.5px;
+  }
+  .logo-testing img{
+    width: 90px;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .guts{
+    display: block;
+  }
+  .navbar-nav{
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-left: 0.5rem;
+  }
+  .donate-btn{
+    font-size: 7px;
+  }
+  
+}
+
+@media(max-width:392px){
+  h1{
+    font-size: 1.2rem;
+  }
+  .lichenbg{
+    min-height: 48vh ;
+   }
+}
