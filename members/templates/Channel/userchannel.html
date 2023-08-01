@@ -725,11 +725,13 @@ $(document).ready(function() {
                   
                 
                   <div class="tab-content" id="updates-content">
+             
                   {% if user.id == request.user.id %}
                   <div style="display: flex; align-items: center; justify-content: center;">
                    <a href="{% url 'project_update' project_id=project.pk %}"> <button class="lodatwo" style="text-align:center; margin-bottom: 20px; margin-top: 10px;">Post an Update</button> </a>
                   </div>
                   {% endif %}
+              <div class="taylor">
                 {% if updates %}
                   {% for update in updates %}
 
@@ -769,7 +771,7 @@ $(document).ready(function() {
                 <p>  @{{project.user.username}} hasn't posted any updates yet. </p>
               </div>
                 {% endif %}
-
+              </div>
                   </div>
 
            

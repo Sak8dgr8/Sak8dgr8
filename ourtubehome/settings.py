@@ -169,5 +169,5 @@ PAYPAL_CLIENT_SECRET = 'ECmnv7vSVdr_isev2FsLhOWAoxiywAk-AtdWc2a6byhIaujdxwPNojgW
 PAYPAL_ENVIRONMENT = 'sandbox'
 
 django_heroku.settings(locals())
-SECURE_SSL_REDIRECT = True
+
 

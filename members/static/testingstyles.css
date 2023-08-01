@@ -1231,6 +1231,7 @@ header{
   margin: initial;
 }
 
+
 }
 
 @media(max-width:953px){
@@ -1242,6 +1243,9 @@ header{
   }
   .sexy-hot-container{
     display: none;
+  }
+  .taylor{
+    display:flex; flex-direction: column; align-items: center;
   }
   .dek{
     width: 80vw;
@@ -1261,7 +1265,7 @@ header{
   }
   .allinone{
     position: initial;
-    width: 80%;
+    width: 90%;
     margin: auto;
     margin-top: 50px;
   }
@@ -1386,12 +1390,7 @@ header{
 .total-donations{
   font-size: 1.3rem;
 }
-.pforfundinggoal-phone{
-  font-size: 1.1rem;
-}
-.donation-text-phone{
-  font-size: 1.15rem;
-}
+
 
 }
 @media(max-width:769px){
@@ -1400,12 +1399,6 @@ header{
     height: calc(80vw * 9 / 16);
   }
 
-  .donation-text-phone{
-    font-size: 1.15rem;
-  }
-  .pforfundinggoal-phone{
-    font-size: 1rem;
-  }
   .pekoms{
     left: 1em;
   }
@@ -1425,7 +1418,12 @@ header{
   .allinone-phone{
     top: 70px;
   }
-
+  .donation-text-phone {
+    margin: 0; font-family: 'Lato', sans-serif; font-size: 1.3rem;
+  }
+  .pforfundinggoal-phone{
+    font-size: 0.95rem;
+  }
 }
 
 @media(max-width:713px){
@@ -1550,6 +1548,12 @@ top: 15vh;
     width: 44px;
     height: 44px;
   }
+  .donation-text-phone {
+  font-size: 1.2rem;
+  }
+  .pforfundinggoal-phone{
+    font-size: 0.9rem;
+  }
 }
 
 @media(max-width:540px){
@@ -1559,12 +1563,7 @@ top: 15vh;
   .total-donations{
     font-size: 1.15rem;
   }
-  .pforfundinggoal-phone{
-    font-size: 1rem;
-  }
-  .donation-text-phone{
-    font-size: 1.05rem;
-  }
+
   .xvidusername{
     font-size: 1rem;
   }
@@ -1572,12 +1571,7 @@ top: 15vh;
 
 @media(max-width:539px){
 
-  .donation-text-phone{
-    font-size: 0.9rem;
-  }
-  .pforfundinggoal-phone{
-    font-size: 0.8rem;
-  }
+
   .video-placeholder {
 
     height: 275px; /* Set the desired height */
@@ -1712,20 +1706,7 @@ height: 76px;
 
 }
 
-@media(max-width:427px){
-  @media(max-width:539px){
 
-    .donation-text-phone{
-      font-size: 0.81rem;
-    }
-    .pforfundinggoal-phone{
-      font-size: 0.72rem;
-    }
-
-
-  }
-  
-}
 
 @media(max-width:425px){
 .update_thumbnail{
@@ -1757,12 +1738,7 @@ height: 76px;
   .total-donations{
     font-size: 1.1rem;
   }
-  .pforfundinggoal-phone{
-    font-size: 0.9rem;
-  }
-  .donation-text-phone{
-    font-size: 0.95rem;
-  }
+
   .lodaone,
   .lodatwo{
     padding: 7px 10px;
@@ -1841,12 +1817,6 @@ height: 76px;
   .total-donations{
     font-size: 1.1rem;
   }
-  .pforfundinggoal-phone{
-    font-size: 0.9rem;
-  }
-  .donation-text-phone{
-    font-size: 0.95rem;
-  }
 }
 
 @media(max-width:352px){
@@ -1886,4 +1856,5 @@ height: 76px;
         width: 37px;
         height: 37px;
        }
+
 }
