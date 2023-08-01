@@ -560,6 +560,8 @@ $(document).ready(function() {
             
           </div>
           <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{project.donations.count}} people donated</p>
+          <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a></button>
+          <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
         </div>
 
         <hr>
@@ -611,11 +613,8 @@ $(document).ready(function() {
                 </div>
             </div>
             {% endif %}
-          <hr>
-          <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
-          <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
-            <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
-            </button>
+       
+          
 
 
     </div>
@@ -631,7 +630,7 @@ $(document).ready(function() {
            
      </div>
        <hr style="width: 100%;">
-       <nav class="bloginteractions" style="margin-top: 10px;">
+       <nav class="bloginteractions" style="margin-top: 10px; margin-bottom: 0;">
         <ul class="blogflex">
           <li id="comment-tab">Comments ({{ comment_count }})</li>
           <li id="updates-tab">Updates ({{project.updates.count}})</li>
@@ -753,8 +752,8 @@ $(document).ready(function() {
               <img src ="{% static 'profilepic.png'%}" class="update-img">
                   {% endif %}
                   <div class="update-video-info">
-                  <p class="update-tit">{{update.update_title}}</p>
-                  <p class="update-creator" style="color: #000000; margin-bottom: 0; font-weight: 600;">@{{project.user.username }}</p>
+                  <p class="update-tit" style="margin-bottom: 0;">{{update.update_title}}</p>
+                  <p class="update-creator" style="color: #000000; margin-bottom: 0; font-weight: 600; margin-top: 5px;">@{{project.user.username }}</p>
                
                   <p class="update-cok"> {{update.views}} views - {{update.updated_at}}</p>
 

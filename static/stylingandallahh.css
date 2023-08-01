@@ -449,13 +449,7 @@ body{
   .lichenbgg{
     background-image: none;
   }
-  body{
-    background-image: url('samiksha.jpeg');
-    background-repeat: no-repeat;
-    background-size: 100% 70%;
-    background-attachment: fixed;
-    background-position: top top;
-  }
+
 }
 
 
@@ -507,12 +501,7 @@ body{
   }
 }
 @media(max-width:465px){
-  body{
 
-    background-size: 100% 60%;
-    background-attachment: fixed;
-    background-position: center 20%;
-  }
 }
 @media(max-width:392px){
 .vinsmoke{

@@ -1404,7 +1404,7 @@ header{
     font-size: 1.15rem;
   }
   .pforfundinggoal-phone{
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .pekoms{
     left: 1em;
@@ -1672,7 +1672,7 @@ height: 76px;
   .logo{
      width: 120px;
      height: 120px;
-    
+    top: 7px;
    }
  
   body{
@@ -1852,13 +1852,18 @@ height: 76px;
 @media(max-width:352px){
 .subscribe-button{
   font-size: 7px;
-  padding: 6px 14px;
+  padding: 6px 13px;
   gap: 20vw;
 }
 }
 @media(max-width:325px){
   .ng{
     gap: 20vw;
+  }
+  .subscribe-button{
+    font-size: 6.8px;
+    padding: 5px 10px;
+    gap: 2vw;
   }
 
 }
@@ -1874,7 +1879,7 @@ height: 76px;
   .logo{
     width: 100px;
     height: 100px;
-       
+    top: 10px;
        }
     
   .dropdown img{
