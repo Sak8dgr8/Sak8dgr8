@@ -63,11 +63,11 @@
         <li></li>
         <li></li>
        <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
-         {% if user.is_authenticated %}
+         {% if request.user.is_authenticated %}
          <li>
           <div class="dropdown">
-            {% if user.profile.cropped_image_data %}
-            <img src="{{ user.profile.cropped_image_data }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+            {% if request.user.profile.cropped_image_data %}
+            <img src="{{ request.user.profile.cropped_image_data }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
             <div class="dropdown-content" id="dropdown-content">
               <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
               <a href="{% url 'donation_history' %}">Your Donations</a>
@@ -132,7 +132,7 @@
 
           <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
               {% if project.user.profile.cropped_image_data %}
-              <img src="{{ project.user.profile.cropped_image_data }}" class="xvidpfp"> 
+              <img src="{{ project.user.profile.cropped_image_data.url }}" class="xvidpfp"> 
                 {% else %}
               <img src ="{% static 'profilepic.png'%}" class="xvidpfp">
                 {% endif %}

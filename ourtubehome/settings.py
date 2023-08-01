@@ -38,7 +38,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ['localhost',
                   'www.our-tube.com',
                   'our-tube.com','*']
 
@@ -170,4 +170,3 @@ PAYPAL_ENVIRONMENT = 'sandbox'
 
 django_heroku.settings(locals())
 
-SECURE_SSL_REDIRECT = True

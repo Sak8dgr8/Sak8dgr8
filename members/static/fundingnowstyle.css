@@ -262,6 +262,7 @@ body{
       display: -webkit-box;
       -webkit-line-clamp: 2; /* Number of lines to show */
       -webkit-box-orient: vertical;
+      min-width: 350px;
     }
     .search-form {
       display: flex;
@@ -384,6 +385,9 @@ body{
         padding-left: 50px;
       }
     }
+    @media(max-width:699px){
+ 
+    }
 
     @media(max-width:600px){
       .menu-btn{
@@ -463,6 +467,11 @@ body{
       .menu-btn{
         font-size: 20px;
       }
+      .container{
+        min-width: 300px;
+        -webkit-line-clamp: 1;
+      }
+  
     }
     @media(max-width:392px){
 
