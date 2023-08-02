@@ -477,13 +477,14 @@ def donation_landing_page(request, project_id):
 
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': 200,
+        'amount' : 200,
         'item_name': 'Your Item Name',
-        'invoice': 'unique-invoice-id',
+        'invoice': 'unique-invoice-id',  # A unique invoice ID for your transaction
         'currency_code': "USD",
-        'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
-        'return_url': 'http://{}{}'.format(host, reverse('payment-completed')),
-        'cancel_url': 'http://{}{}'.format(host, reverse('payment-failed')),
+        'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),  # URL for Instant Payment Notification
+        'return_url': 'http://{}{}'.format(host,reverse('payment-completed')),
+        'cancel_url': 'http://{}{}'.format(host,reverse('payment-failed')),
+
     }
     paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
 
@@ -491,12 +492,6 @@ def donation_landing_page(request, project_id):
         amount = form.cleaned_data['amount']
         platform_donation = form.cleaned_data['platform_donation']
         total_amount = int(amount) + int(platform_donation)  # Convert to integers before adding
-
-        # Update the PayPal dictionary with the correct amount
-        paypal_dict['amount'] = total_amount
-
-        # Create the PayPalPaymentsForm with the updated PayPal dictionary
-        paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
 
         if request.user.is_authenticated:
             # For authenticated users, use the username from the request
