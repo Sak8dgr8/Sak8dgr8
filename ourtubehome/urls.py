@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 from . import views
 urlpatterns = [
+    path('paypal/', include('paypal.standard.ipn.urls'),),
     path('', views.home_page, name='home'),
     path('how_it_works/', views.loda, name='loda'),
     path('admin/', admin.site.urls),

@@ -468,24 +468,23 @@ from .forms import DonationForm
 from django.utils import timezone
 
 
-
 def donation_landing_page(request, project_id):
-    host = request.get_host()
-    notify_url = 'https://www.our-tube.com/members/paypal/'
-    paypal_dict = {
-        'business' : settings.PAYPAL_RECEIVER_EMAIL,
-        'amount' : 200,
-        'item_name': "Loda",
-        'invoice': 'invoice_no-69',
-        'currency_code': 'USD',
-        'notify_url': notify_url,
-        'return_url': 'https://{}{}'.format(host, reverse('payment_completed')),
-        'cancel_url': 'https://{}{}'.format(host, reverse('payment_failed')),
-    }
-    paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
+
 
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
+    host = request.build_absolute_uri('/')  # Get the complete URL for the root of the site
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': 200,
+        'item_name': "Loda",
+        'invoice': 'invoice_no-69',
+        'currency_code': 'USD',
+        'notify_url': host + reverse('paypal-ipn'),
+        'return_url': host + reverse('payment_completed'),
+        'cancel_url': host + reverse('payment_failed'),
+    }
+    paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
     if request.method == 'POST' and form.is_valid():
 
         if request.user.is_authenticated:

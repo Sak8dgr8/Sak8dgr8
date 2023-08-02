@@ -5,13 +5,15 @@ from . import views
 from .views import EditProjectView
 from .views import AddSubscriber
 from .views import RemoveSubscriber
-
+# from .views import PaypalFormView
 
 
 urlpatterns = [
-   path('paypal/', include('paypal.standard.ipn.urls'),),
+   
+  # path('loda', PaypalFormView.as_view(), name='bigloda'),
    path('payment_completed', views.payment_completed_view, name='payment_completed'),
    path('payment_failed', views.payment_failed_view, name='payment_failed'),
+  # path('loda', views.bigloda, name='bigloda'),
    path('login', views.login_user, name='login_user'),
    path('logout_user', views.logout_user, name='logout'),
    path('register_user', views.register_user, name='register_user'),
