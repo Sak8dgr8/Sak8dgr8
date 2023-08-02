@@ -38,7 +38,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = ['localhost',
+ALLOWED_HOSTS = [
                   'www.our-tube.com',
                   'our-tube.com','*']
 
@@ -162,14 +162,6 @@ EMAIL_HOST_PASSWORD = 'yfuawvzqudgjmnix'  # Replace with your Gmail password or 
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
-PAYPAL_RECEIVER_EMAIL = 'sb-wqhuc26807217_api1.business.example.com'
-PAYPAL_TEST = True
-PAYPAL_CLIENT_ID = 'AZqYsF-sJnO-yyxidmyQ2VYOtsKfilN57ne2mJYevKMrYWdHMRVGEX2GhkWB4NKXqmOkN4CcXaPkdMuS'
-PAYPAL_CLIENT_SECRET = 'EOS26K7RzH2auzqNmj7xkT0yt53C80ltmzuphEL4AAldOR2AktaZAwPEt5NRkvr-I9GiZq0gQ0QFF3_b'
-PAYPAL_ENVIRONMENT = 'sandbox'
-
 
 
 django_heroku.settings(locals())
-
-

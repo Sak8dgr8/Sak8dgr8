@@ -26,18 +26,14 @@ from django import forms
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db.models import Q
 from .models import Donation
-
 from django.db.models import Max
 from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-
-from paypal.standard.forms import PayPalPaymentsForm
 from .forms import UpdateForm
 from .models import Update
 from .forms import UpdateCommentForm
 from .models import UpdateComment
-
 from django.core.files.base import ContentFile
 
         
@@ -470,28 +466,9 @@ from .forms import DonationForm
 from django.utils import timezone
 
 def donation_landing_page(request, project_id):
-    host = request.get_host()
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
-    
-
-    paypal_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount' : 200,
-        'item_name': 'Your Item Name',
-        'invoice': 'unique-invoice-id',  # A unique invoice ID for your transaction
-        'currency_code': "USD",
-        'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),  # URL for Instant Payment Notification
-        'return_url': 'http://{}{}'.format(host,reverse('payment-completed')),
-        'cancel_url': 'http://{}{}'.format(host,reverse('payment-failed')),
-
-    }
-    paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
-
     if request.method == 'POST' and form.is_valid():
-        amount = form.cleaned_data['amount']
-        platform_donation = form.cleaned_data['platform_donation']
-        total_amount = int(amount) + int(platform_donation)  # Convert to integers before adding
 
         if request.user.is_authenticated:
             # For authenticated users, use the username from the request
@@ -518,7 +495,6 @@ def donation_landing_page(request, project_id):
     context = {
         'project': project,
         'form': form,
-        'paypal_payment_button': paypal_payment_button,
     }
     return render(request, 'donation/donation_landing_page.html', context)
 
@@ -713,8 +689,3 @@ def register_user(request):
 		'form':form,
 		})
     
-def payment_completed_view(request):
-    return redirect('donation_history')
-
-def payment_failed_view(request):
-    return redirect('home')

@@ -9,7 +9,6 @@ from .views import RemoveSubscriber
 
 
 urlpatterns = [
-   path('paypal/', include('paypal.standard.ipn.urls')),
    path('login', views.login_user, name='login_user'),
    path('logout_user', views.logout_user, name='logout'),
    path('register_user', views.register_user, name='register_user'),
@@ -33,8 +32,6 @@ urlpatterns = [
    path('payment_info/', views.payment_info, name='payment_info'),
 
    
-   path('payment-completed/', views.payment_completed_view, name='payment-completed'),
-   path('payment-failed/', views.payment_failed_view, name='payment-failed'),
 
    path('update/<int:project_id>/', views.update_project, name='project_update'),
    path('project/<int:project_id>/update/<int:update_id>/', views.update_detail, name='update-detail'),
@@ -42,4 +39,3 @@ urlpatterns = [
    path('project/<int:project_id>/complete/', views.complete_project, name='complete_project'),
    path('user/<str:username>/completed_projects/', views.completed_projects, name='completed_projects'),
 ]
-
