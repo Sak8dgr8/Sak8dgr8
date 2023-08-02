@@ -143,7 +143,7 @@ input.donation-box::-webkit-outer-spin-button {
        
         
        </div>
-       <form method="POST" action="">
+       <form method="POST" action="" id="donationForm">
         {% csrf_token %}
                     <div class="joyner">
                         <p style="margin: 0; padding: 0; font-weight: bold; margin-left: 5px; font-family: 'Lato', sans-serif;">Enter your donation</p>
@@ -175,21 +175,29 @@ input.donation-box::-webkit-outer-spin-button {
                   <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;" id="display-total"></p>
                 </div>
                 <hr style="width: 100%;">
+              {%  if not request.user.is_authenticated%}
+                <p style="margin: 0; font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Consider <a href="{% url 'register_user' %}" style="color: gray;"> signing up for free </a> to track your donations and recieve updates on projects you've funded.</p>
+                <hr style="width: 100%;">
+                   <div class="nunu"> 
+                          <div class="bab">
+                            {{form.first_name}}
+                            {{form.last_name}}
+                          </div>
+                          {{form.donor_email}}
 
-                  
-<div style="width: 50%; align-self: center; margin-top: 30px;">
- 
-
-</div>
-    
-
-              </div>
-              
-              
- 
-
-            <button type="submit">Donate</button>
+                      </div>
+                    </div>
+              {% endif %}
+            
+           
+           
             </form>
+          
+      
+              <div id="paypal-button">
+                {{paypal_payment_button.render}}
+              </div>  
+
     </div>
     
  
@@ -231,6 +239,7 @@ input.donation-box::-webkit-outer-spin-button {
     }
   });
 </script>
+
 
 </body>
 </html>

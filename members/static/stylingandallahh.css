@@ -35,12 +35,6 @@
   font-weight: 600;
 }
 
-.fuck{
-  color: black;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-}
-
 li:hover{
   color: #555;
   transition: 0.2s ease-in;
@@ -276,11 +270,25 @@ body{
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 10vh;
-  font-size: 24px;
+
   color: #fff;
   margin-left: 5%;
-  gap: 35px;
+  gap: 20px;
+  padding-top: 50px;
+ 
+}
+.fuck{
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: large;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 20px;
+  z-index: 2000;
 }
 
 .menu a {
@@ -514,12 +522,10 @@ body{
    }
 
    .logo{
-width: 90px;
-height: 90px;
-top: 2vh;
-
-
-   }
+    width: 110px;
+    height: 110px;
+    top: 10px;
+       }
 
    .dropdown img{
     width: 37px;

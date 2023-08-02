@@ -168,6 +168,8 @@ PAYPAL_CLIENT_ID = 'AcFE-H9DzNPnUewQ484D6GmE1oXUpp0JUxK6DmchQPuWQFAyLN-Wr_Xf53H4
 PAYPAL_CLIENT_SECRET = 'ECmnv7vSVdr_isev2FsLhOWAoxiywAk-AtdWc2a6byhIaujdxwPNojgWiYJL_X9EH636gvxJFj5uz8-I'
 PAYPAL_ENVIRONMENT = 'sandbox'
 
+
+
 django_heroku.settings(locals())
 
 

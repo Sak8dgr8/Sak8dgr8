@@ -35,11 +35,7 @@
   font-weight: 600;
 }
 
-.fuck{
-  color: black;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-}
+
 
 li:hover{
   color: #555;
@@ -262,12 +258,18 @@ background-attachment: fixed;
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 10vh;
-  font-size: 24px;
+
   color: #fff;
   margin-left: 5%;
-  gap: 35px;
-  z-index: 2000;
+  gap: 20px;
+  padding-top: 50px;
+ 
+}
+.fuck{
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: large;
 }
 
 .menu a {

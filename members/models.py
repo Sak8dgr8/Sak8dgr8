@@ -100,9 +100,14 @@ class UpdateComment(models.Model):
 from django.core.validators import MinValueValidator
 from django.core.validators import MaxValueValidator
    
+
+
 class Donation(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='donations')
-    donor = models.ForeignKey(User, on_delete=models.CASCADE)
+    donor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100, blank=True)
     amount = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(50000)])
     donation_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
@@ -113,6 +118,10 @@ class Donation(models.Model):
     donor_email = models.EmailField(blank=True, null=True)
     platform_donation = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(50000)], null=True, blank=True)
 
-
     def __str__(self):
-        return f"Donation #{self.id} - Project: {self.project.project_title} - Donor: {self.donor}"
+        return f"Donation #{self.id} - Project: {self.project.project_title} - Donor: {self.get_donor_name()}"
+
+    def get_donor_name(self):
+        if self.donor:
+            return self.donor.username
+        return f"{self.first_name} {self.last_name}"

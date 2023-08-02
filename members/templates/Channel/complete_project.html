@@ -128,7 +128,7 @@
         <i class="fas fa-times fa-lg"></i>
       </div>
       <div class="menu">
-          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 200px; height:auto;"></a>
+          <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 150px; height:auto;"></a>
         
         <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
         <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
@@ -151,66 +151,88 @@
 </header>
 <body>
 
-
   
-<div class="bigdog">
+  <div class="bigdog">
+      
+    {% if user.profile.cropped_image_data %}
+          <img src="{{ user.profile.cropped_image_data.url }}" class="toosexy">
+    {% else %}
+          <img src="{% static 'profilepic.png' %}" class="toosexy">
+    {% endif %}
 
-                    {% if user.profile.cropped_image_data %}
-                          <img src="{{ user.profile.cropped_image_data.url }}" class="toosexy">
-                    {% else %}
-                          <img src="{% static 'profilepic.png' %}" class="toosexy">
-                    {% endif %}
+
+<div class="ng">
+<div class="channelhead">
+  <div class="tara">
+
+<p  class="usernamae"><a href="{% url 'user_channel' username=user.username %}" style="text-decoration: none; color: black;">{{user.username}}</p></a>
  
+                       <div style="display: flex; flex-direction: row; align-items: center; gap: 2vw;">
+                          <p class="shenanigans"> {{user.profile.subscribers.count}} Subscribers  </p>
+                          <p class="shenanigans" style="text-decoration: underline; cursor: pointer;"><a href="{% url 'completed_projects' username=user.username %}" style="color: gray;">{{completed_projects_count}} Completed projects</p></a>
+                        </div>
 
-      <div class="ng">
-                <div class="channelhead">
-                  <div style="display: flex; flex-direction: column; gap: 1vh;">
-               
-              <a href="{% url 'user_channel' username=user.username %}" style="text-decoration: none;">  <p  class="usernamae">{{user.username}}</p></a>
+          {% if user.profile.bio %}
+          <p class="shenanigans">{{user.profile.bio}}</p>
+          {% endif %}  
+          <div class="rick">
+          {% if user.id == request.user.id  %}
+          <a href="{% url 'channel_customization' %}"> <button class="sexy-button"><i class="fas fa-cog fa-xl" style="margin-right: 10px;"></i>Customize Channel</button></a>  
+          {% else %}
+          {% if is_subscribed %}
+          <form method="post" action="{% url 'remove_subscriber' username=user.username %}">
+            {% csrf_token %}
+            <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
+          </form> 
+          {% else %}
+              {% if request.user.is_authenticated %}
+          <form method="post" action="{% url 'add_subscriber' username=user.username %}">
+            {% csrf_token %}
+          <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
+          </form> 
+              {% else %}
+          <a href="{% url 'login_user' %}">  <button class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i> subscribe </button>  </a>
+            {% endif %}
+          {% endif %}
+           {% endif %}    
+      </div>
+</div>
 
-                                       <div style="display: flex; flex-direction: row; align-items: center; gap: 2vw;">
-                                          <p class="shenanigans"> {{user.profile.subscribers.count}} Subscribers  </p>
-                                          <p class="shenanigans" style="text-decoration: underline; cursor: pointer;">{{completed_projects_count}}  Completed projects</p>
-                                        </div>
-                                      
-                          {% if user.profile.bio %}
-                          <p class="shenanigans">{{user.profile.bio}}</p>
-                          {% endif %}  
-                                     
-                </div>
-            
 
-                
-                </div>
-        
-              
-          </div>
-       
-     </div>
 
-    
-     <hr class="hara">
-  <div class="nuts">
-     {% if user.id == request.user.id  %}
-     <a href="{% url 'channel_customization' %}"> <button class="sexy-button"><i class="fas fa-cog fa-xl" style="margin-right: 10px;"></i>Customize Channel</button></a>  
-     {% else %}
-     {% if is_subscribed %}
-     <form method="post" action="{% url 'remove_subscriber' username=user.username %}?next={{ request.path }}">
-       {% csrf_token %}
-       <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
-     </form> 
-     {% else %}
-         {% if request.user.is_authenticated %}
-     <form method="post" action="{% url 'add_subscriber' username=user.username %}?next={{ request.path }}">
-       {% csrf_token %}
-     <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
-     </form> 
-         {% else %}
-     <a href="{% url 'login_user' %}">  <button class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i> subscribe </button>  </a>
-       {% endif %}
-     {% endif %}
-      {% endif %}
-    </div> 
+</div>
+
+
+</div>
+
+</div>
+
+
+<hr class="hara">
+<div class="nuts">
+{% if user.id == request.user.id  %}
+<a href="{% url 'channel_customization' %}"> <button class="sexy-button"><i class="fas fa-cog fa-xl" style="margin-right: 10px;"></i>Customize Channel</button></a>  
+{% else %}
+{% if is_subscribed %}
+<form method="post" action="{% url 'remove_subscriber' username=user.username %}">
+{% csrf_token %}
+<button type="submit" class="subscribe-button"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
+</form> 
+{% else %}
+{% if request.user.is_authenticated %}
+<form method="post" action="{% url 'add_subscriber' username=user.username %}">
+{% csrf_token %}
+<button type="submit" class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
+</form> 
+{% else %}
+<a href="{% url 'login_user' %}">  <button class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i> subscribe </button>  </a>
+{% endif %}
+{% endif %}
+{% endif %}
+</div> 
+
+
+
 <br><br>
 <div class="row">
     {% if completed_projects %}
@@ -248,7 +270,7 @@
     </div>
   {% endfor %}
   {% else %}
-  <p style="display: flex; justify-content: center; align-items: center; height: 200px;">@{{user}} has no completed projects yet. Stay tuned!</p>
+  <p style="display: flex; justify-content: center; align-items: center; height: 200px; text-align: center; max-width: 90%;">@{{user}} has no completed projects yet. Stay tuned!</p>
   {% endif %}
 </div>
 

@@ -237,7 +237,7 @@ $(document).ready(function() {
         <i class="fas fa-times fa-lg"></i>
       </div>
       <div class="menu">
-        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 200px; height:auto;"></a>
+        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 150px; height:auto;"></a>
       
       <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
       <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
@@ -281,7 +281,7 @@ $(document).ready(function() {
 
       <div class="ng">
                 <div class="channelhead">
-                  <div style="display: flex; flex-direction: column; gap: 1vh;">
+                  <div class="tara">
                
                 <p  class="usernamae">{{user.username}}</p>
                  
@@ -289,11 +289,31 @@ $(document).ready(function() {
                                           <p class="shenanigans"> {{user.profile.subscribers.count}} Subscribers  </p>
                                           <p class="shenanigans" style="text-decoration: underline; cursor: pointer;"><a href="{% url 'completed_projects' username=user.username %}" style="color: gray;">{{completed_projects_count}} Completed projects</p></a>
                                         </div>
-                   
+               
                           {% if user.profile.bio %}
                           <p class="shenanigans">{{user.profile.bio}}</p>
                           {% endif %}  
-                                     
+                          <div class="rick">
+                          {% if user.id == request.user.id  %}
+                          <a href="{% url 'channel_customization' %}"> <button class="sexy-button"><i class="fas fa-cog fa-xl" style="margin-right: 10px;"></i>Customize Channel</button></a>  
+                          {% else %}
+                          {% if is_subscribed %}
+                          <form method="post" action="{% url 'remove_subscriber' username=user.username %}">
+                            {% csrf_token %}
+                            <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
+                          </form> 
+                          {% else %}
+                              {% if request.user.is_authenticated %}
+                          <form method="post" action="{% url 'add_subscriber' username=user.username %}">
+                            {% csrf_token %}
+                          <button type="submit" class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
+                          </form> 
+                              {% else %}
+                          <a href="{% url 'login_user' %}">  <button class="subscribe-button"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i> subscribe </button>  </a>
+                            {% endif %}
+                          {% endif %}
+                           {% endif %}    
+                      </div>
                 </div>
             
 
@@ -420,6 +440,7 @@ $(document).ready(function() {
                              </div>
                          </div>
                      </div>
+                      
                      {% endif %}
                    <hr>
                    <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
@@ -582,6 +603,7 @@ $(document).ready(function() {
             </div>
           {% endif %}
           {% if highest_donation %}
+            {% if highest_donation.donor %}
             <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
             {% if highest_donation.donor.profile.cropped_image_data %}
               <img src="{{highest_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
@@ -596,28 +618,57 @@ $(document).ready(function() {
                      </div>
                 </div>
             </div>
-          {% endif %}
-          {% if most_recent_donation %}
-            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px; margin-bottom: 10px;">
-            {% if most_recent_donation.donor.profile.cropped_image_data %}
-              <img src="{{most_recent_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
-              {% else %}
+            {% else %}
+            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
               <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+              <p style="margin: 0;">{{ highest_donation.name }}</p>       
+                           <div style="display: flex; flex-direction: row; gap: 2vw;">
+                             <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                             <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
+                           </div>
+                      </div>
+                  </div>
             {% endif %}
-                <div style="display: flex; flex-direction: column; gap: 1.5vh;">
-                  <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>
-                    <div style="display: flex; flex-direction: row; gap: 1vw;">
-                    <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
-                    <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
-                    </div>
-                </div>
-            </div>
             {% endif %}
        
           
+          {% if most_recent_donation %}
+                  {% if most_recent_donation.donor %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          {% if most_recent_donation.donor.profile.cropped_image_data %}
+            <img src="{{most_recent_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% else %}
+           <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+           {% endif %}
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+        <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>        
+                   <div style="display: flex; flex-direction: row; gap: 1vw;">
+                     <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                     <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Most Recent     </p>
+                  
+                    </div>
+              </div>
+          </div>
+          {% else %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+            <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+            <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+              <p style="margin: 0;">{{ most_recent_donation.name }}</p>        
+                         <div style="display: flex; flex-direction: row; gap: 1vw;">
+                           <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                           <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Most Recent     </p>
+                        
+                          </div>
+                    </div>
+                </div>
+          {% endif %}
+          {% endif %}
+   
+          
+       
 
-
-    </div>
+      </div>
      <hr style="width: 100%;">
      <div style="display: flex; flex-direction: column;">
       <div style="display: flex; flex-direction: row;">
@@ -829,6 +880,7 @@ $(document).ready(function() {
                     </div>
                   {% endif %}
                   {% if highest_donation %}
+                    {% if highest_donation.donor %}
                     <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
                     {% if highest_donation.donor.profile.cropped_image_data %}
                       <img src="{{highest_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
@@ -843,8 +895,22 @@ $(document).ready(function() {
                              </div>
                         </div>
                     </div>
+                  {% else %}
+                  <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                    <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                    <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                    <p style="margin: 0;">{{ highest_donation.name }}</p>     
+                                 <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                   <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                                   <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
+                                 </div>
+                            </div>
+                        </div>
+
+                  {% endif %}
                   {% endif %}
                   {% if most_recent_donation %}
+                    {% if most_recent_donation.donor %}
                     <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
                     {% if most_recent_donation.donor.profile.cropped_image_data %}
                       <img src="{{most_recent_donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
@@ -859,7 +925,21 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                    <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                      <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                      <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                       <p style="margin: 0;">{{ most_recent_donation.name }}</p>
+                          <div style="display: flex; flex-direction: row; gap: 1vw;">
+                          <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                          <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
+                          </div>
+                      </div>
+                  </div>
+                    
                     {% endif %}
+                    {% endif %}
+ 
             </div>
             </div>
 

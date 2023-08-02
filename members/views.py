@@ -471,37 +471,62 @@ from django.utils import timezone
 
 def donation_landing_page(request, project_id):
     host = request.get_host()
+    project = get_object_or_404(Project, id=project_id)
+    form = DonationForm(request.POST or None)
+    
+
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount' : 200,
+        'amount': 200,
         'item_name': 'Your Item Name',
-        'invoice': 'unique-invoice-id',  # A unique invoice ID for your transaction
+        'invoice': 'unique-invoice-id',
         'currency_code': "USD",
-        'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),  # URL for Instant Payment Notification
-        'return_url': 'http://{}{}'.format(host,reverse('payment-completed')),
-        'cancel_url': 'http://{}{}'.format(host,reverse('payment-failed')),
-
+        'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host, reverse('payment-completed')),
+        'cancel_url': 'http://{}{}'.format(host, reverse('payment-failed')),
     }
-
     paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
 
-    project = get_object_or_404(Project, id=project_id)
-    form = DonationForm(request.POST)
-    if request.method == 'POST':
-        donation = form.save(commit=False)
-        donation.project = project
-        donation.donor = request.user
-        donation.donor_email=request.user.email
-        donation.donation_date = timezone.now() 
-        donation.save()
+    if request.method == 'POST' and form.is_valid():
+        amount = form.cleaned_data['amount']
+        platform_donation = form.cleaned_data['platform_donation']
+        total_amount = int(amount) + int(platform_donation)  # Convert to integers before adding
+
+        # Update the PayPal dictionary with the correct amount
+        paypal_dict['amount'] = total_amount
+
+        # Create the PayPalPaymentsForm with the updated PayPal dictionary
+        paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
+
+        if request.user.is_authenticated:
+            # For authenticated users, use the username from the request
+            donation = form.save(commit=False)
+            donation.project = project
+            donation.donor = request.user
+            donation.donation_date = timezone.now()
+            donation.donor_email = request.user.email
+            donation.save()
+        else:
+            # For non-authenticated users, use the first name and last name from the form
+            donor_first_name = form.cleaned_data['first_name']
+            donor_last_name = form.cleaned_data['last_name']
+
+            donation = form.save(commit=False)
+            donation.project = project
+            donation.name = f"{donor_first_name} {donor_last_name}"
+            donation.donor = None
+            donation.donation_date = timezone.now()
+            donation.save()
+
         return redirect('user_channel', username=project.user)
 
     context = {
-         'project': project,
-         'form': form,
-         'paypal_payment_button': paypal_payment_button,
+        'project': project,
+        'form': form,
+        'paypal_payment_button': paypal_payment_button,
     }
     return render(request, 'donation/donation_landing_page.html', context)
+
 
 @login_required
 def donation_history(request):

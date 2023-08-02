@@ -1,10 +1,6 @@
 
 
-.fuck{
-  color: black;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-}
+
 
 .donate-btn-burger {
   background-color: #28a745;
@@ -69,18 +65,27 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 10vh;
-  font-size: 24px;
+
   color: #fff;
   margin-left: 5%;
-  gap: 35px;
+  gap: 20px;
+  padding-top: 50px;
+ 
+}
+.fuck{
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: large;
 }
 
 .menu a {
   color: #fff;
   text-decoration: none;
   margin-bottom: 20px;
+  z-index: 2000;
 }
+
 
 
 
@@ -440,8 +445,8 @@ font-family: 'Roboto', sans-serif;
   position: absolute; top: 310px; left:5%
 }
 .title-update{
-  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 400;
-  font-size: 1.7rem; margin-top: 0.2em; margin-bottom: 0.5em;
+  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 600;
+  font-size: 1.8rem; margin-top: 0.3em; margin-bottom: 0.5em;
 }
 
 .title-phone{
@@ -1177,6 +1182,18 @@ header{
     -webkit-line-clamp: 2; /* Number of lines to show */
     -webkit-box-orient: vertical;
   }
+
+  .ash{
+    font-family: 'Montserrat',sans-serif; font-weight: 400 ;margin-bottom: 40px; 
+  }
+
+  .tara{
+    display: flex; flex-direction: column; gap: 1vh;
+  }
+  .rick{
+    display: none;
+  }
+  
 @media(max-width:600px){
   .row{
     justify-content: center;
@@ -1248,12 +1265,12 @@ header{
     display:flex; flex-direction: column; align-items: center;
   }
   .dek{
-    width: 80vw;
+    width: 90vw;
     margin:auto
   }
   .xvid{
-    width: 80vw;
-    height: calc(80vw * 9 / 16);
+    width: 90vw;
+    height: calc(90vw * 9 / 16);
   }
   .title-update{
     align-self: flex-start;
@@ -1284,7 +1301,7 @@ header{
     display: initial;
   }
   .update-video-info{
-    justify-content: flex-start;
+    justify-content: center;
     width: 60vw;
    
   }
@@ -1394,10 +1411,7 @@ header{
 
 }
 @media(max-width:769px){
-  .xvid{
-    width: 80vw;
-    height: calc(80vw * 9 / 16);
-  }
+
 
   .pekoms{
     left: 1em;
@@ -1411,6 +1425,9 @@ header{
   }
   .title-update{
     font-size: 1.5rem;
+  }
+  .ash{
+   font-size: 1.25rem;
   }
 }
 
@@ -1475,9 +1492,7 @@ padding: 9px 23px;
 }
 
 @media(max-width:612px){
-.bigdog{
-top: 15vh;
-}
+
 .subgap{
   gap: 40vw;
 }
@@ -1510,15 +1525,26 @@ top: 15vh;
     margin-bottom: 90px;
   }
   .toosexy{
-    width: 97px;
-    height: 97px;
+    width: 70px;
+    height: 70px;
   }
   .hara{
     top: 19px;
   }
   .nuts{
-    top: 102px;
+   display: none;
   
+  }
+  .bigdog{
+    flex-direction: column;
+    align-items: center;
+    margin: 0; gap: 0;
+  }
+  .tara{
+    align-items: center; justify-content: center; gap: 5px;
+  }
+  .rick{
+    display: block;
   }
   .comments-phone{
     top: 75px;
@@ -1554,6 +1580,9 @@ top: 15vh;
   .pforfundinggoal-phone{
     font-size: 0.9rem;
   }
+  .ash{
+    font-size: 1.1rem;
+   }
 }
 
 @media(max-width:540px){
@@ -1584,10 +1613,7 @@ top: 15vh;
 
 
 @media(max-width:537px){
-.toosexy{
-width: 88px;
-height: 88px;
-}
+
 .usernamae{
   font-size: 1.3rem;
 }
@@ -1640,15 +1666,8 @@ height: 88px;
 header{
 margin-bottom: 80px;
 }
-.toosexy{
-width: 76px;
-height: 76px;
-}
-.subscribe-button{
-  font-size: 8px;
-  padding: 8px 16px;
-  gap: 30vw;
-}
+
+
 .subscriiibe-button{
   padding: 8px 16px;
   font-size: 10px;
@@ -1750,10 +1769,7 @@ height: 76px;
   .ng{
     gap: 24vw;
   }
-  .toosexy{
-    width: 70px;
-    height: 70px;
-  }
+
   .usernamae{
     font-size: 1.2rem;
   }
@@ -1772,10 +1788,7 @@ height: 76px;
   .nuts{
     top: 82px;
   }
-  .subscribe-button{
-    padding: 7px 15px;
-    font-size: 7.5px;
-  }
+
   .vinsmoke{
     font-size: 13px;
   }
@@ -1819,22 +1832,12 @@ height: 76px;
   }
 }
 
-@media(max-width:352px){
-.subscribe-button{
-  font-size: 7px;
-  padding: 6px 13px;
-  gap: 20vw;
-}
-}
+
 @media(max-width:325px){
   .ng{
     gap: 20vw;
   }
-  .subscribe-button{
-    font-size: 6.8px;
-    padding: 5px 10px;
-    gap: 2vw;
-  }
+
 
 }
 
@@ -1847,8 +1850,8 @@ height: 76px;
    }
 
   .logo{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     top: 10px;
        }
     
