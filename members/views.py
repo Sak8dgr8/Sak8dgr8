@@ -471,13 +471,14 @@ from django.utils import timezone
 
 def donation_landing_page(request, project_id):
     host = request.get_host()
+    notify_url = 'https://www.our-tube.com/members/paypal/'
     paypal_dict = {
         'business' : settings.PAYPAL_RECEIVER_EMAIL,
         'amount' : 200,
         'item_name': "Loda",
         'invoice': 'invoice_no-69',
         'currency_code': 'USD',
-        'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
+        'notify_url': notify_url,
         'return_url': 'https://{}{}'.format(host, reverse('payment_completed')),
         'cancel_url': 'https://{}{}'.format(host, reverse('payment_failed')),
     }

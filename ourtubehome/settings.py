@@ -166,6 +166,9 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
 django_heroku.settings(locals())
 
-SECURE_SSL_REDIRECT = True
-PAYPAL_RECEIVER_EMAIL = 'sb-bnjj026194938@business.example.com'
+
+PAYPAL_RECEIVER_EMAIL = 'mrspock-facilitator@gmail.com'
+PAYPAL_CLIENT_ID = 'AZqYsF-sJnO-yyxidmyQ2VYOtsKfilN57ne2mJYevKMrYWdHMRVGEX2GhkWB4NKXqmOkN4CcXaPkdMuS'
+PAYPAL_CLIENT_SECRET = 'EOS26K7RzH2auzqNmj7xkT0yt53C80ltmzuphEL4AAldOR2AktaZAwPEt5NRkvr-I9GiZq0gQ0QFF3_b'
+
 PAYPAL_TEST = True
