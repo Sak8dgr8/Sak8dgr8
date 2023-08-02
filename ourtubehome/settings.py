@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'members',
     'widget_tweaks',
     'localflavor',
-    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
