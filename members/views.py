@@ -35,9 +35,11 @@ from .models import Update
 from .forms import UpdateCommentForm
 from .models import UpdateComment
 from django.core.files.base import ContentFile
-
-        
-        
+from django.urls import reverse
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from paypal.standard.forms import PayPalPaymentsForm        
+from django.http import HttpResponse       
 
 
 class EditProjectView(UpdateView):
@@ -465,7 +467,22 @@ def channel_customization(request):
 from .forms import DonationForm
 from django.utils import timezone
 
+
+
 def donation_landing_page(request, project_id):
+    host = request.get_host()
+    paypal_dict = {
+        'business' : settings.PAYPAL_RECEIVER_EMAIL,
+        'amount' : 200,
+        'item_name': "Loda",
+        'invoice': 'invoice_no-69',
+        'currency_code': 'USD',
+        'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
+        'return_url': 'https://{}{}'.format(host, reverse('payment_completed')),
+        'cancel_url': 'https://{}{}'.format(host, reverse('payment_failed')),
+    }
+    paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
+
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -495,8 +512,11 @@ def donation_landing_page(request, project_id):
     context = {
         'project': project,
         'form': form,
+        'paypal_payment_button': paypal_payment_button,
     }
     return render(request, 'donation/donation_landing_page.html', context)
+
+
 
 
 @login_required
@@ -689,3 +709,8 @@ def register_user(request):
 		'form':form,
 		})
     
+def payment_completed_view(request):
+    return redirect('home')
+
+def payment_failed_view(request):
+    return redirect('home')

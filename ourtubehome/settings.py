@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'members',
     'widget_tweaks',
     'localflavor',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,6 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
 
 django_heroku.settings(locals())
+
+PAYPAL_RECEIVER_EMAIL = 'sb-bnjj026194938@business.example.com'
+PAYPAL_TEST = True
