@@ -333,7 +333,7 @@ $(document).ready(function() {
             <div style="display: flex; flex-direction: column; gap: 1.5vh;">
               <a href="{% url 'user_channel' username=project.user.username %}" style="text-decoration: none; color: #000000;"> <p style="margin: 0;">@{{ project.user.username }}</p></a>
                   <div style="display: flex; flex-direction: row; gap: 2vw;">
-                <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.amount}} </p>
+                <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.donation_amount}} </p>
                 <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">   Creator Contribution         </p>
                    </div>
             </div>
@@ -350,7 +350,7 @@ $(document).ready(function() {
             <div style="display: flex; flex-direction: column; gap: 1.5vh;">
       <a href="{% url 'user_channel' username=highest_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ highest_donation.donor.username }}</p></a>        
                  <div style="display: flex; flex-direction: row; gap: 2vw;">
-                   <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                   <p style="margin: 0; font-weight: bold;">${{highest_donation.donation_amount}}</p>
                    <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
                  </div>
             </div>
@@ -361,7 +361,7 @@ $(document).ready(function() {
           <div style="display: flex; flex-direction: column; gap: 1.5vh;">
           <p style="margin: 0;">{{ highest_donation.name }}</p>       
                        <div style="display: flex; flex-direction: row; gap: 2vw;">
-                         <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                         <p style="margin: 0; font-weight: bold;">${{highest_donation.donation_amount}}</p>
                          <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
                        </div>
                   </div>
@@ -381,7 +381,7 @@ $(document).ready(function() {
           <div style="display: flex; flex-direction: column; gap: 1.5vh;">
     <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>        
                <div style="display: flex; flex-direction: row; gap: 1vw;">
-                 <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                 <p style="margin: 0; font-weight: bold;">${{most_recent_donation.donation_amount}}</p>
                  <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Most Recent     </p>
               
                 </div>
@@ -393,7 +393,7 @@ $(document).ready(function() {
         <div style="display: flex; flex-direction: column; gap: 1.5vh;">
           <p style="margin: 0;">{{ most_recent_donation.name }}</p>        
                      <div style="display: flex; flex-direction: row; gap: 1vw;">
-                       <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                       <p style="margin: 0; font-weight: bold;">${{most_recent_donation.donation_amount}}</p>
                        <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Most Recent     </p>
                     
                       </div>
@@ -611,7 +611,7 @@ $(document).ready(function() {
                     <div style="display: flex; flex-direction: column; gap: 1.5vh;">
                       <a href="{% url 'user_channel' username=project.user.username %}" style="text-decoration: none; color: #000000;"> <p style="margin: 0;">@{{ project.user.username }}</p></a>
                           <div style="display: flex; flex-direction: row; gap: 2vw;">
-                        <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.amount}} </p>
+                        <p style="margin: 0; font-weight: bold;">${{channel_owner_donation.donation_amount}} </p>
                         <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">   Creator Contribution         </p>
                            </div>
                     </div>
@@ -628,7 +628,7 @@ $(document).ready(function() {
                     <div style="display: flex; flex-direction: column; gap: 1.5vh;">
               <a href="{% url 'user_channel' username=highest_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ highest_donation.donor.username }}</p></a>        
                          <div style="display: flex; flex-direction: row; gap: 2vw;">
-                           <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                           <p style="margin: 0; font-weight: bold;">${{highest_donation.donation_amount}}</p>
                            <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
                          </div>
                     </div>
@@ -639,7 +639,7 @@ $(document).ready(function() {
                 <div style="display: flex; flex-direction: column; gap: 1.5vh;">
                 <p style="margin: 0;">{{ highest_donation.name }}</p>     
                              <div style="display: flex; flex-direction: row; gap: 2vw;">
-                               <p style="margin: 0; font-weight: bold;">${{highest_donation.amount}}</p>
+                               <p style="margin: 0; font-weight: bold;">${{highest_donation.donation_amount}}</p>
                                <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">   Top Contribution     </p>
                              </div>
                         </div>
@@ -658,7 +658,7 @@ $(document).ready(function() {
                     <div style="display: flex; flex-direction: column; gap: 1.5vh;">
                       <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>
                         <div style="display: flex; flex-direction: row; gap: 1vw;">
-                        <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                        <p style="margin: 0; font-weight: bold;">${{most_recent_donation.donation_amount}}</p>
                         <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
                         </div>
                     </div>
@@ -669,7 +669,7 @@ $(document).ready(function() {
                   <div style="display: flex; flex-direction: column; gap: 1.5vh;">
                    <p style="margin: 0;">{{ most_recent_donation.name }}</p>
                       <div style="display: flex; flex-direction: row; gap: 1vw;">
-                      <p style="margin: 0; font-weight: bold;">${{most_recent_donation.amount}}</p>
+                      <p style="margin: 0; font-weight: bold;">${{most_recent_donation.donation_amount}}</p>
                       <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
                       </div>
                   </div>

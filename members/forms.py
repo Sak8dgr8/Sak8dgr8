@@ -89,12 +89,12 @@ class DonationForm(forms.ModelForm):
 
 	class Meta:
 		model = Donation
-		fields = ['amount', 'platform_donation', 'first_name', 'last_name', 'donor_email']
+		fields = ['donation_amount', 'platform_donation', 'first_name', 'last_name', 'donor_email']
 	
 	def __init__(self, *args, **kwargs):
 		super(DonationForm, self).__init__(*args, **kwargs)
-		self.fields['amount'].widget.attrs['class'] = 'donation-box'
-		self.fields['amount'].widget.attrs['placeholder'] = '00.00'
+		self.fields['donation_amount'].widget.attrs['class'] = 'donation-box'
+		self.fields['donation_amount'].widget.attrs['placeholder'] = '00.00'
 		self.fields['platform_donation'].widget.attrs['class'] = 'platform-box'
 		self.fields['platform_donation'].widget.attrs['placeholder'] = '00.00'
 		self.fields['first_name'].widget.attrs['class'] = 'name-box'

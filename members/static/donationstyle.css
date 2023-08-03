@@ -94,8 +94,8 @@ body{
 .donation-box{
     
     width: 200px;
+    text-align: center;
     height: 61px;
-    padding-left: 130px;
     font-size: 2rem;
     line-height: 1.5;
     color: #000;
@@ -144,7 +144,7 @@ body{
 
 
 .thumbnail{
-  width: 40%; height: auto;
+  width: 250px; height: auto;
 }
 
 .platform-box{
@@ -257,10 +257,10 @@ display: flex; flex-direction: row; justify-content: space-between;
   display: flex; flex-direction: column; max-width: 70%; align-items: center;
 }
 .joyner{
-  display: flex; flex-direction: column; gap: 1vh; margin-top: 10px; align-items: center;
+  display: flex; flex-direction: column; gap: 0px; align-items: center;
 }
 .nle{
-  position: relative; right: 5vw; top: 50px; font-family: 'Lato',sans-serif;
+  position: relative; top: 43px; right: 60px; font-family: 'Lato',sans-serif;
 }
 .eminem{
   position: relative; top:38px; left: 30px; font-family: 'Lato',sans-serif;
@@ -275,9 +275,6 @@ display: flex; flex-direction: row; justify-content: space-between;
     border-radius: 0;
     
     
-  }
-  .thumbnail{
-    display: none;
   }
  .kodakblack{
   margin-top: 0;

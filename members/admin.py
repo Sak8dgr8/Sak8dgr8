@@ -42,4 +42,4 @@ admin.site.register(Comment)
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ('project', 'donor', 'amount', 'donation_date', 'status', 'donor_email', 'platform_donation')
+    list_display = ('project', 'donor', 'name', 'donation_amount', 'donation_date', 'status', 'donor_email', 'platform_donation', 'donation_id')

@@ -41,7 +41,6 @@ from django.views.decorators.csrf import csrf_exempt
 from paypal.standard.forms import PayPalPaymentsForm        
 from django.http import HttpResponse       
 
-
 class EditProjectView(UpdateView):
      
      model = Project
@@ -94,7 +93,7 @@ class FundingNowView(ListView):
         
         # Calculate progress percentage for each project
         for project in context['live_projects']:
-            total_donations = project.donations.aggregate(total=Sum('amount')).get('total', 0) or 0
+            total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
             progress_percentage = (total_donations / project.funding_goal) * 100
             project.progress_percentage = round(progress_percentage, 2)
         
@@ -124,7 +123,7 @@ class ProjectSearchView(ListView):
 
         # Calculate the percentage achieved for each project
         for project in projects:
-            total_donations = project.donations.aggregate(total=Sum('amount')).get('total', 0) or 0
+            total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
             if project.funding_goal > 0:
                 progress_percentage = (total_donations / project.funding_goal) * 100
                 project.progress_percentage = round(progress_percentage, 2)
@@ -252,7 +251,7 @@ def user_channel(request, username, error_message=None):
 
         channel_owner = User.objects.get(username=username)
 
-        highest_donation = Donation.objects.filter(project=project).order_by('-amount').first()
+        highest_donation = Donation.objects.filter(project=project).order_by('-donation_amount').first()
         most_recent_donation = Donation.objects.filter(project=project).order_by('-donation_date').first()
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner).first()
 
@@ -306,7 +305,7 @@ def update_detail(request, project_id, update_id):
 
 
     channel_owner = User.objects.get(username=project.user)
-    highest_donation = Donation.objects.filter(project__user=channel_owner).order_by('-amount').first()
+    highest_donation = Donation.objects.filter(project__user=channel_owner).order_by('-donation_amount').first()
     most_recent_donation = Donation.objects.filter(project__user=channel_owner).order_by('-donation_date').first()
     channel_owner_donation = Donation.objects.filter(project__user=channel_owner, donor=channel_owner).first()
     context = {
@@ -365,7 +364,7 @@ def completed_projects(request, username):
     is_subscribed = request.user in subscribers
     completed_projects_count = Project.objects.filter(user=user, status='completed').count()
     for project in completed_projects:
-        total_donations = project.donations.aggregate(total=Sum('amount')).get('total', 0) or 0
+        total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
         progress_percentage = (total_donations / project.funding_goal) * 100
         project.progress_percentage = round(progress_percentage, 2)
 
@@ -468,35 +467,37 @@ from .forms import DonationForm
 from django.utils import timezone
 
 
+
+
+
+from decimal import Decimal  # Import Decimal to handle currency amounts accurately
+
 def donation_landing_page(request, project_id):
-
-
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
-    host = request.build_absolute_uri('/')  # Get the complete URL for the root of the site
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': 200,
         'item_name': "Loda",
-        'invoice': 'invoice_no-69',
+        'invoice': '69',
         'currency_code': 'USD',
-        'notify_url': host + reverse('paypal-ipn'),
-        'return_url': host + reverse('payment_completed'),
-        'cancel_url': host + reverse('payment_failed'),
+        'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
+        'return_url': request.build_absolute_uri(reverse('payment_completed')),
+        'cancel_url': request.build_absolute_uri(reverse('payment_failed')),
     }
     paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
-    if request.method == 'POST' and form.is_valid():
 
+    if request.method == 'POST' and form.is_valid():
+        # Save the donation instance before accessing the donation_id
         if request.user.is_authenticated:
-            # For authenticated users, use the username from the request
             donation = form.save(commit=False)
             donation.project = project
             donation.donor = request.user
             donation.donation_date = timezone.now()
             donation.donor_email = request.user.email
+            donation.status = 'pending'
             donation.save()
         else:
-            # For non-authenticated users, use the first name and last name from the form
             donor_first_name = form.cleaned_data['first_name']
             donor_last_name = form.cleaned_data['last_name']
 
@@ -505,16 +506,49 @@ def donation_landing_page(request, project_id):
             donation.name = f"{donor_first_name} {donor_last_name}"
             donation.donor = None
             donation.donation_date = timezone.now()
+            donation.status = 'pending'
             donation.save()
 
-        return redirect('user_channel', username=project.user)
+        # Update the invoice value with the donation_id
+        donation_id = donation.donation_id
 
+
+        # Update the amount field with the sum of 'donation_amount' and 'platform_donation' from the form
+        donation_amount = form.cleaned_data.get('donation_amount', 0)
+        total_amount = donation_amount
+        
+
+        paypal_updated_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': total_amount,
+        'item_name': "Loda",
+        'invoice': str(donation_id),
+        'currency_code': 'USD',
+        'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
+        'return_url': request.build_absolute_uri(reverse('payment_completed')),
+        'cancel_url': request.build_absolute_uri(reverse('payment_failed')),
+         }
+        # Create a new context dictionary with the updated PayPal button
+        updated_context = {
+            'project': project,
+            'form': form,
+            'paypal_payment_button_updated': PayPalPaymentsForm(initial=paypal_updated_dict),
+        }
+
+        # Return the updated context in the render function
+        return render(request, 'donation/donation_landing_page.html', updated_context)
+
+    # If the form is not submitted, use the existing context with the initial PayPal button
     context = {
         'project': project,
         'form': form,
         'paypal_payment_button': paypal_payment_button,
     }
     return render(request, 'donation/donation_landing_page.html', context)
+
+
+
+
 
 
 
@@ -530,7 +564,7 @@ def donation_history(request):
 
     for donation in donations:
         project = donation.project
-        total_donations = project.donations.aggregate(total=Sum('amount')).get('total', 0) or 0
+        total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
         funding_goal = project.funding_goal
         if funding_goal > 0:
             percentage_achieved = round((total_donations / funding_goal) * 100, 2)
@@ -635,7 +669,7 @@ def completed_channel(request, username, project_id, error_message=None):
 
         channel_owner = User.objects.get(username=username)
 
-        highest_donation = Donation.objects.filter(project=project).order_by('-amount').first()
+        highest_donation = Donation.objects.filter(project=project).order_by('-donation_amount').first()
         most_recent_donation = Donation.objects.filter(project=project).order_by('-donation_date').first()
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner).first()
 

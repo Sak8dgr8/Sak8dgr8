@@ -55,7 +55,7 @@ class Project(models.Model):
     
     @property
     def total_donations(self):
-        return self.donations.aggregate(total=Sum('amount')).get('total', 0) or 0
+        return self.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
 
     
 
@@ -99,7 +99,7 @@ class UpdateComment(models.Model):
 
 from django.core.validators import MinValueValidator
 from django.core.validators import MaxValueValidator
-   
+import uuid
 
 
 class Donation(models.Model):
@@ -108,7 +108,7 @@ class Donation(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
-    amount = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(50000)])
+    donation_amount = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(50000)])
     donation_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
         ('pending', 'Pending'),
@@ -117,6 +117,8 @@ class Donation(models.Model):
     ), default='Pending')
     donor_email = models.EmailField(blank=True, null=True)
     platform_donation = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(50000)], null=True, blank=True)
+    donation_id = models.UUIDField(default=uuid.uuid4, editable=False, null=True)
+
 
     def __str__(self):
         return f"Donation #{self.id} - Project: {self.project.project_title} - Donor: {self.get_donor_name()}"

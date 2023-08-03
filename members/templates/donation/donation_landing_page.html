@@ -129,52 +129,30 @@ input.donation-box::-webkit-outer-spin-button {
   
 <div class="kodakblack">
     <div class="container">
-        <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <p style="font-family: 'Lato', sans-serif;">  You're supporting <strong>@{{project.user}}</strong> in</p>
+           
+          <p style="font-family: 'Lato', sans-serif; text-align: center;"> <strong>{{project.project_title}}</strong></p>
 
             <img src="{{project.project_thumbnail.url}}" class="thumbnail">
 
             
               
-                <p style="font-family: 'Lato', sans-serif;">  You're supporting <strong>@{{project.user}}</strong> in 
-           
-           <strong>{{project.project_title}}</strong></p>
+             
 
           
        
         
        </div>
-       <form method="POST" action="" id="donationForm">
+       <form method="POST" action="" id="donation-form">
         {% csrf_token %}
                     <div class="joyner">
-                        <p style="margin: 0; padding: 0; font-weight: bold; margin-left: 5px; font-family: 'Lato', sans-serif;">Enter your donation</p>
-                        <i class="fa-sharp fa-light fa-dollar-sign fa-2xl nle"></i>   {{form.amount}}
-                        <hr style="width: 100%;">
+                        <p style="margin: 0; padding: 0; font-weight: bold; font-family: 'Lato', sans-serif;">Your donation to @{{project.user}}</p>
+                        <i class="fa-sharp fa-light fa-dollar-sign fa-2xl nle"></i>   {{form.donation_amount}}
                     </div>
-                    
-             
-                    
-                    
+                                      
+
                
-                <div style="display: flex; flex-direction: column; gap: 1vw; width: 100%;">
-               <strong><p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 1em;"> Tip Our-Tube services. </p> </strong>
-               <p style="margin: 0; font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Our-Tube has a 0% platform fee. Our-Tube will continue offering its services thanks to donors who will leave an optional amount here:</p>
-               <i class="fa-sharp fa-light fa-dollar-sign fa-xl eminem"></i>  {{form.platform_donation}}
-               <hr style="width: 100%;">
-               <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em; font-weight: bold;">Your donation</p>
-                  <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;">Donation to @{{project.user}}</p>
-                    <p id="display-amount" style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;"></p>
-                  </div>
-                  <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;">Our-Tube tip</p>
-                    <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;" id="display-platform-amount"></p>
-                  </div>
-                <hr style="width: 100%;">
-                <div style="display:  flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                  <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em; font-weight: bold; margin-bottom: 0.3em;">Total due today</p>
-                  <p style="margin: 0; font-size: 1rem; font-family: 'Lato',sans-serif; margin-top: 0.3em;" id="display-total"></p>
-                </div>
-                <hr style="width: 100%;">
               {%  if not request.user.is_authenticated%}
                 <p style="margin: 0; font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Consider <a href="{% url 'register_user' %}" style="color: gray;"> signing up for free </a> to track your donations and recieve updates on projects you've funded.</p>
                 <hr style="width: 100%;">
@@ -186,18 +164,19 @@ input.donation-box::-webkit-outer-spin-button {
                           {{form.donor_email}}
 
                       </div>
-                    </div>
+                
               {% endif %}
-            
-       
-          <button type="submit">Submit deez nuts</button>
-           
+          
+                    {% if not paypal_payment_button_updated %}
+              <button id="view-payment-options-button">View Payment Options</button>
+                      {%endif%}
             </form>
           
-          
-             <div class="">
-              {{paypal_payment_button.render}}
-             </div>
+            {% if paypal_payment_button_updated %}
+         
+              {{ paypal_payment_button_updated.render }}
+           
+            {% endif %}
             
 
     </div>
@@ -206,38 +185,27 @@ input.donation-box::-webkit-outer-spin-button {
 </div>
 
 
+
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Get the input elements and the element to display the total amount
-    const donationAmountInput = document.getElementById("id_amount");
-    const platformDonationInput = document.getElementById("id_platform_donation");
+    const donationAmountInput = document.getElementById("id_donation_amount");
     const displayAmountElement = document.getElementById("display-amount");
-    const displayPlatformAmountElement = document.getElementById("display-platform-amount");
-    const displayTotalElement = document.getElementById("display-total");
 
     // Add event listeners to the input fields for the "input" event
     donationAmountInput.addEventListener("input", updateTotal);
-    platformDonationInput.addEventListener("input", updateTotal);
 
     // Function to update the total amount
     function updateTotal() {
       // Get the values the user typed in the input fields
       const typedAmount = donationAmountInput.value;
-      const typedPlatformAmount = platformDonationInput.value;
 
       // Convert the input values to valid numbers, or consider them as 0 if not valid numbers
       const amount = parseFloat(typedAmount) || 0;
-      const platformAmount = parseFloat(typedPlatformAmount) || 0;
 
       // Update the elements to display the typed values with dollar signs
-      displayAmountElement.textContent = "$" + amount.toFixed(2);
-      displayPlatformAmountElement.textContent = "$" + platformAmount.toFixed(2);
-
-      // Calculate the total amount
-      const totalAmount = amount + platformAmount;
-
-      // Update the element to display the total amount with a dollar sign
-      displayTotalElement.textContent = "$" + totalAmount.toFixed(2);
+      displayAmountElement.textContent = "$" + amount.toFixed(2);;
     }
   });
 </script>
