@@ -93,7 +93,7 @@ class FundingNowView(ListView):
         
         # Calculate progress percentage for each project
         for project in context['live_projects']:
-            total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
+            total_donations = project.donations.filter(status='completed').aggregate(total=Sum('donation_amount')).get('total', 0) or 0
             progress_percentage = (total_donations / project.funding_goal) * 100
             project.progress_percentage = round(progress_percentage, 2)
         
@@ -123,7 +123,7 @@ class ProjectSearchView(ListView):
 
         # Calculate the percentage achieved for each project
         for project in projects:
-            total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
+            total_donations = project.donations.filter(status='completed').aggregate(total=Sum('donation_amount')).get('total', 0) or 0
             if project.funding_goal > 0:
                 progress_percentage = (total_donations / project.funding_goal) * 100
                 project.progress_percentage = round(progress_percentage, 2)
@@ -251,9 +251,9 @@ def user_channel(request, username, error_message=None):
 
         channel_owner = User.objects.get(username=username)
 
-        highest_donation = Donation.objects.filter(project=project).order_by('-donation_amount').first()
-        most_recent_donation = Donation.objects.filter(project=project).order_by('-donation_date').first()
-        channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner).first()
+        highest_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount').first()
+        most_recent_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_date').first()
+        channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
 
         updates = Update.objects.filter(project=project)
 
@@ -305,9 +305,9 @@ def update_detail(request, project_id, update_id):
 
 
     channel_owner = User.objects.get(username=project.user)
-    highest_donation = Donation.objects.filter(project__user=channel_owner).order_by('-donation_amount').first()
-    most_recent_donation = Donation.objects.filter(project__user=channel_owner).order_by('-donation_date').first()
-    channel_owner_donation = Donation.objects.filter(project__user=channel_owner, donor=channel_owner).first()
+    highest_donation = Donation.objects.filter(project__user=channel_owner, status='completed').order_by('-donation_amount').first()
+    most_recent_donation = Donation.objects.filter(project__user=channel_owner, status='completed').order_by('-donation_date').first()
+    channel_owner_donation = Donation.objects.filter(project__user=channel_owner, donor=channel_owner, status='completed').first()
     context = {
         'project': project,
         'update': update,
@@ -364,7 +364,7 @@ def completed_projects(request, username):
     is_subscribed = request.user in subscribers
     completed_projects_count = Project.objects.filter(user=user, status='completed').count()
     for project in completed_projects:
-        total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
+        total_donations = project.donations.filter(status='completed').aggregate(total=Sum('donation_amount')).get('total', 0) or 0
         progress_percentage = (total_donations / project.funding_goal) * 100
         project.progress_percentage = round(progress_percentage, 2)
 
@@ -556,7 +556,7 @@ def donation_landing_page(request, project_id):
 @login_required
 def donation_history(request):
     user = request.user
-    donations = Donation.objects.filter(donor=user)
+    donations = Donation.objects.filter(donor=user, status='completed')
     context = {
             'donations': donations,
             'percentage_achieved': None
@@ -564,7 +564,7 @@ def donation_history(request):
 
     for donation in donations:
         project = donation.project
-        total_donations = project.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
+        total_donations = project.donations.filter(status='completed').aggregate(total=Sum('donation_amount')).get('total', 0) or 0
         funding_goal = project.funding_goal
         if funding_goal > 0:
             percentage_achieved = round((total_donations / funding_goal) * 100, 2)
@@ -669,9 +669,9 @@ def completed_channel(request, username, project_id, error_message=None):
 
         channel_owner = User.objects.get(username=username)
 
-        highest_donation = Donation.objects.filter(project=project).order_by('-donation_amount').first()
-        most_recent_donation = Donation.objects.filter(project=project).order_by('-donation_date').first()
-        channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner).first()
+        highest_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount').first()
+        most_recent_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_date').first()
+        channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
 
         updates = Update.objects.filter(project=project)
 

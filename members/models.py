@@ -55,7 +55,7 @@ class Project(models.Model):
     
     @property
     def total_donations(self):
-        return self.donations.aggregate(total=Sum('donation_amount')).get('total', 0) or 0
+        return self.donations.filter(status='completed').aggregate(total=Sum('donation_amount')).get('total', 0) or 0
 
     
 
