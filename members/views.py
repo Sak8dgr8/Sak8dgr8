@@ -254,7 +254,7 @@ def user_channel(request, username, error_message=None):
         highest_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount').first()
         most_recent_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_date').first()
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
-
+        completed_donation_count = project.donations.filter(status='completed').count()
         updates = Update.objects.filter(project=project)
 
         context.update({
@@ -272,6 +272,7 @@ def user_channel(request, username, error_message=None):
             'channel_owner_donation': channel_owner_donation,
             'updates': updates,
             'completed_projects_count':completed_projects_count,
+            'completed_donation_count': completed_donation_count,
         })
 
         if not request.user.is_authenticated:
@@ -308,6 +309,7 @@ def update_detail(request, project_id, update_id):
     highest_donation = Donation.objects.filter(project__user=channel_owner, status='completed').order_by('-donation_amount').first()
     most_recent_donation = Donation.objects.filter(project__user=channel_owner, status='completed').order_by('-donation_date').first()
     channel_owner_donation = Donation.objects.filter(project__user=channel_owner, donor=channel_owner, status='completed').first()
+    completed_donation_count = project.donations.filter(status='completed').count()
     context = {
         'project': project,
         'update': update,
@@ -322,6 +324,7 @@ def update_detail(request, project_id, update_id):
         'comment_count': comment_count,
         'comments' : comments,       
         'comment_form':comment_form, 
+        'completed_donation_count':completed_donation_count,
     }
 
     if request.method == 'POST':
@@ -619,7 +622,7 @@ def completed_channel(request, username, project_id, error_message=None):
    
     # Get the completed project for the user (assuming there's only one active project)
     project = Project.objects.get(user=user, status__in=['completed'], pk=project_id)
-
+    
 
     context.update({
         'user': user,
@@ -672,7 +675,7 @@ def completed_channel(request, username, project_id, error_message=None):
         highest_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount').first()
         most_recent_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_date').first()
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
-
+        completed_donation_count = project.donations.filter(status='completed').count()
         updates = Update.objects.filter(project=project)
 
         context.update({
@@ -690,6 +693,8 @@ def completed_channel(request, username, project_id, error_message=None):
             'channel_owner_donation': channel_owner_donation,
             'updates': updates,
             'completed_projects_count':completed_projects_count,
+            'completed_donation_count':completed_donation_count,
+        
         })
 
         if not request.user.is_authenticated:

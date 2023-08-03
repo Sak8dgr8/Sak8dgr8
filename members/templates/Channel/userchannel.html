@@ -389,7 +389,7 @@ $(document).ready(function() {
                      <p class="pforfundinggoal-phone">raised of ${{ project.funding_goal }} goal</p>
                      
                    </div>
-                   <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{project.donations.count}} people donated</p>
+                   <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{completed_donation_count}} people donated</p>
                  </div>
          
                  <hr>
@@ -492,7 +492,7 @@ $(document).ready(function() {
                 <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate
                 </button>
                 <div class="donation-info">
-                <p class="donation-text">{{project.donations.count}} people donated</p>
+                <p class="donation-text">{{completed_donation_count}} people donated</p>
                 </div>
             
                   </div>
@@ -580,7 +580,7 @@ $(document).ready(function() {
             <p class="pforfundinggoal-phone">raised of ${{ project.funding_goal }} goal</p>
             
           </div>
-          <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{project.donations.count}} people donated</p>
+          <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{completed_donation_count}} people donated</p>
           <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a></button>
           <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
         </div>
@@ -858,7 +858,7 @@ $(document).ready(function() {
                 <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
                 </button>
                 <div class="donation-info">
-                <p class="donation-text">{{project.donations.count}} people donated</p>
+                <p class="donation-text">{{completed_donation_count}} people donated</p>
                 </div>
             
                   </div>

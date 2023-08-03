@@ -12,3 +12,4 @@ def payment_notification(sender, **kwargs):
         donation = get_object_or_404(Donation, donation_id=ipn.invoice)
         donation.status = 'completed'
         donation.save()
+    
