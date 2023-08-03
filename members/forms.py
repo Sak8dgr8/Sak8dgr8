@@ -71,6 +71,9 @@ class CommentForm(forms.ModelForm):
 		widgets = {
             'body': forms.Textarea(attrs={'placeholder': 'Share your thoughts...'})
         }
+	def __init__(self, *args, **kwargs):
+		super(CommentForm, self).__init__(*args, **kwargs)
+		self.fields['body'].widget.attrs['class']='comment-input'
 
 class UpdateCommentForm(forms.ModelForm):
 
@@ -81,7 +84,9 @@ class UpdateCommentForm(forms.ModelForm):
 		widgets = {
             'body': forms.Textarea(attrs={'placeholder': 'Share your thoughts...'})
         }
-
+	def __init__(self, *args, **kwargs):
+		super(UpdateCommentForm, self).__init__(*args, **kwargs)
+		self.fields['body'].widget.attrs['class']='comment-input'
 
 		
 class DonationForm(forms.ModelForm):

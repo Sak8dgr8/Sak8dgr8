@@ -800,11 +800,15 @@ background-color: #ebebeb;
   border-radius: 4px;
   outline: none;
   resize: vertical;
-  width: 100%;
+  width: 50vw;
+  height: 40px;
+  font-family: 'Roboto', sans-serif;
+  resize: none;
 }
 
 .comment-input:focus {
-  border-color: #aaa;
+  border-color: #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .comment-header {
@@ -839,26 +843,15 @@ background-color: #ebebeb;
  
 }
 
-.comment-form textarea {
-  width: 50vw;
-  height: 10vh;
-  resize: none;
-  padding: 5px;
-  margin: 0;
-  border: 1px solid #ccc;
-  
-  font-family: 'Roboto', sans-serif;
-}
 
 .comment-form button {
-  margin-top: 0px;
   background-color: #00A687;
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 8px;
   border-radius: 5px;
   cursor: pointer;
-  width: 150px;
+  width: 100px;
   height: auto;
   margin: 0;
 }
@@ -1223,8 +1216,9 @@ header{
   }
 
     .tab-content{
-      top: 630px;
+      width: 100%;
     }
+
   }
 
 
@@ -1323,6 +1317,9 @@ header{
   }
   .subscriibe-button{
     display: none;
+  }
+  .comment-input{
+    width: 75vw;
   }
 }
 @media(max-width:872px){
@@ -1489,6 +1486,12 @@ padding: 9px 23px;
 }
 
 
+}
+
+@media(max-width:633px){
+.comment-input{
+  width: 65vw;
+}
 }
 
 @media(max-width:612px){
@@ -1823,6 +1826,12 @@ margin-bottom: 80px;
     height: 40px;
   }
 }
+
+@media(max-width:375px){
+  .comment-input{
+    width: 60vw;
+  }
+  }
 @media(max-width:362px){
   .title-phone{
     font-size: 1.35rem;

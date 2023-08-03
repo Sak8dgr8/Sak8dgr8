@@ -1,4 +1,18 @@
+.form-errors {
 
+  background-color: #ffced1;
+  color: #721c24;
+  padding: 15px;
+  margin-top: 0px;
+  border-radius: 5px;
+  width: 100%;
+}
+.error-message {
+  color: #bc3042;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+}
 
 .rip{
 background-image: url('castration.svg') ;

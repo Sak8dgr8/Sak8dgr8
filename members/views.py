@@ -721,7 +721,9 @@ def login_user(request):
             return redirect('user_channel', username=request.user.username)
         else:
             messages.error(request, "Invalid username or password.")
-            return redirect('login')
+            return redirect('login_user')
+   
+            
 
     return render(request, template_name="authenticate/login.html")
 
@@ -749,7 +751,10 @@ def register_user(request):
 		})
     
 def payment_completed_view(request):
-    return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('donation_history')
+    else:
+        return redirect('home')
 
 def payment_failed_view(request):
     return redirect('home')

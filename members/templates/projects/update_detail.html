@@ -144,7 +144,7 @@
                       {% if is_subscribed %}
               <form method="post" action="{% url 'remove_subscriber' username=project.user.username %}?next={{ request.path }}">
                 {% csrf_token %}
-                <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-minus " style="margin-right: 10px;"></i> Unsubscribe </button>
+                <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-minus " style="margin-right: 2px;"></i> Unsubscribe </button>
               </form> 
               {% else %}
                   {% if user.is_authenticated %}
@@ -284,9 +284,9 @@
                                   {% csrf_token %}
                                   <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; width: 100%; margin-bottom: 4vh;">
                                     {% if user.profile.cropped_image_data %}
-                                    <img src="{{user.profile.cropped_image_data.url}}" style="border-radius: 50%; height: 5vw; width: 5vw;">
+                                    <img src="{{user.profile.cropped_image_data.url}}" style="border-radius: 50%; height: 55px; width: 55px;">
                                     {% else %}
-                                    <img src="{% static 'profilepic.png' %}" style="border-radius: 50%; height: 5vw; width: 5vw;">
+                                    <img src="{% static 'profilepic.png' %}" style="border-radius: 50%; height: 55px; width: 55px;">
                                     {% endif %}
                                 
                                       <div style="display: flex; flex-direction: column;">
