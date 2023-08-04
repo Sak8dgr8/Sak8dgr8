@@ -56,6 +56,7 @@
       top: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%);
+      margin-right: 10px;
     }
     
 .dropdown-content a {

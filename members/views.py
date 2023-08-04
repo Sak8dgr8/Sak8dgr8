@@ -197,6 +197,7 @@ def user_channel(request, username, error_message=None):
 
     context={
         'completed_projects_count':completed_projects_count,
+        'completed_projects':completed_projects,
     }
    
     # Get the active project for the user (assuming there's only one active project)
@@ -519,11 +520,12 @@ def donation_landing_page(request, project_id):
         # Update the amount field with the sum of 'donation_amount' and 'platform_donation' from the form
         donation_amount = form.cleaned_data.get('donation_amount', 0)
         total_amount = donation_amount
-        
+ 
 
         paypal_updated_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': total_amount,
+
         'item_name': "Loda",
         'invoice': str(donation_id),
         'currency_code': 'USD',
@@ -730,25 +732,29 @@ def login_user(request):
     
 def logout_user(request):
     logout(request)
-    messages.success(request, ("Thank you for creating change via Our-Tube!"))
+
     return redirect ('home')
 
 def register_user(request):
-	if request.method == "POST":
-		form = RegisterUserForm(request.POST)
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password1']
-			user = authenticate(username=username, password=password)
-			login(request, user)
-			return redirect('home')
-	else:
-		form = RegisterUserForm()
+    if request.method == "POST":
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')
+        else:
+            # If the form is not valid, add a message to display the errors in the template
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{error}")
+            return render(request, 'authenticate/register_user.html', {'form': form})
+    else:
+        form = RegisterUserForm()
 
-	return render(request, 'authenticate/register_user.html', {
-		'form':form,
-		})
+    return render(request, 'authenticate/register_user.html', {'form': form})
     
 def payment_completed_view(request):
     if request.user.is_authenticated:

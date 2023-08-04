@@ -24,9 +24,12 @@ class RegisterUserForm(UserCreationForm):
 	def __init__(self, *args, **kwargs):
 		super(RegisterUserForm, self).__init__(*args, **kwargs)
 
+
 		self.fields['username'].widget.attrs['class'] = 'form-control'
 		self.fields['password1'].widget.attrs['class'] = 'form-control'
 		self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+		
         
 class ChannelCustomizationForm(forms.ModelForm):
 	
@@ -132,4 +135,16 @@ class UpdateForm(forms.ModelForm):
 		self.fields['update_description'].widget.attrs['class'] = 'update-description-input'
 		
 
+from paypal.standard.forms import PayPalPaymentsForm
 
+class PayPalPaymentsForm(PayPalPaymentsForm):
+    def __init__(self, custom_image_url=None, *args, **kwargs):
+        self.custom_image_url = custom_image_url
+        super(PayPalPaymentsForm, self).__init__(*args, **kwargs)
+
+    def get_image(self):
+        if self.custom_image_url:
+            return self.custom_image_url
+        else:
+            # Replace this with the default image URL
+            return "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"

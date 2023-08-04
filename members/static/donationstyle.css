@@ -180,6 +180,7 @@ body{
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
+  margin-right: 10px;
 }
 
 .dropdown-content a {
@@ -268,6 +269,31 @@ display: flex; flex-direction: row; justify-content: space-between;
 .nunu{
   margin-left: 5%; margin-right: 5%;
 }
+.sathi{
+  width: 80px; height: 80px; border-radius: 50%;
+}
+.el{
+font-family: 'Lato', sans-serif; text-align: center;
+}
+.harambe{
+  margin: 0; padding: 0; font-weight: bold; font-family: 'Lato', sans-serif; text-align: center;
+}
+.payment-button{
+  width: 200px;
+  border-radius: 25px;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Lato',sans-serif;
+  padding: 13px 8px;
+  border: none;
+  transition: 0.3s ease-in;
+  margin-top: 1em;
+  cursor: pointer;
+}
+.payment-button:hover{
+  background-color: #000000c3;
+}
+
 
 @media(max-width:1001px){
   .container{
@@ -294,18 +320,12 @@ display: flex; flex-direction: row; justify-content: space-between;
   flex-direction: row; gap: 5px; width: 100%;
  }
  .joyner{
-  align-items: flex-start;
   margin-top: 0;
   gap: 0px;
  }
  .nle{
   left: 20px;
   top: 43px;
- }
- .donation-box{
-  width: calc(100% - 50px);
-  padding-left: 50px;
-  margin-bottom: 0.6em;
  }
  .platform-box{
   width: calc(100% - 50px);
@@ -478,8 +498,36 @@ display: flex; flex-direction: row; justify-content: space-between;
     width: 40px;
 
   }
+  .sathi{
+    width: 60px; height: 60px; border-radius: 50%;
+  }
+  .el{
+    font-size: 0.85rem;
+    }
+  .thumbnail{
+    width: 224px;
+  }
+  .harambe{
+    font-size: 0.9rem;
+  }
+  .donation-box{
+    
+    width: 175px;
+    text-align: center;
+    height: 53px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: 'Lato', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 0.8em;
+    
 }
-
+}
 @media(max-width:392px){
   h1{
     font-size: 1.4rem;

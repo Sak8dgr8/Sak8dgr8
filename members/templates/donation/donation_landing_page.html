@@ -131,16 +131,16 @@ input.donation-box::-webkit-outer-spin-button {
     <div class="container">
         <div style="display: flex; flex-direction: column; align-items: center;">
           {% if project.user.profile.cropped_image_data %}
-          <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 80px; height: 80px; border-radius: 50%;">
+          <img src="{{project.user.profile.cropped_image_data.url}}" class="sathi">
           {% else %}
-          <img src="{% static 'profilepic.png' %}" style="width: 50px; height: 50px; border-radius: 50%;">
+          <img src="{% static 'profilepic.png' %}" class="sathi">
           {% endif %}
-          <p style="font-family: 'Lato', sans-serif; text-align: center;">  You're supporting <strong>@{{project.user}}</strong> in</p>
+          <p class="el">  You're supporting <strong>@{{project.user}}</strong> in</p>
            
-          <p style="font-family: 'Lato', sans-serif; text-align: center; margin-top: 0;"> <strong>{{project.project_title}}</strong></p>
+          <p class="el" style="font-family: 'Lato', sans-serif; text-align: center; margin-top: 0;"> <strong>{{project.project_title}}</strong></p>
           <hr style="width: 100%;">
-          <p></p>
-            <img src="{{project.project_thumbnail.url}}" class="thumbnail">
+        
+            <img src="{{project.project_thumbnail.url}}" class="thumbnail" style="margin-top: 1em;">
 
             
               
@@ -153,14 +153,19 @@ input.donation-box::-webkit-outer-spin-button {
        <form method="POST" action="" id="donation-form">
         {% csrf_token %}
                     <div class="joyner">
-                        <p style="margin: 0; padding: 0; font-weight: bold; font-family: 'Lato', sans-serif;">Your donation to @{{project.user}}</p>
+                        <p class="harambe">Your donation to @{{project.user}}</p>
                         <i class="fa-sharp fa-light fa-dollar-sign fa-2xl nle"></i>   {{form.donation_amount}}
                     </div>
-                                      
+        <hr style="width: 100%">
+                  <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
+        <hr style="width: 100%">
+        
+        
 
                
               {%  if not request.user.is_authenticated%}
-                <p style="margin: 0; font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Consider <a href="{% url 'register_user' %}" style="color: gray;"> signing up for free </a> to track your donations and recieve updates on projects you've funded.</p>
+              <hr style="width: 100%;">
+                <p style="font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Consider <a href="{% url 'register_user' %}" style="color: gray;"> signing up for free </a> to track your donations and recieve updates on projects you've funded.</p>
                 <hr style="width: 100%;">
                    <div class="nunu"> 
                           <div class="bab">
@@ -168,20 +173,22 @@ input.donation-box::-webkit-outer-spin-button {
                             {{form.last_name}}
                           </div>
                           {{form.donor_email}}
-
+                           
                       </div>
-                
+                      <hr style="width: 100%;">    
               {% endif %}
           
                     {% if not paypal_payment_button_updated %}
-              <button id="view-payment-options-button">View Payment Options</button>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+               <button id="view-payment-options-button" class="payment-button"><i class="fa fa-lock" style="margin-right: 8px;"></i>View Payment Options</button>
+                  </div>
                       {%endif%}
             </form>
           
             {% if paypal_payment_button_updated %}
-         
+            <div style="display: flex; align-items: center; justify-content: center;">
               {{ paypal_payment_button_updated.render }}
-           
+            </div>
             {% endif %}
             
 

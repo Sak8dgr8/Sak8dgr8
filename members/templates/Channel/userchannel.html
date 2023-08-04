@@ -161,10 +161,32 @@ $(document).ready(function() {
             <a href="{% url 'go_live' project_id=project.pk %}"> <button class="lodatwo"><i class="fas fa-rocket" style="margin-right: 10px;"></i>LAUNCH</button> </a>
   
           {% elif project.status == 'live' %}
-            <button id="lockedButton" class="lodatwo" style="cursor: not-allowed;" title="Haven't reached funding goal"><i class="fas fa-building-columns" style="margin-right: 10px;"></i>Withdraw Funds</button>
+        <div style="position: absolute; left: 5%; align-self: center;">
             <form method="post" action="{% url 'complete_project' project_id=project.pk %}">{% csrf_token %}
-            <button class="lodatwo" type="submit"><i class="fas fa-building-columns" style="margin-right: 10px;"></i>Complete Project</button>
+            <button class="lodatwo" type="submit"><i class="fas fa-building-columns" style="margin-right: 10px; @media(max-width:571px){display: none;}"></i>Complete Project</button>
             </form>   
+          </div>
+        <div style="position: absolute; right: 10%; align-self: center;">
+            <li>
+              <div class="dropdown">
+                {% if request.user.profile.cropped_image_data %}
+                <img src="{{ request.user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+                <div class="dropdown-content" id="dropdown-content">
+                  <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+                  <a href="{% url 'donation_history' %}">Your Donations</a>
+                  <a href="{% url 'logout'%}">Log Out</a>
+                {% else %}
+                <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+                <div class="dropdown-content" id="dropdown-content">
+                  <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+                  <a href="{% url 'donation_history' %}">Your Donations</a>
+                  <a href="{% url 'logout'%}">Log Out</a>
+                {% endif %}
+                </div>
+              </div>
+           </li>
+          </div>
+       
           {% else %}
           <div class="menu-btn">
             <i class="fas fa-bars"></i>
@@ -360,7 +382,12 @@ $(document).ready(function() {
              <a href="{% url 'funding_info' %}"><button class="donate-btn-btn">Start a project</button></a>
             </div>
         {% else %}
-            This user has no ongoing projects... Stay tuned!
+        <div style="display: flex; flex-direction: column; align-items: center; position: absolute; top: 70vh; width: 100%; justify-content: center; gap: 20px;">
+            <p class="shenanigans" style="color: black;"> @{{user}} has no ongoing projects.</p>
+            {% if completed_projects %}
+            <p class="shenanigans" style="text-decoration: underline; cursor: pointer;"><a href="{% url 'completed_projects' username=user.username %}" style="color: gray;">View @{{user}}'s completed projects</p></a>
+            {% endif %}
+        </div>
         {% endif %}
       {% elif project.status == 'draft' %}
            {% if request.user.id == user.id %}
@@ -844,14 +871,37 @@ $(document).ready(function() {
                   <div class="progress-bar">
                     <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
                   </div>
-                  
-                <a href="https://www.instagram.com/create/story/" target="_blank" style="text-decoration: none;"> <button id="shareButton" class="sexysex-button share-button"
-                  data-title="{{ project.project_title }}"
-                  data-thumbnail="{{ project.project_thumbnail.url }}"
-                  data-url="{{ request.build_absolute_uri }}">
+      <!-- Share button on big screen   -->         
+                 <button id="open-lightbox-btn" class="sexysex-button share-button">
                    <i class="fas fa-share"></i> Share
-                   </button></a>
-          
+                   </button>
+
+                       <!-- Lightbox Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox-container" id="lightbox-container">
+        <span id="close-btn">&times;</span>
+        <div class="lightbox-content">
+            <!-- Add your lightbox content here -->
+        <p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0;">Help by sharing</p>
+        <p style="font-family: 'Lato', sans-serif;">Paste the link anywhere to support {{user}}.<p>
+          <hr style="width: 100%; margin-bottom: 1em;">
+            <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+             <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
+             <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;"></i></a>
+             <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}&img={{project.project_thumbnail.url}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-2xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
+             <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
+            <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
+          </div>
+        <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 3em;">
+          <div class="form-input-container">
+            <input type="text" id="link-input" readonly>
+          </div>
+          <button id="copy-button">Copy link</button>
+        </div>
+      </div>
+    </div>
 
 
                 <button class="sexysex-button donate-button" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
@@ -919,7 +969,7 @@ $(document).ready(function() {
                     {% endif %}
                         <div style="display: flex; flex-direction: column; gap: 1.5vh;">
                           <a href="{% url 'user_channel' username=most_recent_donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ most_recent_donation.donor.username }}</p></a>
-                            <div style="display: flex; flex-direction: row; gap: 1vw;">
+                            <div style="display: flex; flex-direction: row; gap: 2vw;">
                             <p style="margin: 0; font-weight: bold;">${{most_recent_donation.donation_amount}}</p>
                             <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end;">  Most Recent  </p>
                             </div>
@@ -964,42 +1014,39 @@ $(document).ready(function() {
 
 
 
-<!-- Add the following script at the end of your HTML body or in the <head> section -->
+<!-- copy link for big screen -->
 
-<!-- Add the following script at the end of your HTML body or in the <head> section -->
   <script>
-// Function to copy the current page URL to the clipboard
-function copyLinkToClipboard(event) {
-  // Prevent the default behavior of the anchor link
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const linkInput = document.getElementById("link-input");
+  const copyButton = document.getElementById("copy-button");
 
-  var url = window.location.href;
+  // Set the value of the input field to the current URL when the page loads
+  linkInput.value = window.location.href;
 
-  // Create a temporary input element to copy the URL
-  var tempInput = document.createElement('input');
-  tempInput.value = url;
-  document.body.appendChild(tempInput);
+  // Function to handle text selection
+  function preventTextSelection(event) {
+    event.preventDefault();
+    window.getSelection().removeAllRanges();
+  }
 
-  // Select and copy the URL
-  tempInput.select();
-  tempInput.setSelectionRange(0, 99999); // For mobile devices
-  document.execCommand('copy');
+  // Add an event listener to prevent text selection
+  linkInput.addEventListener("select", preventTextSelection);
 
-  // Remove the temporary input element
-  document.body.removeChild(tempInput);
+  // Event listener for the "Copy" button
+  copyButton.addEventListener("click", function () {
+    linkInput.select();
+    document.execCommand("copy");
+    // Optionally, provide some visual feedback to indicate that the link is copied
+    copyButton.textContent = "Copied!";
+    setTimeout(function () {
+      copyButton.textContent = "Copy";
+    }, 2000); // Reset the button text after 2 seconds
+  });
+});
 
-  // Show the success message
-  var successMessage = document.getElementById("copy-success-message");
-  successMessage.style.display = "block";
-  
-  // Hide the success message after a short delay
-  setTimeout(function() {
-    successMessage.style.display = "none";
-  }, 2000); // Display the message for 2 seconds (adjust as needed)
-}
 
-  </script>
-
+</script>
   
 <!-- Your HTML content -->
 
@@ -1095,7 +1142,37 @@ fileInput.addEventListener('change', previewImage);
   });
 </script>
 
+<!-- light box script for big screen  -->
+<script>
+  // javascript.js
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the button and lightbox elements
+  const openLightboxBtn = document.getElementById("open-lightbox-btn");
+  const overlay = document.getElementById("overlay");
+  const lightboxContainer = document.getElementById("lightbox-container");
+  const closeBtn = document.getElementById("close-btn");
 
+  // Function to open the lightbox
+  function openLightbox() {
+    overlay.style.display = "block";
+    lightboxContainer.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+
+  // Function to close the lightbox
+  function closeLightbox() {
+    overlay.style.display = "none";
+    lightboxContainer.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  // Event listeners
+  openLightboxBtn.addEventListener("click", openLightbox);
+  closeBtn.addEventListener("click", closeLightbox);
+  overlay.addEventListener("click", closeLightbox);
+});
+
+</script>
 
   
 
