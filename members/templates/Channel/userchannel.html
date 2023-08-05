@@ -944,10 +944,10 @@ $(document).ready(function() {
             <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
           </div>
         <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
-          <div class="form-input-container">
-            <input type="text" id="link-input" readonly>
+          <div class="form-input-container-com">
+            <input type="text" id="link-input-com" readonly>
           </div>
-          <button id="copy-button">Copy link</button>
+          <button id="copy-button-com">Copy link</button>
         </div>
       </div>
     </div>
@@ -1097,6 +1097,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
   
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const linkInput = document.getElementById("link-input-com");
+    const copyButton = document.getElementById("copy-button-com");
+  
+    // Set the value of the input field to the current URL when the page loads
+    linkInput.value = window.location.href;
+  
+    // Function to handle text selection
+    function preventTextSelection(event) {
+      event.preventDefault();
+      window.getSelection().removeAllRanges();
+    }
+  
+    // Add an event listener to prevent text selection
+    linkInput.addEventListener("select", preventTextSelection);
+  
+    // Event listener for the "Copy" button
+    copyButton.addEventListener("click", function () {
+      linkInput.select();
+      document.execCommand("copy");
+      // Optionally, provide some visual feedback to indicate that the link is copied
+      copyButton.textContent = "Copied!";
+      setTimeout(function () {
+        copyButton.textContent = "Copy";
+      }, 2000); // Reset the button text after 2 seconds
+    });
+  });
+  
+  
+  </script>
 <!-- phone pop up share button -->
 <script>
   function openPopup() {
