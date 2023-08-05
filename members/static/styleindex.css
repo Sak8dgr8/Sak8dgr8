@@ -111,6 +111,9 @@ li:hover{
         cursor: pointer;
         color: #fff;
         width: 15rem; height: 3.5rem; text-align: center; font-size: larger; font-weight: bold;
+        animation-name: ButtonTransition;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out;
       
 }
 
@@ -176,10 +179,34 @@ h1 {
 }
 .cool-transition {
   font-family: 'Lato', sans-serif;
-  color: #0a383f;
+  color: #fff;
   margin-bottom: 0em;
+  animation-name: coolTransition;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
 
 }
+@keyframes coolTransition {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ButtonTransition {
+  0% {
+    opacity: 0;
+    
+  }
+  100% {
+    opacity: 1;
+  
+  }
+}
+
 
 
 

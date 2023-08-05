@@ -609,7 +609,56 @@ $(document).ready(function() {
           </div>
           <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{completed_donation_count}} people donated</p>
           <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a></button>
-          <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
+          <button class="sexysex-button-phone share-button" onclick="openPopup()"><i class="fas fa-share"></i> Share</button>
+          <!--  phone menu share button  -->
+              <div class="popup" id="popup">
+                <div class="popup-content">
+                  <button class="close-button-phone" onclick="closePopup()"><i class="fas fa-times"></i></button>
+               
+                  <p style="font-family: 'Lato', sans-serif; font-size: 1.2rem; margin-bottom: 0; margin-left: 5%; margin-right: 5%;">Help by sharing</p>
+                  <p style="font-family: 'Lato', sans-serif; font-size: 0.8rem; line-height: 1.5; margin-bottom: 0;margin-left: 5%; margin-right: 5%;">Paste the link anywhere to support {{user}}.<p>
+                  <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
+                  <hr style="width: 100%; margin-top: 0;">
+                      <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                      <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-xl" style="color: #1877F2; cursor: pointer; margin: 0;"></i></a>
+                      <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none; color: black;" target="_blank"> <p style="margin: 0.5em; font-size: 0.8rem;">Facebook</p></a>
+                      </div>
+                  <hr style="width: 100%;">
+                     <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                      <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-xl" style="color: #C13584; cursor: pointer;"></i></a>                   
+                      <a href="instagram-stories://camera" target="_blank" style="text-decoration: none; color: #000000;"><p style="margin: 0.5em; font-size: 0.8rem;">Instagram</p></a>
+                    </div>
+                  <hr style="width: 100%;">
+                  <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                    <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}&img={{project.project_thumbnail.url}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
+                    <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}&img={{project.project_thumbnail.url}}" style="text-decoration: none; color: black;" target="_blank"><p style="margin: 0.5em; font-size: 0.8rem;">Twitter</p></a>
+                    </div>
+                    <hr style="width: 100%;">
+                    <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                      <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-xl" style="color: #25D366; cursor: pointer;"></i></a>
+                      <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none; color: black;" target="_blank"> <p style="margin: 0.5em; font-size: 0.8rem;">Whatsapp</p></a>
+                      </div>
+                      <hr style="width: 100%;">
+                      <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                        <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-xl" style="color: #0077B5;"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none; color: black;" target="_blank"><p style="margin: 0.5em; font-size: 0.8rem;">LinkedIn</p></a>
+                        </div>
+                        <hr style="width: 100%;">
+                             <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
+                            <div class="form-input-container">
+                              <input type="text" id="link-input" readonly>
+                            </div>
+                            <button id="copy-button">Copy link</button>
+                          </div>
+                 
+                  
+                  </div>
+                </div>
+              </div>
+            <!--
+  
+            -->
+          <!--  phone menu share button end  -->
         </div>
 
         <hr>
@@ -886,7 +935,7 @@ $(document).ready(function() {
             <!-- Add your lightbox content here -->
         <p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0;">Help by sharing</p>
         <p style="font-family: 'Lato', sans-serif;">Paste the link anywhere to support {{user}}.<p>
-          <hr style="width: 100%; margin-bottom: 1em;">
+          <hr style="width: 100%; margin-bottom: 2em;">
             <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
              <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
              <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;"></i></a>
@@ -894,7 +943,7 @@ $(document).ready(function() {
              <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
             <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
           </div>
-        <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 3em;">
+        <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
           <div class="form-input-container">
             <input type="text" id="link-input" readonly>
           </div>
@@ -1048,8 +1097,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
   
-<!-- Your HTML content -->
+<!-- phone pop up share button -->
+<script>
+  function openPopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'block';
+}
 
+function closePopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
+</script>
 
 
 <script>

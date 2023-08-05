@@ -156,9 +156,7 @@ input.donation-box::-webkit-outer-spin-button {
                         <p class="harambe">Your donation to @{{project.user}}</p>
                         <i class="fa-sharp fa-light fa-dollar-sign fa-2xl nle"></i>   {{form.donation_amount}}
                     </div>
-        <hr style="width: 100%">
-                  <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
-        <hr style="width: 100%">
+
         
         
 
@@ -190,7 +188,9 @@ input.donation-box::-webkit-outer-spin-button {
               {{ paypal_payment_button_updated.render }}
             </div>
             {% endif %}
-            
+           
+            <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem; text-align: center;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
+            <hr style="width: 100%">
 
     </div>
     
