@@ -323,10 +323,6 @@ font-family: 'Lato', sans-serif; text-align: center;
   margin-top: 0;
   gap: 0px;
  }
- .nle{
-  left: 20px;
-  top: 43px;
- }
  .platform-box{
   width: calc(100% - 50px);
  }
