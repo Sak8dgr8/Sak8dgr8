@@ -215,8 +215,11 @@ body{
 margin: 0;
 padding: 0;
 background-image: url('samiksha.jpeg');
-background-size: cover;
 background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: center center;
+background-attachment: fixed;
+
 }
 
 
