@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@400;600&family=Raleway:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
     <title>
       {% if user.project.status == live %}
-        {{project.project_title}}
+        {{project.project_title}} by {{user}}
       {% else %}
         {{user}}
       {% endif %}
