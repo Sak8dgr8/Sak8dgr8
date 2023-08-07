@@ -5,7 +5,7 @@
     width: 150px;
     height: 150px;
     position: absolute;
-    top: 1.5vh;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
    
@@ -211,17 +211,12 @@ h1 {
 
 
 
-
 body{
 margin: 0;
 padding: 0;
 background-image: url('samiksha.jpeg');
-background-size: 100% 100%;
-
+background-size: cover;
 background-repeat: no-repeat;
-background-position: center top;
-background-attachment: fixed;
-
 }
 
 
@@ -405,6 +400,7 @@ background-attachment: fixed;
     display: block;
   }
   .logo{
+    top: 10px;
     width: 140px;
     height: 140px;
   }
@@ -432,6 +428,7 @@ background-attachment: fixed;
  .logo{
     width: 125px;
     height: 125px;
+    top: 10px;
   }
 
  body{
@@ -486,7 +483,7 @@ background-attachment: fixed;
  .logo{
     width: 120px;
     height: 120px;
-    top: 1vh;
+    top: 8px;
   }
 
  body{

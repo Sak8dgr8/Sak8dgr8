@@ -197,7 +197,7 @@ font-family: 'Roboto', sans-serif;
   width: 150px;
   height: 150px;
   position: absolute;
-  top: 8px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
  
@@ -568,16 +568,22 @@ justify-content:flex-start ;
   }
 
 }
+@media(max-width:851px){
+
+  .logo{
+    width: 140px;
+    height: 140px;
+    top: 10px;
+  }
+
+}
+
 
 @media(max-width: 635px){
   .lodaone,
   .lodatwo{
     padding: 10px 20px;
     font-size: 0.8rem;
-  }
-  .logo{
-    width: 140px;
-    height: auto;
   }
   .heding{
     font-size: 1.3rem;
@@ -611,14 +617,22 @@ justify-content:flex-start ;
   }
 }
 
+@media(max-width:600px){
+  .logo{
+    width: 125px;
+    height: 125px;
+    top: 10px;
+  }
+}
+
 @media(max-width:490px){
   .navbar-nav{
     height: 4rem;
    }
    .logo{
       width: 120px;
-      height: auto;
-      top: 1vh;
+      height: 120px;
+      top: 8px;
     }
     .lodaone,
     .lodatwo{

@@ -407,7 +407,7 @@ font-family: 'Roboto', sans-serif;
   width: 150px;
   height: 150px;
   position: absolute;
-  top: 10px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
  
@@ -1448,6 +1448,7 @@ header{
    .logo{
     width: 140px;
     height: 140px;
+    top: 10px;
   }
   .hudini{
     display: none;
@@ -1609,6 +1610,7 @@ padding: 9px 23px;
    .logo{
       width: 125px;
       height: 125px;
+      top: 10px;
     }
     .menu-btn{
       font-size: 25px;
@@ -1788,7 +1790,7 @@ margin-bottom: 80px;
   .logo{
      width: 120px;
      height: 120px;
-    top: 7px;
+    top: 8px;
    }
  
   body{
@@ -1961,7 +1963,6 @@ margin-bottom: 80px;
   .logo{
     width: 110px;
     height: 110px;
-    top: 10px;
        }
     
   .dropdown img{
