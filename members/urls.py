@@ -43,4 +43,6 @@ urlpatterns = [
 
    path('project/<int:project_id>/complete/', views.complete_project, name='complete_project'),
    path('user/<str:username>/completed_projects/', views.completed_projects, name='completed_projects'),
+
+   path('project/<int:project_id>/update/<int:update_id>/', views.mark_update_as_seen, name='mark_update_as_seen'),
 ]

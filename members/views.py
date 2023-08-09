@@ -562,9 +562,11 @@ def donation_landing_page(request, project_id):
 def donation_history(request):
     user = request.user
     donations = Donation.objects.filter(donor=user, status='completed')
+    unseen_updates = Update.objects.filter(project__in=[donation.project for donation in donations], seen_by_users__in=[user])
     context = {
             'donations': donations,
-            'percentage_achieved': None
+            'percentage_achieved': None,
+            'unseen_updates': unseen_updates,
         }
 
     for donation in donations:
@@ -581,8 +583,18 @@ def donation_history(request):
        
     return render(request, 'donation/history.html', context)
 
+
+def mark_update_as_seen(request, update_id):
+    update = Update.objects.get(pk=update_id)
+    update.seen_by_users.add(request.user)
+    return redirect('update_detail')
+
+
+
 from django.template.loader import render_to_string    
 from django.core.mail import EmailMessage
+
+
 
 @login_required
 def payment_info(request):

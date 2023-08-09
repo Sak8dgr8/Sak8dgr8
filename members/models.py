@@ -73,6 +73,7 @@ class Update(models.Model):
     update_thumbnail = models.ImageField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
+    seen_by_users = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return f"{self.update_title} - {self.project}"
