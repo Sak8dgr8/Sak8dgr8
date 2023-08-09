@@ -494,9 +494,14 @@ body{
         
            }
         
-      .dropdown img{
+           .dropdown img{
             width: 37px;
             height: 37px;
+            position: relative;
+            left: 20px;
+           }
+           .dropdown{
+            margin-right: 20px;
            }
     }
     @media(max-width:344px){

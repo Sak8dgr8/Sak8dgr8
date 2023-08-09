@@ -1964,10 +1964,14 @@ margin-bottom: 80px;
     width: 110px;
     height: 110px;
        }
-    
-  .dropdown img{
+       .dropdown img{
         width: 37px;
         height: 37px;
+        position: relative;
+        left: 20px;
+       }
+       .dropdown{
+        margin-right: 20px;
        }
 
 }

@@ -529,11 +529,15 @@ body{
     height: 110px;
    
        }
-
-   .dropdown img{
-    width: 37px;
-    height: 37px;
-   }
+       .dropdown img{
+        width: 37px;
+        height: 37px;
+        position: relative;
+        left: 20px;
+       }
+       .dropdown{
+        margin-right: 20px;
+       }
 
    .donate-btn-btn{
     width: 10rem;

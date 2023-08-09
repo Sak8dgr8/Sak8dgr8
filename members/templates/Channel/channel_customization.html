@@ -156,7 +156,7 @@
              
               <p class="bigp">Enter a description of your channel that can be up to 150 characters long. This will sit at the very top of your channel page next to your profile picture.</p>
               <form method="POST" action="{% url 'channel_customization' %}">{% csrf_token %}  
-                <div style="display: flex; flex-direction: column; align-items: center; margin: auto; gap: 10px; margin:0 2%;">   
+                <div style="display: flex; flex-direction: column; align-items: center; margin: auto; gap: 10px; margin:0 2%">   
                 {{ form.bio }} 
            
               <button type="submit" name="submit_bio" class="pubutton">PUBLISH</button>
@@ -176,7 +176,7 @@
 <div id="cropping-modal" class="modal">
   <div class="modal-content">
     <img id="cropping-preview" src="{% if form.profile_pic.value %}{{ form.profile_pic.value.url }}{% else %}{% if user.profile.profile_pic %}{{ user.profile.profile_pic.url }}{% else %}{% static 'profilepic.png' %}{% endif %}{% endif %}" alt="Cropping Preview" class="toosexy">
-    <button id="crop-button" class="crop-button">Crop</button>
+  <div style="display: flex; align-items: center; justify-content: center;"> <button id="crop-button" class="crop-button">Crop</button></div> 
   </div>
 </div>
 

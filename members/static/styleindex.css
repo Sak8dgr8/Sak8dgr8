@@ -112,7 +112,7 @@ li:hover{
         color: #fff;
         width: 15rem; height: 3.5rem; text-align: center; font-size: larger; font-weight: bold;
         animation-name: ButtonTransition;
-        animation-duration: 3s;
+        animation-duration: 1.5s;
         animation-timing-function: ease-in-out;
       
 }
@@ -190,19 +190,23 @@ h1 {
   0% {
     opacity: 0;
     transform: translateY(-20px);
+    z-index: 1;
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    z-index: 1;
   }
 }
 @keyframes ButtonTransition {
   0% {
     opacity: 0;
+    z-index: 1;
     
   }
   100% {
     opacity: 1;
+    z-index: 1;
   
   }
 }
@@ -240,7 +244,6 @@ background-attachment: fixed;
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  margin-right: 10px;
 }
 
 .dropdown-content a {
@@ -558,6 +561,11 @@ height: 110px;
    .dropdown img{
     width: 37px;
     height: 37px;
+    position: relative;
+    left: 20px;
+   }
+   .dropdown{
+    margin-right: 20px;
    }
 
    .donate-btn-btn{
@@ -572,6 +580,7 @@ height: 110px;
    .menu-btn{
     font-size: 20px;
   }
+
 }
 
 @media(max-width:323px){

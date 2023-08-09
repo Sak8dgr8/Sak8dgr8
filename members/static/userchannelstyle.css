@@ -376,10 +376,10 @@ textarea :focus {
     display: none;
     position: fixed;
     top: 50%;
-    left: 60%;
-    width: 25vw;
-    height: 25vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    height: 40vw;
   }
   
   .modal-content {
@@ -388,9 +388,8 @@ textarea :focus {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
     width: 40vw;
-    height: 40vh;
+    height: 40vw;
   }
 
   .crop-button {
@@ -400,10 +399,11 @@ textarea :focus {
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     transition-duration: 0.4s;
     cursor: pointer;
+    width: 100%;
+
   }
   .logo{
     width: 150px;
@@ -650,6 +650,34 @@ textarea :focus {
       font-size: 0.85rem;
     }
   }
+  @media(max-width:513px){
+    #cropping-modal {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .modal-content {
+      background-color: white;
+      width: 200px;
+      height: 200px;
+    }
+  
+    .crop-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      width: 200px;
+  
+    }
+
+
+  }
   @media(max-width:483px){
    .navbar-nav{
     height: 4rem;
@@ -721,11 +749,16 @@ textarea :focus {
      
          }
   
-     .dropdown img{
-      width: 37px;
-      height: 37px;
-     }
-  
+         .dropdown img{
+          width: 37px;
+          height: 37px;
+          position: relative;
+          left: 20px;
+         }
+         .dropdown{
+          margin-right: 20px;
+         }
+         
      .donate-btn-btn{
       width: 10rem;
       height: 2rem;
