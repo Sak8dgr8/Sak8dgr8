@@ -38,13 +38,13 @@ class ChannelCustomizationForm(forms.ModelForm):
 		fields = ('profile_pic', 'bio', 'cropped_image_data',)
 		widgets = {
             'profile_pic': forms.FileInput(attrs={'class': 'custom-profile-pic-input', 'accept': 'image/*'}),
-	   				'bio': forms.Textarea(attrs={'class': 'custom-bio-field'}),
+	   				'bio': forms.Textarea(attrs={'class': 'form-container'}),
 	     
         }
 
 	def __init__(self, *args, **kwargs):
 		super(ChannelCustomizationForm, self).__init__(*args, **kwargs)
-		self.fields['bio'].widget.attrs['class'] = 'form-control'
+		self.fields['bio'].widget.attrs['class'] = 'form-container'
 		
 		
 

@@ -123,14 +123,13 @@ body{
         cursor: pointer;
       }
 
-h1 {
+.escanor{
   color: #0a383f;
-  font-size: 2.5rem;
+  font-size: 2rem;
   padding: 0px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
 }
-
 .toosexy{
     width: 150px;
     height: 150px;
@@ -182,17 +181,55 @@ textarea :focus {
   .sexy-button:hover {
     background-color: #666666;
   }
-
+  .donate-btn-burger {
+    background-color: #28a745;
+    padding: 16px 25px;
+    border-radius: 9px;
+    width: 60vw;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+  }
+  .sign-btn-burger {
+    background-color: #f1f1f1;
+    padding: 16px 25px;
+    border-radius: 9px;
+    width: 60vw;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    color: #000;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+  }
+  .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000; /* Set the color you want for the close button */
+  }
   .throatgoat{
     display: flex;
     flex-direction: row;
+    margin: auto;
     list-style: none;
-    justify-content: space-around;
+    justify-content: space-between;
     font-family: 'Roboto', sans-serif;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-items: center;
     background-color: #ffffff;
-    z-index: 999;
+    padding: 0 100px;
+
 
   }
   .pstyle{
@@ -207,23 +244,23 @@ textarea :focus {
   .edit-bar{
     width: 100%;
     height: 5%;
-    position: fixed;
     background-color: #ffffff;
-    z-index: 100;
     
   }
 
   .litems{
     font-size: large;
+    color: #1774e5;
+    cursor: pointer;
   }
 
   /* Updated CSS for a modern and visually appealing form */
 
 /* Style the form container */
 .form-container {
-    margin-top: 8vh;
-    max-width: 600px;
-    background-color: #f5f5f5;
+    margin-top: 10px;
+    width: 100%;
+    background-color: #e9e5e5;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -231,9 +268,11 @@ textarea :focus {
     align-items: center;
     justify-content: center;
     align-self: center;
-    
+    font-size: 1rem;
   }
-  
+  .form-container:focus{
+    background-color: #fff;
+  }
   /* Style form rows */
   .form-row {
     display: flex;
@@ -385,3 +424,350 @@ textarea :focus {
     background-color: #45a049;
   }
   
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 30px;
+    display: none;
+    color: #fff; /* Set the color you want for the hamburger icon */
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  
+    color: #fff;
+    margin-left: 5%;
+    gap: 20px;
+    padding-top: 50px;
+   
+  }
+  .fuck{
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: large;
+  }
+  
+  .menu a {
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 20px;
+    z-index: 2000;
+  }
+  
+  .menu a:hover {
+    color: #00a6e0; /* Change to your desired hover color */
+  }
+   /* Set the initial state (hidden) */
+  
+  
+  .donate-btn-burger:hover{
+    background-color: #69DDED;
+  }
+  .inshah{
+    display: flex; 
+    flex-direction: column;
+    max-width: 40vw; font-size: 0.9rem ;
+    font-family: 'Roboto', sans-serif; color: gray; 
+    font-weight: 400; margin-left: 6%;
+  }
+  .bignem{
+    display: flex; flex-direction: row; align-items: center;
+  }
+  .pfp{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .pubutton{
+    background-color: #1774e5; border-radius: 4px; margin: 0;
+            border: none; color: #ffffff; width: 100px; height: 40px; cursor: pointer; font-size: medium;
+      
+  }
+  .pewds{
+    align-self: flex-start;
+  }
+  @media(max-width:851px){
+    .inshah{
+      max-width: 100%;
+      justify-content: center;
+      margin: 0 5%; align-items: center;
+    }
+
+    .navbar-nav{
+      height: 4.8rem;
+      justify-content: space-between;
+      margin-right: 6vw;
+      margin-left: 6vw;
+     }
+     body{
+      margin-top: 4.8rem;
+     }
+     .escanor{
+      font-size: 1.5rem;
+     }
+     .throatgoat{
+      padding: 0 50px;
+     }
+     .lichenbg{
+      min-height: 65vh ;
+     }
+    .menu-items{
+      display: none;
+    }
+    .menu-btn{
+      display: block;
+    }
+  
+    .guts{
+      display: block;
+    }
+    .logo{
+      width: 140px;
+      height: 140px;
+      top: 10px;
+    }
+    .hudini{
+      display: none;
+    }
+    .donate-btn-btn{
+      width: 18rem;
+    }
+   
+  }
+
+  @media(max-width:686px){
+    .escanor{
+      font-size: 1.25rem;
+    }
+    .litems{
+      font-size: 0.9rem;
+    }
+    .form-container{
+      font-size: 0.9rem;
+    }
+  }
+
+  
+  @media(max-width:600px){
+  .menu-btn{
+    font-size: 25px;
+  }
+  
+   .navbar-nav{
+    height: 4.4rem;
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-left: 2rem;
+  
+   }
+   .logo{
+      width: 125px;
+      height: 125px;
+      top: 10px;
+    }
+  
+   body{
+    margin-top: 4.4rem;
+   }
+
+   .lichenbg{
+    min-height: 60vh ;
+   }
+    .menu-items{
+      display: none;
+    }
+    .bar{
+      width: 20px;
+      height: 2px;
+    }
+    .logo-testing img{
+      width: 130px;
+   
+    }
+  
+    .donate-btn-btn{
+      width: 14rem;
+      height: 2.5rem;
+      font-size: medium;
+  
+    }
+  
+    .dropdown img{
+      width: 45px;
+      height: 45px;
+    }
+    .lichenbgg{
+      background-image: none;
+    }
+  
+  }
+  @media(max-width:557px){
+    .throatgoat{
+      padding: 8px 25px;
+    }
+    .escanor{
+      font-size: 1rem;
+    }
+    .litems{
+      font-size: 0.75rem;
+    }
+  }
+  @media(max-width:575px){
+
+    .pfp{
+      width: 120px;
+      height: 120px;
+    }
+  }
+  @media(max-width:536px){
+    .bignem{
+      flex-direction: column; 
+      align-items: flex-start; gap: 20px;
+    }
+    .pubutton{
+      font-size: 0.9rem;
+      width: 80px;
+      height: 32px;
+      
+    }
+    .pewds{
+      font-size: 0.85rem;
+    }
+  }
+  @media(max-width:483px){
+   .navbar-nav{
+    height: 4rem;
+   }
+   .logo{
+      width: 120px;
+      height: 120px;
+      top: 8px;
+    }
+  
+   body{
+    margin-top: 4rem;
+   }
+   h1{
+    font-size: 1.6rem;
+   }
+   .lichenbg{
+    min-height: 55vh ;
+   }
+    .menu-items{
+      display: none;
+    }
+    .bar{
+      width: 15px;
+      height: 1.9px;
+    }
+    .logo-testing img{
+      width: 110px;
+      
+      left: 38vw;
+    }
+  
+    .guts{
+      display: block;
+    }
+   
+    .donate-btn-btn{
+      font-size: small;
+      width: 11rem;
+      height: 2.2rem;
+    }
+    .dropdown img{
+      height: 40px;
+      width: 40px;
+  
+    }
+  }
+  @media(max-width:450px){
+    .pfp{
+      width: 100px;
+      height: 100px;
+    }
+  }
+  @media(max-width:392px){
+  .vinsmoke{
+    font-size: 13px;
+  }
+  
+    h1{
+      font-size: 1.4rem;
+    }
+    .lichenbg{
+      min-height: 48vh ;
+     }
+  
+     .logo{
+      width: 110px;
+      height: 110px;
+     
+         }
+  
+     .dropdown img{
+      width: 37px;
+      height: 37px;
+     }
+  
+     .donate-btn-btn{
+      width: 10rem;
+      height: 2rem;
+      font-size: 0.7rem;
+     }
+     .navbar-nav{
+      margin-left: 5vw;
+      margin-right: 5vw;
+     }
+     .menu-btn{
+      font-size: 20px;
+    }
+  }
+  
+@media(max-width:383px){
+  .bigp{
+    font-size: 0.85rem;
+  }
+  .pewds{
+    font-size: 0.75rem;
+  }
+  .pfp{
+    width: 75px;
+    height: 75px;
+  }
+}
+@media(max-width:374px){
+
+  .pewds{
+    font-size: 0.65rem;
+  }
+  .pfp{
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+  @media(max-width:323px){
+  
+  h1{
+      font-size: 1.3rem;
+  }
+  
+  }
