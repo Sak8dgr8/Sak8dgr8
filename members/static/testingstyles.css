@@ -1,3 +1,108 @@
+.no-scroll {
+  overflow: hidden;
+}
+.all_donations-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Darkish background color with transparency */
+  z-index: 999; /* Place the overlay above other content */
+}
+
+.all_donations-popup-phone {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  padding: 20px;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Styles for the close button */
+.all_donations-close-phone {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 35px; /* Increase font size for larger close button */
+     /* Increase padding for larger clickable area */
+}
+
+
+
+
+
+.all_donations-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto; 
+}
+
+/* Styles for the close button */
+.all_donations-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 35px; /* Increase font size for larger close button */
+  padding: 10px;   /* Increase padding for larger clickable area */
+}
+
+.all_donations-trigger{
+  border:1px solid #20c997;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #20c997;
+  font-size: large;
+  font-weight: 600;
+}
+.all_donations-trigger:hover{
+  background-color: #20c99653;
+}
+
+
+.form-errors {
+  margin:0;
+  background-color: #ffced1;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+.error-message {
+  color: #bc3042;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+
 .popup {
   display: none;
   position: fixed;
@@ -770,24 +875,6 @@ transform: scale(1.05);
 }
 
 
-
-.error-message {
-  background-color: #ff9999;
-  color: #990000;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.messages {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-}
-
-.messages li {
-  margin-bottom: 5px;
-}
 
 .blogflex {
 display: flex;

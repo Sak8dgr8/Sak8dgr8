@@ -178,7 +178,8 @@ input.donation-box::-webkit-outer-spin-button {
                       </div>
                       <hr style="width: 100%;">    
               {% endif %}
-          
+              
+         
                     {% if not paypal_payment_button_updated %}
                     <div style="display: flex; align-items: center; justify-content: center;">
                <button id="view-payment-options-button" class="payment-button"><i class="fa fa-lock" style="margin-right: 8px;"></i>View Payment Options</button>
@@ -191,7 +192,7 @@ input.donation-box::-webkit-outer-spin-button {
               {{ paypal_payment_button_updated.render }}
             </div>
             {% endif %}
-           
+        
             <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem; text-align: center;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
             <hr style="width: 100%">
 

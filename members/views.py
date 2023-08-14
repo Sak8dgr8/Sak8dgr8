@@ -68,7 +68,6 @@ def go_live(request, project_id):
     # Check if all required fields are filled
     if not project.project_title or not project.project_description or not project.project_thumbnail or not project.project_video or not project.funding_goal:
         messages.error(request, 'Please fill in all required project details before going live.')
-
         return redirect('user_channel', username=request.user.username)
 
     # Update the project status to "Live"
@@ -132,7 +131,26 @@ class ProjectSearchView(ListView):
         context['search_query'] = self.request.GET.get('q')
         return context
 
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
+def send_update_emails(update, project):
+    subject = f"{project.user} posted a new update in {project.project_title}"
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [donor.email for donor in project.donations.filter(status='completed')] + [subscriber.email for subscriber in project.user.profile.subscribers.all()]
+
+    context = {
+        'project':project,
+        'update': update,
+     }
+    email_body = render_to_string('projects/update_notification_email.html', context)
+    email = EmailMessage(subject, email_body, from_email, recipient_list)
+    email.content_subtype = 'html'
+    email.send()
+               
+ 
+
+    
 
      
 def update_project(request, project_id):
@@ -145,6 +163,7 @@ def update_project(request, project_id):
                 update = form.save(commit=False)
                 update.project = project
                 update.save()
+                send_update_emails(update, project)
                 # Redirect to the project detail page after successfully creating the update
                 return redirect('user_channel', username=request.user.username)
         else:
@@ -160,9 +179,9 @@ def funding_info(request):
     if request.user.is_authenticated:
         active_project = Project.objects.filter(user=request.user, status__in=['live', 'draft']).first()
         if active_project:
-            error_message = "You can only start one project at a time. Complete the current project before starting a new one!"
             username = request.user.username
-            return redirect(reverse('user_channel', kwargs={'username': username}) + f'?error_message={error_message}')
+            messages.error(request, "You can only start one project at a time. Complete your current project before starting a new one!")
+            return redirect(reverse('user_channel', kwargs={'username': username}))
 
         try:
             project = Project.objects.get(user=request.user, status='none')
@@ -251,7 +270,7 @@ def user_channel(request, username, error_message=None):
         percentage = (total_donations / funding_goal) * 100
 
         channel_owner = User.objects.get(username=username)
-
+        all_donations = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount')
         highest_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount').first()
         most_recent_donation = Donation.objects.filter(project=project, status='completed').order_by('-donation_date').first()
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
@@ -274,6 +293,7 @@ def user_channel(request, username, error_message=None):
             'updates': updates,
             'completed_projects_count':completed_projects_count,
             'completed_donation_count': completed_donation_count,
+            'all_donations': all_donations,
         })
 
         if not request.user.is_authenticated:
@@ -507,7 +527,10 @@ def donation_landing_page(request, project_id):
 
             donation = form.save(commit=False)
             donation.project = project
-            donation.name = f"{donor_first_name} {donor_last_name}"
+            if not donor_first_name and not donor_last_name:
+                donation.name = 'Anonymous'
+            else:
+                donation.name = f"{donor_first_name} {donor_last_name}"
             donation.donor = None
             donation.donation_date = timezone.now()
             donation.status = 'pending'

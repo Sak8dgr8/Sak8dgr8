@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta property="og:title" content="{{project.project_title}}">
+    <meta property="og:description" content="{{project.project_description}}">
+    <meta property="og:image" content="{{project.project_thumbnail.url}}">
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,18 +291,13 @@ $(document).ready(function() {
     </div>
   </div>
 
-
 </header>
 
 <body>
 
-   
-  {% if error_message %}
-      <div style="background-color: #ff9999; position: absolute; left: 23vw; top: 43vh; color: #990000; padding: 10px; margin-bottom: 10px;">
-        {{ error_message }}
-      </div>
-      {% endif %}
+  {% load humanize %}
 
+   
   
 <div class="bigdog">
       
@@ -356,8 +354,23 @@ $(document).ready(function() {
        
      </div>
 
-    
+     {% if messages %}
+     {% for message in messages %}
+     <div class="form-errors hara">
+       <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+       <i class="fas fa-exclamation-circle fa-lg"></i>
+       <p class="error-message">{{ message }}</p>
+       </div>
+     </div>
+     {% endfor %}
+     {% else %}
      <hr class="hara">
+     {% endif %}
+
+   
+
+
+
   <div class="nuts">
      {% if user.id == request.user.id  %}
      <a href="{% url 'channel_customization' %}"> <button class="sexy-button"><i class="fas fa-cog fa-xl" style="margin-right: 10px;"></i>Customize Channel</button></a>  
@@ -581,6 +594,7 @@ $(document).ready(function() {
                         </div>
                     </div>
                     {% endif %}
+                
             </div>
             </div>
 
@@ -749,8 +763,55 @@ $(document).ready(function() {
                 </div>
           {% endif %}
           {% endif %}
-   
-          
+   <!-- start of phone see all button-->
+  
+          <div style="display: flex; flex-direction: row; align-items: center; margin-top: 15px; justify-content: center;">
+            <button onclick="allDonations_openPopup_phone()" class="all_donations-trigger">See all</button>
+          </div>
+
+            <!-- The pop-up container for all donations on small screen -->
+        <div id="all_donations-popup-phone" class="all_donations-popup-phone">
+              <span class="all_donations-close-phone" onclick="allDonations_closePopup_phone()">&times;</span>
+              <h2 style="padding: 10px; margin-bottom: 0; padding-bottom: 0;">Donations ({{all_donations.count}})</h2>
+        <div style="display: flex; flex-direction: column; justify-content: space-between; padding-left: 10px; padding-top: 10px; margin-bottom: 0;">
+
+          {% for donation in all_donations %}
+              {% if donation.donor %}
+              <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+              {% if donation.donor.profile.cropped_image_data %}
+                <img src="{{donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+              {% else %}
+               <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+               {% endif %}
+                  <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+            <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+                       <div style="display: flex; flex-direction: row; gap: 2vw;">
+                         <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                         <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
+                       </div>
+                  </div>
+              </div>
+            {% else %}
+            <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+              <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+              <p style="margin: 0;">{{ donation.name }}</p>     
+                           <div style="display: flex; flex-direction: row; gap: 2vw;">
+                             <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                             <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>
+                           </div>
+                      </div>
+                  </div>
+
+            {% endif %}
+            {% endfor %}
+        </div>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <button class="sexysex-button-phone donate-button" style="margin-top: 30px; width: 90%;"><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff; padding: 20px;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a></button>
+            </div>
+          </div>
+
+    <!-- end of phone see all button-->
        
 
       </div>
@@ -759,7 +820,7 @@ $(document).ready(function() {
       <div style="display: flex; flex-direction: row;">
       <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500;">{{project.views}} views</p>
 
-      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500;">{{project.created_at}}</p>
+      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500;">{{project.created_at|naturaltime}}</p>
       </div>
           
               <p class="yallah">{{ project.project_description }}</p>
@@ -841,7 +902,7 @@ $(document).ready(function() {
                                 <div style="display: flex; flex-direction: column;"> 
                                     <div class="comment-header">
                                     <strong> <a href="{% url 'user_channel' username=comment.user.username %}" style="text-decoration: none; cursor: pointer; color: inherit;"> <p>@{{ comment.user.username }}</p></a></strong>
-                                      <p style="color: gray;">{{ comment.created_at }}</p>
+                                      <p style="color: gray;">{{ comment.created_at|naturaltime }}</p>
                                     </div>
                                     <div class="comment-body">
                                       <p>{{ comment.body }}</p>
@@ -864,7 +925,7 @@ $(document).ready(function() {
              
                   {% if user.id == request.user.id %}
                   <div style="display: flex; align-items: center; justify-content: center;">
-                   <a href="{% url 'project_update' project_id=project.pk %}"> <button class="lodatwo" style="text-align:center; margin-bottom: 20px; margin-top: 10px;">Post an Update</button> </a>
+                   <a href="{% url 'project_update' project_id=project.pk %}"> <button class="lodatwo" style="text-align:center; margin-bottom: 0px; margin-top: 30px;">Post an Update</button> </a>
                   </div>
                   {% endif %}
               <div class="taylor">
@@ -893,7 +954,7 @@ $(document).ready(function() {
                   <p class="update-tit" style="margin-bottom: 0;">{{update.update_title}}</p>
                   <p class="update-creator" style="color: #000000; margin-bottom: 0; font-weight: 600; margin-top: 5px;">@{{project.user.username }}</p>
                
-                  <p class="update-cok"> {{update.views}} views - {{update.updated_at}}</p>
+                  <p class="update-cok"> {{update.views}} views - {{update.updated_at|naturaltime}}</p>
 
                 </div>
 
@@ -946,11 +1007,11 @@ $(document).ready(function() {
         <p style="font-family: 'Lato', sans-serif;">Paste the link anywhere to support {{user}}.<p>
           <hr style="width: 100%; margin-bottom: 2em;">
             <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
-             <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"><i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
              <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;"></i></a>
-             <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}&img={{project.project_thumbnail.url}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-2xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
-             <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
-            <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
+             <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ project.project_title }}%20-%20{{ project.project_description }}" target="_blank"></i></a>
+             <a href="https://api.whatsapp.com/send?text={{ project.project_title }}%20-%20{{ project.project_description }}%20{{ request.build_absolute_uri }}" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
+             <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
           </div>
         <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
           <div class="form-input-container-com">
@@ -1044,10 +1105,52 @@ $(document).ready(function() {
                           </div>
                       </div>
                   </div>
-                    
                     {% endif %}
                     {% endif %}
- 
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-top: 15px; justify-content: center;">
+                    <button onclick="allDonations_openPopup()" class="all_donations-trigger">See all</button>
+                  </div>
+
+                    <!-- The pop-up container for all donations on big screen -->
+                    <div id="all_donations-overlay" class="all_donations-overlay"></div>
+                <div id="all_donations-popup" class="all_donations-popup">
+                      <span class="all_donations-close" onclick="allDonations_closePopup()">&times;</span>
+                      <h2>Donations ({{all_donations.count}})</h2>
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+
+                  {% for donation in all_donations %}
+                      {% if donation.donor %}
+                      <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                      {% if donation.donor.profile.cropped_image_data %}
+                        <img src="{{donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+                      {% else %}
+                       <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                       {% endif %}
+                          <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                    <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+                               <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                 <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                                 <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
+                               </div>
+                          </div>
+                      </div>
+                    {% else %}
+                    <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                      <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                      <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                      <p style="margin: 0;">{{ donation.name }}</p>     
+                                   <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                     <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                                     <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>
+                                   </div>
+                              </div>
+                          </div>
+  
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                    <button class="sexysex-button-phone donate-button" style="margin-top: 25px;"><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a></button>
+                    </div>
             </div>
             </div>
 
@@ -1061,11 +1164,53 @@ $(document).ready(function() {
 
 
 
+<!-- phone see all button -->
+
+<script>
+  // Open the pop-up
+  function allDonations_openPopup_phone() {
+    var poopup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    poopup.style.display = "block";
+    body.classList.add("no-scroll");
+  }
+
+  // Close the pop-up
+  function allDonations_closePopup_phone() {
+    var poopup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    poopup.style.display = "none";
+    body.classList.remove("no-scroll");
+    
+  }
+</script>
 
 
+<!-- POP UP FOR ALL DONATIONS ON BIG SCREEN-->
 
+<script>
+  // Open the pop-up
+  function allDonations_openPopup() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup");
+    var body = document.body;
+    overlay.style.display = "block";
+    popup.style.display = "block";
+    body.classList.add("no-scroll");
+    overlay.addEventListener("click", allDonations_closePopup);
+  }
 
-
+  // Close the pop-up
+  function allDonations_closePopup() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup");
+    var body = document.body;
+    overlay.style.display = "none";
+    popup.style.display = "none";
+    body.classList.remove("no-scroll");
+    overlay.removeEventListener("click", allDonations_closePopup);
+  }
+</script>
 
 
 
@@ -1275,7 +1420,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
-  
 
 </body>
 </html>

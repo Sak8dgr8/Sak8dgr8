@@ -152,12 +152,10 @@
 {% if donations %}
   {% for donation in donations %}
     <div class="col-md-4">
+
       <a href="{% url 'user_channel' username=donation.project.user.username %}" style="text-decoration: none;">
 
         <div class="cuntainer">
-          {% if unseen_update %}
-          New Update
-          {% endif %}
           <!-- Display project information here -->
           <img src="{{ donation.project.project_thumbnail.url }}" style="height: 40%; width: auto;">
           <h2 class="title">{{ donation.project.project_title }}</h2>

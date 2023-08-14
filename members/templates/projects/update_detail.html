@@ -119,6 +119,7 @@
 
 </header>
 <body>
+  {% load humanize %}
     <h2 align="center" class="ash">Update #{{update_number}} in <a href="{% url 'user_channel' username=project.user %}" style="color: #000000;"> {{project.project_title}}</a></h2>
 
     
@@ -139,7 +140,7 @@
                 {% else %}
               <img src ="{% static 'profilepic.png'%}" class="xvidpfp">
                 {% endif %}
-                <div style="display: flex; flex-direction: column;">
+                <div style="display: flex; flex-direction: column; gap: 3px; margin-left: 3px;">
                   <p class="xvidusername"><a href="{% url 'user_channel' username=project.user %}" style="color: #000000; text-decoration: none; font-weight: 600;">@{{ project.user.username }}</a></p>
                   <p style="margin: 0; color: gray;">{{number_of_subscribers}} subscribers</p>
                 </div>     
@@ -169,7 +170,7 @@
                       <div style="display: flex; flex-direction: row;">
                       <p style="font-family: 'Open sans',sans-serif; font-size: 0.85rem; margin-top: 0.5em; margin-left: 2.5%; margin-right: 2.5%; font-weight: 200;">{{update.views}} views</p>
               
-                      <p style="font-family: 'Open sans',sans-serif; font-size: 0.85rem; margin-top: 0.5em; margin-left: 2.5%; margin-right: 2.5%; font-weight: 200;">{{update.updated_at}}</p>
+                      <p style="font-family: 'Open sans',sans-serif; font-size: 0.85rem; margin-top: 0.5em; margin-left: 2.5%; margin-right: 2.5%; font-weight: 200;">{{update.updated_at|naturaltime}}</p>
                       </div>
                       <p class="yallah">{{ update.update_description }}</p>
                   </div>

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'localflavor',
     'paypal.standard.ipn',
     'django.contrib.messages',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
+
+]
+
+AUTHENTICATION_BACKENDS = [
+ 'members.custom_auth_backend.CustomAuthenticationBackend',
 
 ]
 
@@ -162,7 +168,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bvssaket6000@gmail.com'  # Replace with your Gmail address
-EMAIL_HOST_PASSWORD = 'yfuawvzqudgjmnix'  # Replace with your Gmail password or app-specific password
+EMAIL_HOST_PASSWORD = 'iudpebiylxxciwue'  # Replace with your Gmail password or app-specific password
 
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
