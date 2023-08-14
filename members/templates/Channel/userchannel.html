@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% if project.status == 'live' %}
     <meta property="og:title" content="{{project.project_title}}">
     <meta property="og:description" content="{{project.project_description}}">
     <meta property="og:image" content="{{project.project_thumbnail.url}}">
+  {% endif %}
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
