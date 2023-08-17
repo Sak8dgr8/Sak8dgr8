@@ -1,3 +1,111 @@
+.screenshot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: none;
+}
+.logo-image{
+  width: 30%; height: auto; margin-top: 5px;
+}
+
+/* Pop-up container */
+.instagram-share-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #69dded;/* Semi-transparent white background */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.sharing-instructions-container{
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+}
+/* Pop-up content */
+.instagram-share-content {
+  width: 70%;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  align-self: center;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%,-30%);
+}
+.popupflex{
+
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+/* Close button */
+.instagram-share-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Dynamically generated image */
+.instagram-share-image {
+ width: 100%;
+  height: auto;
+}
+
+/* Instructions for users */
+.instagram-share-instructions {
+  font-size: 1.1rem;
+
+  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 600;
+  text-align: left;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+/* Call-to-action button */
+.instagram-share-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #E1306C;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  width: 80%;
+  align-self: center;
+  border: none;
+  margin-bottom: 1em;
+}
+
+.instagram-share-button:hover {
+  background-color: #C1235A;
+}
+
+
+
+
+
+
+
+
+
 .no-scroll {
   overflow: hidden;
 }
@@ -102,6 +210,25 @@
   margin-bottom: 0.2em;
 }
 
+.form-successes {
+  margin: 0;
+  background-color: #28a745; /* Green color */
+  color: #ffffff; /* White text color */
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+
+.success-message {
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+
 
 .popup {
   display: none;
@@ -142,9 +269,9 @@
 
 .donate-btn-burger {
   background-color: #28a745;
-  padding: 16px 25px;
+  padding: 12px 25px;
   border-radius: 9px;
-  width: 60vw;
+  width: 80vw;
   border: none;
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -157,9 +284,9 @@
 }
 .sign-btn-burger {
   background-color: #f1f1f1;
-  padding: 16px 25px;
+  padding: 12px 25px;
   border-radius: 9px;
-  width: 60vw;
+  width: 80vw;
   border: none;
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -1067,6 +1194,26 @@ display: block;
   
 }
 
+.form-input-container-two {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 15px 8px;
+  background-color: #fff;
+}
+
+
+#link-input-two {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  padding: 0 8px;
+  
+  
+}
+
 #link-input {
   flex: 1;
   border: none;
@@ -1077,6 +1224,12 @@ display: block;
 }
 @media(max-width:360px){
  #link-input{
+  text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal; 
+    font-size: 0.75rem;
+ }
+ #link-input-two{
   text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: horizontal; 
@@ -1095,6 +1248,20 @@ display: block;
 }
 
 #copy-button:hover {
+  background-color: #0056b3;
+}
+
+#copy-button-two {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 15px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#copy-button-two:hover {
   background-color: #0056b3;
 }
 

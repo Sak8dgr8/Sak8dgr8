@@ -6,6 +6,8 @@
     <meta property="og:description" content="{{project.project_description}}">
     <meta property="og:image" content="{{project.project_thumbnail.url}}">
   {% endif %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -277,14 +279,14 @@ $(document).ready(function() {
       
       <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
       <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
-      {% if user.is_authenticated %}
+      {% if request.user.is_authenticated %}
       <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out <i class="fas fa-face-sad-tear" style="margin-left: 10px;"></i></a>
       {% else %}
        <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
        {% endif %}
      <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
     <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
     {% else %}
     <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
@@ -358,12 +360,21 @@ $(document).ready(function() {
 
      {% if messages %}
      {% for message in messages %}
+     {% if message.tags == 'error' %}
      <div class="form-errors hara">
        <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
        <i class="fas fa-exclamation-circle fa-lg"></i>
        <p class="error-message">{{ message }}</p>
        </div>
      </div>
+     {% elif message.tags == 'success' %}
+     <div class="form-successes hara">
+      <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+      <i class="fas fa-check-circle fa-lg"></i>
+      <p class="success-message">{{ message }}</p>
+      </div>
+    </div>
+    {% endif %}
      {% endfor %}
      {% else %}
      <hr class="hara">
@@ -649,10 +660,65 @@ $(document).ready(function() {
                       <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none; color: black;" target="_blank"> <p style="margin: 0.5em; font-size: 0.8rem;">Facebook</p></a>
                       </div>
                   <hr style="width: 100%;">
-                     <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
-                      <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-xl" style="color: #C13584; cursor: pointer;"></i></a>                   
-                      <a href="instagram-stories://camera" target="_blank" style="text-decoration: none; color: #000000;"><p style="margin: 0.5em; font-size: 0.8rem;">Instagram</p></a>
+             
+                     <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;"  onclick="openInstagramSharePopup();">
+                       <i class="fab fa-instagram fa-xl" style="color: #C13584; cursor: pointer;"></i>                 
+                      <p style="margin: 0.5em; font-size: 0.8rem;">Instagram</p>
                     </div>
+                  </a>
+              <!-- Instagram Share Pop Up -->
+
+                    <div id="instagram-share-popup" class="instagram-share-popup">
+                    
+                      <span class="instagram-share-close" onclick="closeInstagramSharePopup()">&times;</span>
+              
+
+                      <div class="instagram-share-content">
+                       
+                          <img src="{% static 'TubeLogo.png' %}" class="logo-image">
+                          <!-- Dynamically generated image -->
+                          <img src="{{project.project_thumbnail.url}}" alt="Project Thumbnail" class="instagram-share-image">
+                        
+                          <!-- Instructions for users -->
+                 <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
+                            <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-top: 8px;">
+                              {% if project.user.profile.cropped_image_data %}
+                              <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 44px; height: 44px; border-radius: 50%;">
+                              {% else %}
+                              <img src="{% static 'profilepic.png' %}" style="width: 35px; height: 35px; border-radius: 50%;">
+                              {% endif %}
+                              <p style="margin: 0; font-family: 'Lato',sans-serif; font-size: 0.925rem; color: #000;">@{{user.username}}</p>
+                            </div>
+                          <p class="instagram-share-instructions">
+                             {{project.project_title}}
+                          </p>
+                          <div class="progress-bar-phone">
+                            <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
+                          </div>
+                          <p style="color: gray; font-family: 'Lato',sans-serif; font-size: 0.8rem; text-align: left;">${{project.total_donations}} raised</p>
+                </div>
+
+
+                      </div>
+            
+            <div class="sharing-instructions-container">
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the project link to your story!</p>
+                      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
+                        <div class="form-input-container-two">
+                          <input type="text" id="link-input-two" readonly>
+                        </div>
+                       <button id="copy-button-two">Copy link</button>
+                      </div>
+                <button class="instagram-share-button" id="instagram-btn">Continue to Instagram</button>
+
+                <div id="screenshot-overlay" class="screenshot-overlay"></div>
+            </div>
+
+                        
+
+                  </div>
+
+              <!-- End of INstagram Share pop up -->
                   <hr style="width: 100%;">
                   <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
                     <a href="https://twitter.com/share?url={{ request.build_absolute_uri | urlencode }}&text={{ project.project_title | urlencode }}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
@@ -1163,30 +1229,73 @@ $(document).ready(function() {
 
 {% endif %}
 
-
-
-
-<!-- phone see all button -->
-
+<!-- Screenshot thingy script -->
 <script>
-  // Open the pop-up
-  function allDonations_openPopup_phone() {
-    var poopup = document.getElementById("all_donations-popup-phone");
-    var body = document.body;
-    poopup.style.display = "block";
-    body.classList.add("no-scroll");
-  }
+  const srcElement = document.getElementById("instagram-share-popup");
+  const shareButton = document.getElementById("instagram-btn");
 
-  // Close the pop-up
-  function allDonations_closePopup_phone() {
-    var poopup = document.getElementById("all_donations-popup-phone");
-    var body = document.body;
-    poopup.style.display = "none";
-    body.classList.remove("no-scroll");
-    
-  }
+  shareButton.addEventListener("click", () => {
+    // Hide the elements you want to hide
+    document.querySelector('.instagram-share-close').style.display = 'none';
+    document.querySelector('.sharing-instructions-container').style.display = 'none';
+
+    // Create a temporary duplicate of the logo image
+
+
+    // Replace the original logo with the temporary logo
+
+
+    // Capture a screenshot of the specified element
+    html2canvas(srcElement).then(canvas => {
+      // Show the hidden elements again
+      document.querySelector('.instagram-share-close').style.display = 'block';
+      document.querySelector('.sharing-instructions-container').style.display = 'block';
+
+      // Remove the temporary logo and show the original logo
+
+      // Download the screenshot as an image
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL();
+      a.download = "screenshot.jpg";
+      a.click();
+
+      window.location.href = 'instagram-stories://camera';
+    });
+  });
 </script>
 
+
+
+
+
+
+<script>
+// Open Instagram sharing pop-up
+function openInstagramSharePopup() {
+    var popup = document.getElementById("instagram-share-popup");
+    popup.style.display = "block";
+    disablePageScrolling();
+}
+
+// Close Instagram sharing pop-up
+function closeInstagramSharePopup() {
+    var popup = document.getElementById("instagram-share-popup");
+    popup.style.display = "none";
+    enablePageScrolling();
+}
+
+// Disable page scrolling when pop-up is open
+function disablePageScrolling() {
+    document.body.style.overflow = "hidden";
+}
+
+// Enable page scrolling when pop-up is closed
+function enablePageScrolling() {
+    document.body.style.overflow = "auto";
+}
+
+  
+</script>
 
 <!-- POP UP FOR ALL DONATIONS ON BIG SCREEN-->
 
@@ -1215,7 +1324,37 @@ $(document).ready(function() {
 </script>
 
 
-
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const linkInput = document.getElementById("link-input-two");
+    const copyButton = document.getElementById("copy-button-two");
+  
+    // Set the value of the input field to the current URL when the page loads
+    linkInput.value = window.location.href;
+  
+    // Function to handle text selection
+    function preventTextSelection(event) {
+      event.preventDefault();
+      window.getSelection().removeAllRanges();
+    }
+  
+    // Add an event listener to prevent text selection
+    linkInput.addEventListener("select", preventTextSelection);
+  
+    // Event listener for the "Copy" button
+    copyButton.addEventListener("click", function () {
+      linkInput.select();
+      document.execCommand("copy");
+      // Optionally, provide some visual feedback to indicate that the link is copied
+      copyButton.textContent = "Copied!";
+      setTimeout(function () {
+        copyButton.textContent = "Copy";
+      }, 2000); // Reset the button text after 2 seconds
+    });
+  });
+  
+  
+  </script>
 
 
 
@@ -1377,18 +1516,6 @@ var fileInput = document.getElementById('id_update_thumbnail');
 fileInput.addEventListener('change', previewImage);
 </script>
 
-
-<script>
-  document.getElementById('shareButton').addEventListener('click', function() {
-      var title = this.getAttribute('data-title');
-      var thumbnail = this.getAttribute('data-thumbnail');
-      var url = this.getAttribute('data-url');
-      var caption = title + '\n\n' + url;
-      
-      // Open the Instagram app with the "Add Post" page
-      window.location.href = 'instagram://library?AssetPath=' + encodeURIComponent(thumbnail) + '&InstagramCaption=' + encodeURIComponent(caption);
-  });
-</script>
 
 <!-- light box script for big screen  -->
 <script>

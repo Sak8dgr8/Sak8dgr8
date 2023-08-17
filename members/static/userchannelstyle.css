@@ -183,9 +183,9 @@ textarea :focus {
   }
   .donate-btn-burger {
     background-color: #28a745;
-    padding: 16px 25px;
+    padding: 12px 25px;
     border-radius: 9px;
-    width: 60vw;
+    width: 80vw;
     border: none;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -198,9 +198,9 @@ textarea :focus {
   }
   .sign-btn-burger {
     background-color: #f1f1f1;
-    padding: 16px 25px;
+    padding: 12px 25px;
     border-radius: 9px;
-    width: 60vw;
+    width: 80vw;
     border: none;
     transition: background-color 0.3s ease;
     cursor: pointer;

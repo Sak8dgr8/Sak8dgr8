@@ -294,6 +294,7 @@ def user_channel(request, username, error_message=None):
             'completed_projects_count':completed_projects_count,
             'completed_donation_count': completed_donation_count,
             'all_donations': all_donations,
+            'logo_image_url': "{% static 'Our-TubeLogo.svg' %}",
         })
 
         if not request.user.is_authenticated:
@@ -369,6 +370,7 @@ def complete_project(request, project_id):
         # Update the project status to "completed"
         project.status = 'completed'
         project.save()
+        
         return redirect(reverse('completed_projects', kwargs={'username': request.user.username}))  # Redirect to the completed projects template
 
     return render(request, 'Channel/complete_project.html', {'project': project, 'user':user})

@@ -101,14 +101,14 @@
         
         <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
         <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out</a>
         {% else %}
          <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
          {% endif %}
        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
       <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
-      {% if user.is_authenticated %}
+      {% if request.user.is_authenticated %}
       <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
       {% else %}
       <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
@@ -151,7 +151,7 @@
                 <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-minus " style="margin-right: 2px;"></i> Unsubscribe </button>
               </form> 
               {% else %}
-                  {% if user.is_authenticated %}
+                  {% if request.user.is_authenticated %}
               <form method="post" action="{% url 'add_subscriber' username=project.user.username %}?next={{ request.path }}">
                 {% csrf_token %}
               <button type="submit" class="subscriiibe-button" style="margin-left: 15px;"><i class="fa-solid fa-user-plus " style="margin-right: 10px;"></i>Subscribe</button> 
