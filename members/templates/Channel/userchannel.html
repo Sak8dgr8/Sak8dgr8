@@ -683,7 +683,7 @@ $(document).ready(function() {
                  <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
                             <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-top: 8px;">
                               {% if project.user.profile.cropped_image_data %}
-                              <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 44px; height: 44px; border-radius: 50%;">
+                              <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 35px; height: 35px; border-radius: 50%;">
                               {% else %}
                               <img src="{% static 'profilepic.png' %}" style="width: 35px; height: 35px; border-radius: 50%;">
                               {% endif %}
@@ -702,7 +702,7 @@ $(document).ready(function() {
                       </div>
             
             <div class="sharing-instructions-container">
-                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the project link to your story!</p>
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Remember to add the project link to your story!</p>
                       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
                         <div class="form-input-container-two">
                           <input type="text" id="link-input-two" readonly>
@@ -1251,15 +1251,15 @@ $(document).ready(function() {
       document.querySelector('.instagram-share-close').style.display = 'block';
       document.querySelector('.sharing-instructions-container').style.display = 'block';
 
-      // Remove the temporary logo and show the original logo
-
+      // Instagram story redirect
+      const instaLink = 'instagram-stories://camera';
+      document.getElementById("instagram-btn").setAttribute("href", instaLink);
       // Download the screenshot as an image
       const a = document.createElement("a");
       a.href = canvas.toDataURL();
       a.download = "screenshot.jpg";
       a.click();
 
-      window.location.href = 'instagram-stories://camera';
     });
   });
 </script>
@@ -1295,6 +1295,32 @@ function enablePageScrolling() {
 }
 
   
+</script>
+
+
+<!-- Pop all donations phone-->
+<script>
+  // Open the pop-up
+  function allDonations_openPopup_phone() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    overlay.style.display = "block";
+    popup.style.display = "block";
+    body.classList.add("no-scroll");
+    overlay.addEventListener("click", allDonations_closePopup_phone);
+  }
+
+  // Close the pop-up
+  function allDonations_closePopup_phone() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    overlay.style.display = "none";
+    popup.style.display = "none";
+    body.classList.remove("no-scroll");
+    overlay.removeEventListener("click", allDonations_closePopup_phone);
+  }
 </script>
 
 <!-- POP UP FOR ALL DONATIONS ON BIG SCREEN-->
