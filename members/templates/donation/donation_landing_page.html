@@ -188,7 +188,7 @@ input.donation-box::-webkit-outer-spin-button {
             </form>
           
             {% if paypal_payment_button_updated %}
-            <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
               {{ paypal_payment_button_updated.render }}
             </div>
             {% endif %}

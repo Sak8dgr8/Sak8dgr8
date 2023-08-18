@@ -98,6 +98,9 @@ class DonationForm(forms.ModelForm):
 	class Meta:
 		model = Donation
 		fields = ['donation_amount', 'platform_donation', 'first_name', 'last_name', 'donor_email']
+		widgets = {
+            'donor_email': forms.EmailInput(attrs={'required': 'required'}),
+		}
 	
 	def __init__(self, *args, **kwargs):
 		super(DonationForm, self).__init__(*args, **kwargs)
@@ -137,14 +140,19 @@ class UpdateForm(forms.ModelForm):
 
 from paypal.standard.forms import PayPalPaymentsForm
 
-class PayPalPaymentsForm(PayPalPaymentsForm):
-    def __init__(self, custom_image_url=None, *args, **kwargs):
-        self.custom_image_url = custom_image_url
-        super(PayPalPaymentsForm, self).__init__(*args, **kwargs)
+from paypal.standard.forms import PayPalPaymentsForm
+from django.utils.html import format_html
+
+
+from paypal.standard.conf import (
+    DONATION_BUTTON_IMAGE,
+)
+class ExtPayPalPaymentsForm(PayPalPaymentsForm):
 
     def get_image(self):
-        if self.custom_image_url:
-            return self.custom_image_url
-        else:
-            # Replace this with the default image URL
-            return "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+        custom_image_url = DONATION_BUTTON_IMAGE
+        return format_html('{}', custom_image_url)
+    
+
+
+

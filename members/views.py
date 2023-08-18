@@ -495,7 +495,7 @@ from django.utils import timezone
 
 
 
-
+from .forms import ExtPayPalPaymentsForm
 from decimal import Decimal  # Import Decimal to handle currency amounts accurately
 
 def donation_landing_page(request, project_id):
@@ -562,7 +562,7 @@ def donation_landing_page(request, project_id):
         updated_context = {
             'project': project,
             'form': form,
-            'paypal_payment_button_updated': PayPalPaymentsForm(initial=paypal_updated_dict),
+            'paypal_payment_button_updated': ExtPayPalPaymentsForm(initial=paypal_updated_dict),
         }
 
         # Return the updated context in the render function

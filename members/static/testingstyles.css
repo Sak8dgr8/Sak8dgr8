@@ -1914,6 +1914,9 @@ padding: 9px 23px;
   .subscriiibe-button{
     padding: 8px 20px;
   }
+  .shenanigans{
+    text-align: center;
+  }
 }
 
 @media(max-width:592px){
