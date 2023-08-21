@@ -173,7 +173,7 @@ EMAIL_HOST_PASSWORD = 'iudpebiylxxciwue'  # Replace with your Gmail password or 
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
-
+SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())
 

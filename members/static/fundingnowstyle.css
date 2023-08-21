@@ -237,8 +237,8 @@ body{
   
     
     .col-md-4 {
-      flex: 0 0 calc(33.33% - 4vw);
-      max-width: calc(33.33% - 4vw);
+      flex: 0 0 calc(33.33% - 2vw);
+      max-width: calc(33.33% - 2vw);
       padding: 2vw;
       box-sizing: border-box;
     }
@@ -355,8 +355,8 @@ body{
     }
     @media (max-width: 1025px) {
       .col-md-4 {
-        flex: 0 0 calc(50% - 4vw);
-        max-width: calc(50% - 4vw);
+        flex: 0 0 calc(50% - 2vw);
+        max-width: calc(50% - 2vw);
       }
     
     }
@@ -406,11 +406,11 @@ body{
       }
       .row{
         justify-content: center;
-        margin-left: 2vw;
+       
       }
       .col-md-4 {
       
-        max-width: 96vw;
+        max-width: 98vw;
       }
       .navbar-nav{
        height: 4.4rem;

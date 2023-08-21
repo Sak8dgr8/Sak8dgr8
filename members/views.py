@@ -576,12 +576,7 @@ def donation_landing_page(request, project_id):
     }
     return render(request, 'donation/donation_landing_page.html', context)
 
-
-
-
-
-
-
+   
 
 @login_required
 def donation_history(request):
