@@ -213,10 +213,22 @@ def user_channel(request, username, error_message=None):
     completed_projects = Project.objects.filter(user=user, status='completed')
 
     completed_projects_count = completed_projects.count()
+    data2 = Profile.objects.get(user=user)
+    subscribers = data2.subscribers.all()
+    number_of_subscribers = len(subscribers)
+    is_subscribed = False
+    for subscriber in subscribers:
+        if subscriber == request.user:
+            is_subscribed = True
+            break
+    is_subscribed = request.user in subscribers
 
     context={
         'completed_projects_count':completed_projects_count,
         'completed_projects':completed_projects,
+        'data2':data2,
+        'number_of_subscribers': number_of_subscribers,
+        'is_subscribed': is_subscribed,
     }
    
     # Get the active project for the user (assuming there's only one active project)
@@ -232,7 +244,7 @@ def user_channel(request, username, error_message=None):
     })
 
     if project:
-        data2 = Profile.objects.get(user=user)
+        
         comment_form = CommentForm()
 
         if request.method == 'POST':
@@ -252,12 +264,7 @@ def user_channel(request, username, error_message=None):
         project.views += 1
         project.save()
 
-        subscribers = data2.subscribers.all()
-        number_of_subscribers = len(subscribers)
-        
-        
-        
-        is_subscribed = request.user in subscribers
+
 
         for comment in comments:
             # Calculate the elapsed time since the comment was created
@@ -283,8 +290,7 @@ def user_channel(request, username, error_message=None):
             'comment_count': comment_count,
             'comments': comments,
             'profile_id': profile_id,
-            'number_of_subscribers': number_of_subscribers,
-            'is_subscribed': is_subscribed,
+
             'percentage': percentage,
             'channel_owner': channel_owner,
             'highest_donation': highest_donation,
