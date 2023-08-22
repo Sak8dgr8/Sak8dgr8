@@ -122,31 +122,32 @@
 
 </header>
 <body>
- <div class="overall">
+ <div class="overall" id="overall">
    
   <h1 class="cool-transition">Empowering communities</h1>
   <h1 class="cool-transition">to change lives</h1>
-  <a href="{% url 'funding_info' %}">
-    <button class="donate-btn-btn" style="margin-top: 2.2em;">Start a project</button>
-  </a>
+  <a href="{% url 'funding_info' %}"><button class="donate-btn-btn">Start a project</button></a>
+  
 </div>  
 
   <br>
-
-<script>
-document.querySelector(".menu-btn").addEventListener("click", function () {
-  document.getElementById("overlay").style.display = "block";
-});
-
-document.getElementById("overlay").addEventListener("click", function (event) {
-  if (event.target.classList.contains("overlay")) {
-    document.getElementById("overlay").style.display = "none";
-  }
-});
-
-document.querySelector(".close-btn").addEventListener("click", function () {
-  document.getElementById("overlay").style.display = "none";
-});
-</script>
+  <script>
+    document.querySelector(".menu-btn").addEventListener("click", function () {
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("overall").classList.add("hidden");
+    });
+  
+    document.getElementById("overlay").addEventListener("click", function (event) {
+      if (event.target.classList.contains("overlay")) {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("overall").classList.remove("hidden");
+      }
+    });
+  
+    document.querySelector(".close-btn").addEventListener("click", function () {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("overall").classList.remove("hidden");
+    });
+  </script>
 </body> 
 </html>
