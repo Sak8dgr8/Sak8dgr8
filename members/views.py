@@ -306,6 +306,7 @@ def user_channel(request, username, error_message=None):
 
 def update_detail(request, project_id, update_id):
     project = get_object_or_404(Project, id=project_id)
+    all_donations = Donation.objects.filter(project=project, status='completed').order_by('-donation_amount')
     update = get_object_or_404(Update, id=update_id, project=project)
     update.views += 1
     update.save()
@@ -347,6 +348,7 @@ def update_detail(request, project_id, update_id):
         'comments' : comments,       
         'comment_form':comment_form, 
         'completed_donation_count':completed_donation_count,
+        'all_donations': all_donations,
     }
 
     if request.method == 'POST':

@@ -2,6 +2,9 @@
 
 <html lang="en">
 <head>
+  <meta property="og:title" content="{{project.project_title}}">
+    <meta property="og:description" content="{{project.project_description}}">
+    <meta property="og:image" content="{{project.project_thumbnail.url}}">
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
  {% load static %}
     <meta charset="UTF-8">
@@ -188,7 +191,124 @@
                             
                           </div>
                           <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{completed_donation_count}} people donated</p>
+
+                          <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
+                            <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
+                            </button>
+                            <!--start of phone menu share button -->
+
+                            <button class="sexysex-button-phone share-button" onclick="openPopup()"><i class="fas fa-share"></i> Share</button>
+                            <!--  phone menu share button  -->
+                                <div class="popup" id="popup">
+                                  <div class="popup-content">
+                                    <button class="close-button-phone" onclick="closePopup()"><i class="fas fa-times"></i></button>
+                                 
+                                    <p style="font-family: 'Lato', sans-serif; font-size: 1.2rem; margin-bottom: 0; margin-left: 5%; margin-right: 5%;">Help by sharing</p>
+                                    <p style="font-family: 'Lato', sans-serif; font-size: 0.8rem; line-height: 1.5; margin-bottom: 0;margin-left: 5%; margin-right: 5%;">Paste the link anywhere to support {{project.user}}.<p>
+                                    <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
+                                    <hr style="width: 100%; margin-top: 0;">
+                                        <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                                        <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-xl" style="color: #1877F2; cursor: pointer; margin: 0;"></i></a>
+                                        <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none; color: black;" target="_blank"> <p style="margin: 0.5em; font-size: 0.8rem;">Facebook</p></a>
+                                        </div>
+                                    <hr style="width: 100%;">
+                               
+                                       <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;"  onclick="openInstagramSharePopup();">
+                                         <i class="fab fa-instagram fa-xl" style="color: #C13584; cursor: pointer;"></i>                 
+                                        <p style="margin: 0.5em; font-size: 0.8rem;">Instagram</p>
+                                      </div>
+                                    </a>
+                                <!-- Instagram Share Pop Up -->
+                  
+                                      <div id="instagram-share-popup" class="instagram-share-popup">
+                                      
+                                        <span class="instagram-share-close" onclick="closeInstagramSharePopup()">&times;</span>
+                                
+                  
+                                        <div class="instagram-share-content">
+                                         
+                                            <img src="{% static 'TubeLogo.png' %}" class="logo-image">
+                                            <!-- Dynamically generated image -->
+                                            <img src="{{project.project_thumbnail.url}}" alt="Project Thumbnail" class="instagram-share-image">
+                                          
+                                            <!-- Instructions for users -->
+                                   <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
+                                              <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-top: 8px;">
+                                                {% if project.user.profile.cropped_image_data %}
+                                                <img src="{{project.user.profile.cropped_image_data.url}}" style="width: 35px; height: 35px; border-radius: 50%;">
+                                                {% else %}
+                                                <img src="{% static 'profilepic.png' %}" style="width: 35px; height: 35px; border-radius: 50%;">
+                                                {% endif %}
+                                                <p style="margin: 0; font-family: 'Lato',sans-serif; font-size: 0.925rem; color: #000;">@{{project.user.username}}</p>
+                                              </div>
+                                            <p class="instagram-share-instructions">
+                                               {{project.project_title}}
+                                            </p>
+                                            <div class="progress-bar-phone">
+                                              <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
+                                            </div>
+                                            <p style="color: gray; font-family: 'Lato',sans-serif; font-size: 0.8rem; text-align: left;">${{project.total_donations}} raised</p>
+                                  </div>
+                  
+                  
+                                        </div>
+                              
+                              <div class="sharing-instructions-container">
+                                  <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Remember to add the project link to your story!</p>
+                                        <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
+                                          <div class="form-input-container-two">
+                                            <input type="text" id="link-input-two" readonly>
+                                          </div>
+                                         <button id="copy-button-two">Copy link</button>
+                                        </div>
+                                  <button class="instagram-share-button" id="instagram-btn">Continue to Instagram</button>
+                  
+                                  <div id="screenshot-overlay" class="screenshot-overlay"></div>
+                              </div>
+                  
+                                          
+                  
+                                    </div>
+                  
+                                <!-- End of INstagram Share pop up -->
+                                    <hr style="width: 100%;">
+                                    <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                                      <a href="https://twitter.com/share?url={{ request.build_absolute_uri | urlencode }}&text={{ project.project_title | urlencode }}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
+                                      <a href="https://twitter.com/share?url={{ request.build_absolute_uri | urlencode }}&text={{ project.project_title | urlencode }}" style="text-decoration: none; color: black;" target="_blank"><p style="margin: 0.5em; font-size: 0.8rem;">Twitter</p></a>
+                                      </div>
+                                      <hr style="width: 100%;">
+                                      <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                                        <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-xl" style="color: #25D366; cursor: pointer;"></i></a>
+                                        <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none; color: black;" target="_blank"> <p style="margin: 0.5em; font-size: 0.8rem;">Whatsapp</p></a>
+                                        </div>
+                                        <hr style="width: 100%;">
+                                        <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
+                                          <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none;" target="_blank"><i class="fab fa-linkedin fa-xl" style="color: #0077B5;"></i></a>
+                                          <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}&title={{project.project_title}}" style="text-decoration: none; color: black;" target="_blank"><p style="margin: 0.5em; font-size: 0.8rem;">LinkedIn</p></a>
+                                          </div>
+                                          <hr style="width: 100%;">
+                                               <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
+                                              <div class="form-input-container">
+                                                <input type="text" id="link-input" readonly>
+                                              </div>
+                                              <button id="copy-button">Copy link</button>
+                                            </div>
+                                   
+                                    
+                                    </div>
+                                  </div>
+                                </div>
+                              <!--
+                    
+                              -->
+                            <!--  phone menu share button end  -->
+
+                            <!-- end of phone menu share button -->
+                         
+
+
                         </div>
+
                 
                         <hr>
                         {% if channel_owner %}
@@ -269,11 +389,55 @@
                             </div>
                       {% endif %}
                       {% endif %}
-                          <hr>
-                          <button class="sexysex-button-phone share-button" style="margin-bottom: 15px; margin-top: 10px;"><i class="fas fa-share"></i> Share</button>
-                          <button class="sexysex-button-phone donate-button" style="margin-bottom: 10px;" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
-                            <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
-                            </button>
+                <!-- start of phone see all button -->
+                <div style="display: flex; flex-direction: row; align-items: center; margin-top: 15px; justify-content: center;">
+                  <button onclick="allDonations_openPopup_phone()" class="all_donations-trigger">See all</button>
+                </div>
+      
+                  <!-- The pop-up container for all donations on small screen -->
+              <div id="all_donations-popup-phone" class="all_donations-popup-phone">
+                    <span class="all_donations-close-phone" onclick="allDonations_closePopup_phone()">&times;</span>
+                    <h2 style="padding: 10px; margin-bottom: 0; padding-bottom: 0;">Donations ({{all_donations.count}})</h2>
+              <div style="display: flex; flex-direction: column; justify-content: space-between; padding-left: 10px; padding-top: 10px; margin-bottom: 0;">
+      
+                {% for donation in all_donations %}
+                    {% if donation.donor %}
+                    <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                    {% if donation.donor.profile.cropped_image_data %}
+                      <img src="{{donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+                    {% else %}
+                     <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                     {% endif %}
+                        <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                  <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+                             <div style="display: flex; flex-direction: row; gap: 2vw;">
+                               <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                               <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
+                             </div>
+                        </div>
+                    </div>
+                  {% else %}
+                  <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+                    <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+                    <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+                    <p style="margin: 0;">{{ donation.name }}</p>     
+                                 <div style="display: flex; flex-direction: row; gap: 2vw;">
+                                   <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                                   <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>
+                                 </div>
+                            </div>
+                        </div>
+      
+                  {% endif %}
+                  {% endfor %}
+              </div>
+                  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                    <a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff; padding: 20px;"><button class="sexysex-button-phone donate-button" style="margin-top: 30px; width: 90vw;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate</button></a>
+                  </div>
+                </div>
+                <!--end of phone see all button -->
+                    
+                         
                 
                             <hr style="width: 100%;">
                     </div>
@@ -375,18 +539,45 @@
           <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
         </div>
         
-        <button id="shareButton" class="sexysex-button share-button"
-        data-title="{{ project.project_title }}"
-        data-thumbnail="{{ project.project_thumbnail.url }}"
-        data-url="{{ request.build_absolute_uri }}">
-         <i class="fas fa-share"></i> Share
-         </button>
+       <!--start of share button on big screen-->
+       <button id="open-lightbox-btn" class="sexysex-button share-button">
+        <i class="fas fa-share"></i> Share
+        </button>
+
+            <!-- Lightbox Overlay -->
+<div class="overlay" id="overlay-share"></div>
+
+<!-- Lightbox Container -->
+<div class="lightbox-container" id="lightbox-container">
+<span id="close-btn">&times;</span>
+<div class="lightbox-content">
+ <!-- Add your lightbox content here -->
+<p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0;">Help by sharing</p>
+<p style="font-family: 'Lato', sans-serif;">Paste the link anywhere to support {{project.user}}.<p>
+<hr style="width: 100%; margin-bottom: 2em;">
+ <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+  <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
+  <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;"></i></a>
+  <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-2xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
+  <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
+</div>
+<div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 2.5em;">
+<div class="form-input-container-com">
+ <input type="text" id="link-input-com" readonly>
+</div>
+<button id="copy-button-com">Copy link</button>
+</div>
+</div>
+</div>
+
+       <!--end of share button on big screen -->
 
 
 
-      <button class="sexysex-button donate-button" ><a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;">
-      <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </a>
-      </button>
+         <a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"> <button class="sexysex-button donate-button" >
+      <i class="fas fa-donate" style="margin-right: 5px;"></i> Donate </button> </a>
+     
       <div class="donation-info">
       <p class="donation-text">{{completed_donation_count}} people donated</p>
       </div>
@@ -469,6 +660,52 @@
       
       {% endif %}
       {% endif %}
+      <!--start of big screen see all-->
+      <div style="display: flex; flex-direction: row; align-items: center; margin-top: 15px; justify-content: center;">
+        <button onclick="allDonations_openPopup()" class="all_donations-trigger">See all</button>
+      </div>
+
+        <!-- The pop-up container for all donations on big screen -->
+        <div id="all_donations-overlay" class="all_donations-overlay"></div>
+    <div id="all_donations-popup" class="all_donations-popup">
+          <span class="all_donations-close" onclick="allDonations_closePopup()">&times;</span>
+          <h2>Donations ({{all_donations.count}})</h2>
+    <div style="display: flex; flex-direction: column; justify-content: space-between;">
+
+      {% for donation in all_donations %}
+          {% if donation.donor %}
+          <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          {% if donation.donor.profile.cropped_image_data %}
+            <img src="{{donation.donor.profile.cropped_image_data.url}}" style="width: 55px; height: 55px; border-radius: 50%;">
+          {% else %}
+           <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+           {% endif %}
+              <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+        <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+                   <div style="display: flex; flex-direction: row; gap: 2vw;">
+                     <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                     <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
+                   </div>
+              </div>
+          </div>
+        {% else %}
+        <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
+          <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
+          <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+          <p style="margin: 0;">{{ donation.name }}</p>     
+                       <div style="display: flex; flex-direction: row; gap: 2vw;">
+                         <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
+                         <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>
+                       </div>
+                  </div>
+              </div>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{% url 'donation_landing_page' project_id=project.id %}" style="text-decoration: none; color: #ffffff;"><button class="sexysex-button-phone donate-button" style="margin-top: 25px;"><i class="fas fa-donate" style="margin-right: 5px;"></i> Donate</button></a>
+        </div>
+      <!-- end of big screen see all -->
   </div>
   </div>
 
@@ -497,5 +734,266 @@
       document.getElementById("overlay").style.display = "none";
     });
     </script>
+
+<script>
+  // Open the pop-up
+  function allDonations_openPopup_phone() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    overlay.style.display = "block";
+    popup.style.display = "block";
+    body.classList.add("no-scroll");
+    overlay.addEventListener("click", allDonations_closePopup_phone);
+  }
+
+  // Close the pop-up
+  function allDonations_closePopup_phone() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup-phone");
+    var body = document.body;
+    overlay.style.display = "none";
+    popup.style.display = "none";
+    body.classList.remove("no-scroll");
+    overlay.removeEventListener("click", allDonations_closePopup_phone);
+  }
+</script>
+
+<!-- POP UP FOR ALL DONATIONS ON BIG SCREEN-->
+
+<script>
+  // Open the pop-up
+  function allDonations_openPopup() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup");
+    var body = document.body;
+    overlay.style.display = "block";
+    popup.style.display = "block";
+    body.classList.add("no-scroll");
+    overlay.addEventListener("click", allDonations_closePopup);
+  }
+
+  // Close the pop-up
+  function allDonations_closePopup() {
+    var overlay = document.getElementById("all_donations-overlay");
+    var popup = document.getElementById("all_donations-popup");
+    var body = document.body;
+    overlay.style.display = "none";
+    popup.style.display = "none";
+    body.classList.remove("no-scroll");
+    overlay.removeEventListener("click", allDonations_closePopup);
+  }
+</script>
+
+<!-- light box script for big screen  -->
+<script>
+  // javascript.js
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the button and lightbox elements
+  const openLightboxBtn = document.getElementById("open-lightbox-btn");
+  const overlay = document.getElementById("overlay-share");
+  const lightboxContainer = document.getElementById("lightbox-container");
+  const closeBtn = document.getElementById("close-btn");
+
+  // Function to open the lightbox
+  function openLightbox() {
+    overlay.style.display = "block";
+    lightboxContainer.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+
+  // Function to close the lightbox
+  function closeLightbox() {
+    overlay.style.display = "none";
+    lightboxContainer.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  // Event listeners
+  openLightboxBtn.addEventListener("click", openLightbox);
+  closeBtn.addEventListener("click", closeLightbox);
+  overlay.addEventListener("click", closeLightbox);
+});
+
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const linkInput = document.getElementById("link-input-com");
+    const copyButton = document.getElementById("copy-button-com");
+  
+    // Set the value of the input field to the current URL when the page loads
+    linkInput.value = window.location.href;
+  
+    // Function to handle text selection
+    function preventTextSelection(event) {
+      event.preventDefault();
+      window.getSelection().removeAllRanges();
+    }
+  
+    // Add an event listener to prevent text selection
+    linkInput.addEventListener("select", preventTextSelection);
+  
+    // Event listener for the "Copy" button
+    copyButton.addEventListener("click", function () {
+      linkInput.select();
+      document.execCommand("copy");
+      // Optionally, provide some visual feedback to indicate that the link is copied
+      copyButton.textContent = "Copied!";
+      setTimeout(function () {
+        copyButton.textContent = "Copy";
+      }, 2000); // Reset the button text after 2 seconds
+    });
+  });
+  
+  
+  </script>
+<!-- phone pop up share button -->
+<script>
+  function openPopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'block';
+}
+
+function closePopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const linkInput = document.getElementById("link-input-two");
+    const copyButton = document.getElementById("copy-button-two");
+  
+    // Set the value of the input field to the current URL when the page loads
+    linkInput.value = window.location.href;
+  
+    // Function to handle text selection
+    function preventTextSelection(event) {
+      event.preventDefault();
+      window.getSelection().removeAllRanges();
+    }
+  
+    // Add an event listener to prevent text selection
+    linkInput.addEventListener("select", preventTextSelection);
+  
+    // Event listener for the "Copy" button
+    copyButton.addEventListener("click", function () {
+      linkInput.select();
+      document.execCommand("copy");
+      // Optionally, provide some visual feedback to indicate that the link is copied
+      copyButton.textContent = "Copied!";
+      setTimeout(function () {
+        copyButton.textContent = "Copy";
+      }, 2000); // Reset the button text after 2 seconds
+    });
+  });
+  
+  
+  </script>
+
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const linkInput = document.getElementById("link-input");
+    const copyButton = document.getElementById("copy-button");
+  
+    // Set the value of the input field to the current URL when the page loads
+    linkInput.value = window.location.href;
+  
+    // Function to handle text selection
+    function preventTextSelection(event) {
+      event.preventDefault();
+      window.getSelection().removeAllRanges();
+    }
+  
+    // Add an event listener to prevent text selection
+    linkInput.addEventListener("select", preventTextSelection);
+  
+    // Event listener for the "Copy" button
+    copyButton.addEventListener("click", function () {
+      linkInput.select();
+      document.execCommand("copy");
+      // Optionally, provide some visual feedback to indicate that the link is copied
+      copyButton.textContent = "Copied!";
+      setTimeout(function () {
+        copyButton.textContent = "Copy";
+      }, 2000); // Reset the button text after 2 seconds
+    });
+  });
+  
+  
+  </script>
+  
+<!-- Screenshot thingy script -->
+<script>
+  const srcElement = document.getElementById("instagram-share-popup");
+  const shareButton = document.getElementById("instagram-btn");
+
+  shareButton.addEventListener("click", () => {
+    // Hide the elements you want to hide
+    document.querySelector('.instagram-share-close').style.display = 'none';
+    document.querySelector('.sharing-instructions-container').style.display = 'none';
+
+    // Create a temporary duplicate of the logo image
+
+
+    // Replace the original logo with the temporary logo
+
+
+    // Capture a screenshot of the specified element
+    html2canvas(srcElement).then(canvas => {
+      // Show the hidden elements again
+      document.querySelector('.instagram-share-close').style.display = 'block';
+      document.querySelector('.sharing-instructions-container').style.display = 'block';
+
+      // Instagram story redirect
+      const instaLink = 'instagram-stories://camera';
+      document.getElementById("instagram-btn").setAttribute("href", instaLink);
+      // Download the screenshot as an image
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL();
+      a.download = "screenshot.jpg";
+      a.click();
+
+    });
+  });
+</script>
+
+
+
+
+
+
+<script>
+// Open Instagram sharing pop-up
+function openInstagramSharePopup() {
+    var popup = document.getElementById("instagram-share-popup");
+    popup.style.display = "block";
+    disablePageScrolling();
+}
+
+// Close Instagram sharing pop-up
+function closeInstagramSharePopup() {
+    var popup = document.getElementById("instagram-share-popup");
+    popup.style.display = "none";
+    enablePageScrolling();
+}
+
+// Disable page scrolling when pop-up is open
+function disablePageScrolling() {
+    document.body.style.overflow = "hidden";
+}
+
+// Enable page scrolling when pop-up is closed
+function enablePageScrolling() {
+    document.body.style.overflow = "auto";
+}
+
+  
+</script>  
 </body>
 </html>
