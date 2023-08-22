@@ -179,12 +179,16 @@ h1 {
 }
 .cool-transition {
   font-family: 'Lato', sans-serif;
-  color: #fff;
+  font-weight: 600;
+  color: #f1f1f1;
   margin-bottom: 0em;
   animation-name: coolTransition;
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
 
+}
+.overall{
+  margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%;
 }
 @keyframes coolTransition {
   0% {
@@ -343,6 +347,9 @@ background-attachment: fixed;
     width: 60%;
     align-self: center;
   
+  }
+  .overall{
+  position: absolute; top: 20%; left: 50%; transform: translate(-50%,-20%); width: 100%;
   }
 }
 @media(max-width:730px){
