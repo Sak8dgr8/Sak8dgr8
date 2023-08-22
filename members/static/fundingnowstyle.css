@@ -261,15 +261,16 @@ body{
       transform: scale(1.08);
   }
 
-    .container {
-      max-height: 15vh; /* Adjust the value as needed */
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Number of lines to show */
-      -webkit-box-orient: vertical;
-      min-width: 375px;
-    }
+  .container {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    height: auto; /* Reset the height to auto */
+    max-height: 4rem; /* Set a max-height that accommodates two lines */
+  }
+  
     .search-form {
       display: flex;
       align-items: center;
@@ -475,10 +476,7 @@ body{
       .menu-btn{
         font-size: 20px;
       }
-      .container{
-        min-width: 300px;
-        -webkit-line-clamp: 1;
-      }
+
   
     }
     @media(max-width:392px){
