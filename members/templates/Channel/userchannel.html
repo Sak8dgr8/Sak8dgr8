@@ -702,7 +702,7 @@ $(document).ready(function() {
                       </div>
             
             <div class="sharing-instructions-container">
-                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the link to your story!</p>
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the link to your story! </p>
                       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
                         <div class="form-input-container-two">
                           <input type="text" id="link-input-two" readonly>
@@ -710,6 +710,7 @@ $(document).ready(function() {
                        <button id="copy-button-two">Copy link</button>
                       </div>
                 <button class="instagram-share-button" id="instagram-btn">Take cropped screenshot</button>
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-bottom: 1em; font-size: 0.9rem;">(saved in your files/downloads folder)</p>
 
                 <div id="screenshot-overlay" class="screenshot-overlay"></div>
             </div>
@@ -723,7 +724,7 @@ $(document).ready(function() {
               <!--start of snapchat -->
               <hr style="width: 100%;">
               <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;"  onclick="openInstagramSharePopup();">
-                <i class="fab fa-snapchat fa-xl" style="color: #fffc00; cursor: pointer;"></i>                 
+                <i class="fab fa-snapchat fa-xl" style="color: #e6e305; cursor: pointer;"></i>                 
                <p style="margin: 0.5em; font-size: 0.8rem;">Snapchat</p>
              </div>
               <!-- end of snapchat -->
@@ -1084,7 +1085,8 @@ $(document).ready(function() {
           <hr style="width: 100%; margin-bottom: 2em;">
             <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
              <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
-             <a href="instagram-stories://camera" target="_blank" style="text-decoration: none;"> <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;"></i></a>
+             <i class="fab fa-instagram fa-2xl" style="color: #C13584; cursor: pointer;" title="Open on phone"></i></a>
+             <i class="fab fa-snapchat fa-2xl" style="color: #e6e305; cursor: pointer;" title="Open on phone"></i></a>
              <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{project.project_title}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-2xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
              <a href="https://api.whatsapp.com/send?text={{project.project_title}} {{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"><i class="fab fa-whatsapp fa-2xl" style="color: #25D366; cursor: pointer;"></i></a>
              <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank"><i class="fab fa-linkedin fa-2xl" style="color: #0077B5;"></i></a>
