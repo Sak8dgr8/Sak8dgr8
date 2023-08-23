@@ -155,4 +155,14 @@ class ExtPayPalPaymentsForm(PayPalPaymentsForm):
     
 
 
+from django.contrib.auth.forms import UserChangeForm
+
+class UserUpdateForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'namae'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'namae'}))
+    class Meta:
+        model = User  # Replace with your User model
+        fields = ('username', 'email')
+	
+	
 

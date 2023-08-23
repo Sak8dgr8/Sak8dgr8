@@ -1,4 +1,28 @@
+.namae {
+  width: 50vw;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  background-color: #ccc; /* Set a background color */
+  transition: box-shadow 0.3s, border-color 0.3s; /* Add smooth transitions */
 
+  /* Center the content horizontally */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add hover effect */
+.namae:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #007bff; /* Change border color on hover */
+  background-color: #fff;
+}
+
+.namae:focus{
+  border-color: #007bff;
+  background-color: #fff;
+}
 .navbar-testing {
     background-color: #42c09e;
     width: 100%;
@@ -495,6 +519,11 @@ textarea :focus {
     border-radius: 50%;
   }
   .pubutton{
+    background-color: #1774e5; border-radius: 4px; margin: 0;
+            border: none; color: #ffffff; width: 100px; height: 40px; cursor: pointer; font-size: medium;
+      
+  }
+  .pubbutton{
     background-color: #1774e5; border-radius: 4px; margin: 0;
             border: none; color: #ffffff; width: 100px; height: 40px; cursor: pointer; font-size: medium;
       

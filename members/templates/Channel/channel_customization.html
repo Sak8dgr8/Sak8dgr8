@@ -114,7 +114,10 @@
     <nav class="edit-bar">
         <ul class="throatgoat">
             <h1 class="escanor">Customize your channel</h1>
-            <a href="{% url 'user_channel' username=request.user.username %}" style="text-decoration: none;">  <li class="litems">View channel</li></a>
+              <div style="display: flex; flex-direction: row; gap: 20px;">
+              <a href="{% url 'channel_customization' %}" style="text-decoration: none;">  <li class="litems">Branding</li> </a>
+               <a href="{% url 'basic_info' %}" style="text-decoration: none;"><li class="litems">Basic info</li></a>
+              </div>
         </ul>
     </nav>
 

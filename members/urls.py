@@ -24,7 +24,8 @@ urlpatterns = [
    path('user_channel/<str:username>/', views.user_channel, name='user_channel'),
    path('completed_channel/<str:username>/<int:project_id>', views.completed_channel, name='completed_channel'),
    path('no_project', views.no_project, name='no_project'),
-   path('channel_customization', views.channel_customization, name='channel_customization'),
+   path('channel-customization/branding', views.channel_customization, name='channel_customization'),
+   path('channel-customization/basic_info', views.basic_info, name='basic_info'),
    path('funding_info', views.funding_info, name='funding_info'),
 
    path('edit_project/<int:pk>/', EditProjectView.as_view(), name='edit_project'),

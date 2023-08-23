@@ -459,7 +459,7 @@ import base64
 from django.shortcuts import render, redirect
 from django.core.files.base import ContentFile
 
-
+@login_required
 def channel_customization(request):
     if request.user.is_authenticated:
         profile = request.user.profile
@@ -495,6 +495,24 @@ def channel_customization(request):
         return render(request, 'Channel/channel_customization.html', {
             'form': form,
         })
+
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from .forms import UserUpdateForm
+
+@login_required
+def basic_info(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Succesfully changed your basic information!')
+            return redirect('user_channel', username=request.user.username)  # Redirect to the user's profile page
+    else:
+        form = UserUpdateForm(instance=request.user)
+
+    return render(request, 'Channel/basic_info.html', {'form': form})
+
 
 
 from .forms import DonationForm

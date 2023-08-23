@@ -160,6 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'members/static/media')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+LOGIN_URL = 'login_user'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
