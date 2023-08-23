@@ -665,7 +665,7 @@ $(document).ready(function() {
                        <i class="fab fa-instagram fa-xl" style="color: #C13584; cursor: pointer;"></i>                 
                       <p style="margin: 0.5em; font-size: 0.8rem;">Instagram</p>
                     </div>
-                  </a>
+                
               <!-- Instagram Share Pop Up -->
 
                     <div id="instagram-share-popup" class="instagram-share-popup">
@@ -702,14 +702,14 @@ $(document).ready(function() {
                       </div>
             
             <div class="sharing-instructions-container">
-                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Remember to add the project link to your story!</p>
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the link to your story!</p>
                       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
                         <div class="form-input-container-two">
                           <input type="text" id="link-input-two" readonly>
                         </div>
                        <button id="copy-button-two">Copy link</button>
                       </div>
-                <button class="instagram-share-button" id="instagram-btn">Continue to Instagram</button>
+                <button class="instagram-share-button" id="instagram-btn">Take cropped screenshot</button>
 
                 <div id="screenshot-overlay" class="screenshot-overlay"></div>
             </div>
@@ -719,6 +719,14 @@ $(document).ready(function() {
                   </div>
 
               <!-- End of INstagram Share pop up -->
+
+              <!--start of snapchat -->
+              <hr style="width: 100%;">
+              <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;"  onclick="openInstagramSharePopup();">
+                <i class="fab fa-snapchat fa-xl" style="color: #fffc00; cursor: pointer;"></i>                 
+               <p style="margin: 0.5em; font-size: 0.8rem;">Snapchat</p>
+             </div>
+              <!-- end of snapchat -->
                   <hr style="width: 100%;">
                   <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
                     <a href="https://twitter.com/share?url={{ request.build_absolute_uri | urlencode }}&text={{ project.project_title | urlencode }}" style="text-decoration: none;" target="_blank"> <i class="fab fa-twitter fa-xl" style="color: #1DA1F2; cursor: pointer;"></i></a>
@@ -1237,7 +1245,7 @@ $(document).ready(function() {
   shareButton.addEventListener("click", () => {
     // Hide the elements you want to hide
     document.querySelector('.instagram-share-close').style.display = 'none';
-    document.querySelector('.sharing-instructions-container').style.display = 'none';
+    document.querySelector('.sharing-instructions-container').classList.add("bidden");
 
     // Create a temporary duplicate of the logo image
 
@@ -1249,11 +1257,10 @@ $(document).ready(function() {
     html2canvas(srcElement).then(canvas => {
       // Show the hidden elements again
       document.querySelector('.instagram-share-close').style.display = 'block';
-      document.querySelector('.sharing-instructions-container').style.display = 'block';
+      document.querySelector('.sharing-instructions-container').classList.remove("bidden");
 
       // Instagram story redirect
-      const instaLink = 'instagram-stories://camera';
-      document.getElementById("instagram-btn").setAttribute("href", instaLink);
+    
       // Download the screenshot as an image
       const a = document.createElement("a");
       a.href = canvas.toDataURL();

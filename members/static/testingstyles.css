@@ -1543,6 +1543,9 @@ header{
   .rick{
     display: none;
   }
+  .bidden{
+    display: none;
+  }
   
 @media(max-width:600px){
   .row{
