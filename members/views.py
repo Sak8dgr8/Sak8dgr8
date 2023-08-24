@@ -479,7 +479,7 @@ def channel_customization(request):
                         )
 
                         # Save the profile picture and cropped image data
-                        profile.profile_pic = profile_pic
+                        profile.cropped_image_data = cropped_image_data
                         profile.save()
 
                         return redirect('channel_customization')
