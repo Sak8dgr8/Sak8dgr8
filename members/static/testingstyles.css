@@ -1096,7 +1096,7 @@ background-color: #ebebeb;
 
 
 .comment-form button {
-  background-color: #00A687;
+  background-color: #20c997;
   color: #fff;
   border: none;
   padding: 8px 8px;
@@ -1105,6 +1105,10 @@ background-color: #ebebeb;
   width: 100px;
   height: auto;
   margin: 0;
+  transition: 0.2s ease-in;
+}
+.comment-form button:hover{
+  background-color: rgba(8, 164, 117, 0.985)
 }
 
 .donate-btn-btn{

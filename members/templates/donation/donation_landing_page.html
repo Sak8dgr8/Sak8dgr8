@@ -192,9 +192,9 @@ input.donation-box::-webkit-outer-spin-button {
               {{ paypal_payment_button_updated.render }}
             </div>
             {% endif %}
-        
-            <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem; text-align: center;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
-            <hr style="width: 100%">
+            <hr style="width: 100%; margin: 0;">
+            <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem; text-align: center; margin: 0 0;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
+            <hr style="width: 100%; margin: 0;">
 
     </div>
     
@@ -226,7 +226,10 @@ input.donation-box::-webkit-outer-spin-button {
     }
   });
 </script>
-
+<script>
+  // Automatically scroll to the bottom of the page
+  window.scrollTo(0, document.body.scrollHeight);
+</script>
 
 </body>
 </html>

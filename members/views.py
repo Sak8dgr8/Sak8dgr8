@@ -508,6 +508,7 @@ def basic_info(request):
             form.save()
             messages.success(request, 'Succesfully changed your basic information!')
             return redirect('user_channel', username=request.user.username)  # Redirect to the user's profile page
+
     else:
         form = UserUpdateForm(instance=request.user)
 

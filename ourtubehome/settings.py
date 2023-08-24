@@ -145,6 +145,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
+
+
+
+
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -154,11 +159,28 @@ STATICFILES_DIRS = [BASE_DIR / 'ourtubehome/static', BASE_DIR / 'members/static'
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'members/static/media')
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# MEDIA_URL = '/media/'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'members/static/media')
+
+from google.oauth2 import service_account
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(os.path.join(BASE_DIR,'our-tube-396914-20e47ea5fe42.json'))
+
+DEFAULT_FILE_STORAGE = 'ourtubehome.gcloud.GoogleCloudMediaFileStorage'
+GS_PROJECT_ID = 'our-tube-396914'
+GS_BUCKET_NAME = 'our-tube-bucket'
+MEDIA_ROOT = "media/"
+UPLOAD_ROOT = 'media/uploads/'
+MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+
+
+
+
+
+
 
 LOGIN_URL = 'login_user'
 
