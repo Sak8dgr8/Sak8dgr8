@@ -1256,7 +1256,10 @@ $(document).ready(function() {
 
 
     // Capture a screenshot of the specified element
-    html2canvas(srcElement).then(canvas => {
+    html2canvas(srcElement, {
+      allowTaint: true,
+      useCORS: true,
+    }).then(canvas => {
       // Show the hidden elements again
       document.querySelector('.instagram-share-close').style.display = 'block';
       document.querySelector('.sharing-instructions-container').classList.remove("bidden");
