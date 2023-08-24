@@ -1,0 +1,581 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+.logo{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+.logo img{
+    width: 100%;
+    
+}
+
+.navbar-nav{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    margin: auto;
+    height: 5.6rem;
+  
+  }
+  
+.vinsmoke{
+  text-decoration: none;
+  color: white;
+  font-family: 'Roberto', sans-serif;
+  font-weight: 600;
+}
+
+
+
+li:hover{
+  color: #555;
+  transition: 0.2s ease-in;
+}
+.navbar-testing {
+  background-color: #42c09e;
+  width: 100%;
+  
+  position: fixed;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  top: 0;
+}
+
+
+.donate-btn {
+  background-color: #28a745;
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+  margin: 0;
+
+}
+.donate-btn-burger {
+  background-color: #28a745;
+  padding: 12px 25px;
+  border-radius: 9px;
+  width: 80vw;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  align-self: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+.sign-btn-burger {
+  background-color: #f1f1f1;
+  padding: 12px 25px;
+  border-radius: 9px;
+  width: 80vw;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #000;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #000; /* Set the color you want for the close button */
+}
+
+.donate-btn-btn{
+
+        background-color: #28a745;
+        margin-top: 2.2em;
+        border-radius: 50px;
+        border: none;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        color: #fff;
+        width: 15rem; height: 3.5rem; text-align: center; font-size: larger; font-weight: bold;
+      
+}
+
+.donate-btn a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.donate-btn:hover {
+  background-color: #69DDED;
+}
+
+.donate-btn-btn:hover {
+  background-color: #69DDED;
+}
+
+.exp{
+  width: 90%; height:auto;
+}
+.juice{
+  display: flex; flex-direction: row; margin: 0; align-items: center; gap: 0px;
+}
+.yachty{
+flex-direction: column; margin-left: 5%; gap:20px; display: none; margin-right: 5%;
+}
+:root {
+  font-size: 16px;
+  font-family: sans-serif;
+  
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+main{
+  margin-top: 5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.guts{
+  display: none;
+}
+
+h1 {
+  color: #0a383f;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0px;
+  font-weight: bold;
+
+}
+.cool-transition {
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  color: #f1f1f1;
+  margin-bottom: 0em;
+}
+.overall{
+  margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%;animation: coolTransition 1s ease-in-out;
+}
+@keyframes coolTransition {
+  0% {
+    opacity: 0;
+  
+
+  }
+  100% {
+    opacity: 1;
+
+  }
+}
+
+.hidden{
+  display: none;
+}
+
+
+
+body{
+margin: 0;
+padding: 0;
+background-image: url('Samikshasketch.png');
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: center center;
+background-attachment: fixed;
+
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px;
+  min-width: 160px;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-content a {
+  display: block;
+  color: #333333;
+  text-decoration: none;
+  padding: 8px 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown img {
+  width: 50px; /* Adjust the width to fit your button image */
+  height: 50px; /* Adjust the height to fit your button image */
+  cursor: pointer;
+}
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 30px;
+  display: none;
+  color: #fff; /* Set the color you want for the hamburger icon */
+}
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  color: #fff;
+  margin-left: 5%;
+  gap: 20px;
+  padding-top: 50px;
+ 
+}
+.fuck{
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: large;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 20px;
+  z-index: 2000;
+}
+
+.menu a:hover {
+  color: #00a6e0; /* Change to your desired hover color */
+}
+ /* Set the initial state (hidden) */
+
+
+.donate-btn-burger:hover{
+  background-color: #69DDED;
+}
+.pstyle{
+  font-family: 'Montserrat',sans-serif; margin: 0; color: gray; font-size: 1rem; line-height: 1.5;
+}
+.headingstyle{
+  font-family: 'Montserrat', sans-serif; font-size: 2rem; margin: 0; text-align: center; margin-bottom: 20px;
+}
+
+@media(max-width:985px){
+.pstyle{
+  font-size: 0.9rem;
+}
+.headingstyle{
+  font-size: 1.8rem;
+}
+}
+@media(max-width:890px){
+  .juice{
+    display: none;
+  }
+  .yachty{
+    display: flex;
+  }
+  .exp{
+    width: 60%;
+    align-self: center;
+  
+  }
+  .overall{
+  position: absolute; top: 20%; left: 50%; transform: translate(-50%,-20%); width: 100%;
+  }
+}
+@media(max-width:730px){
+  .pstyle{
+    font-size: 0.8rem;
+  }
+  .headingstyle{
+    font-size: 1.6rem;
+  }
+  .exp{
+    width: 420px;
+  }
+}
+@media(max-width:635px){
+  .pstyle{
+    font-size: 0.7rem;
+  }
+  .headingstyle{
+    font-size: 1.5rem;
+  }
+  .exp{
+    width: 360px;
+  }
+}
+@media(max-width:480px){
+  .pstyle{
+    font-size: 0.65rem;
+  }
+  .headingstyle{
+    font-size: 1.35rem;
+  }
+  .exp{
+    width: 300px;
+  }
+}
+
+@media(max-width:851px){
+  .navbar-nav{
+    height: 4.8rem;
+    justify-content: space-between;
+    margin-right: 6vw;
+    margin-left: 6vw;
+   }
+   body{
+    margin-top: 4.8rem;
+   }
+   h1{
+    font-size: 2.75rem;
+   }
+   .lichenbg{
+    min-height: 65vh ;
+   }
+  .menu-items{
+    display: none;
+  }
+  .menu-btn{
+    display: block;
+  }
+
+  .guts{
+    display: block;
+  }
+  .logo{
+    top: 10px;
+    width: 140px;
+    height: 140px;
+  }
+  .hudini{
+    display: none;
+  }
+  .donate-btn-btn{
+    width: 18rem;
+  }
+ 
+}
+
+@media(max-width:600px){
+.menu-btn{
+  font-size: 25px;
+}
+
+ .navbar-nav{
+  height: 4.4rem;
+  justify-content: space-between;
+  margin-right: 2rem;
+  margin-left: 2rem;
+
+ }
+ .logo{
+    width: 125px;
+    height: 125px;
+    top: 10px;
+  }
+
+ body{
+  margin-top: 4.4rem;
+ }
+ h1{
+  font-size: 2.4rem;
+ }
+ .lichenbg{
+  min-height: 60vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 20px;
+    height: 2px;
+  }
+  .logo-testing img{
+    width: 130px;
+ 
+  }
+
+  .donate-btn-btn{
+    width: 14rem;
+    height: 2.5rem;
+    font-size: medium;
+
+  }
+
+  .dropdown img{
+    width: 45px;
+    height: 45px;
+  }
+  .lichenbgg{
+    background-image: none;
+  }
+  body{
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center center;
+  }
+}
+
+
+@media(max-width:483px){
+ .navbar-nav{
+  height: 4rem;
+ }
+ .logo{
+    width: 120px;
+    height: 120px;
+    top: 8px;
+  }
+
+ body{
+  margin-top: 4rem;
+ }
+ h1{
+  font-size: 1.8rem;
+ }
+ .lichenbg{
+  min-height: 55vh ;
+ }
+  .menu-items{
+    display: none;
+  }
+  .bar{
+    width: 15px;
+    height: 1.9px;
+  }
+  .logo-testing img{
+    width: 110px;
+    
+    left: 38vw;
+  }
+
+  .guts{
+    display: block;
+  }
+ 
+  .donate-btn-btn{
+    font-size: small;
+    width: 11rem;
+    height: 2.2rem;
+  }
+  .dropdown img{
+    height: 40px;
+    width: 40px;
+
+  }
+}
+@media(max-width:465px){
+  body{
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    background-position: center center;
+  }
+}
+@media(max-width:392px){
+.vinsmoke{
+  font-size: 13px;
+}
+
+  h1{
+    font-size: 1.5rem;
+  }
+  .lichenbg{
+    min-height: 48vh ;
+   }
+
+   .logo{
+width: 110px;
+height: 110px;
+
+
+
+   }
+
+   .dropdown img{
+    width: 37px;
+    height: 37px;
+    position: relative;
+    left: 20px;
+   }
+   .dropdown{
+    margin-right: 20px;
+   }
+
+   .donate-btn-btn{
+    width: 10rem;
+    height: 2rem;
+    font-size: 0.7rem;
+   }
+   .navbar-nav{
+    margin-left: 5vw;
+    margin-right: 5vw;
+   }
+   .menu-btn{
+    font-size: 20px;
+  }
+
+}
+
+@media(max-width:323px){
+
+h1{
+    font-size: 1.39rem;
+}
+
+}

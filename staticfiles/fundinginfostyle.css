@@ -1,0 +1,713 @@
+
+.navbar-testing {
+  background-color: #42c09e;
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  top: 0;
+}
+
+
+.navbar-nav{
+      text-decoration: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      list-style: none;
+      margin: auto;
+      height: 5.6rem;
+      
+    }
+
+    .vinsmoke{
+      text-decoration: none;
+      color: white;
+      font-family: 'Roberto', sans-serif;
+      font-weight: 600;
+    }
+    li:hover{
+      color: #555;
+      transition: 0.2s ease-in;
+    }
+    .lodaone:hover{
+      transform: scale(1.05);
+    }
+    .lodatwo:hover{
+      transform: scale(1.05);
+    }
+.dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+.dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      padding: 10px;
+      min-width: 160px;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      margin-right: 10px;
+    }
+    
+.dropdown-content a {
+      display: block;
+      color: #333333;
+      text-decoration: none;
+      padding: 8px 10px;
+    }
+    
+.dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    
+.dropdown img {
+      width: 50px; /* Adjust the width to fit your button image */
+      height: 50px; /* Adjust the height to fit your button image */
+      cursor: pointer;
+    }
+
+.logo-testing img {
+      width: 9.5rem; 
+      height: auto;
+      margin-right: 0;
+    
+    }
+
+.guts{
+      display: none;
+    }
+
+.donate-btn {
+      background-color: #28a745;
+      padding: 10px 25px;
+      border-radius: 30px;
+      border: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    
+.donate-btn a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+.donate-btn:hover {
+      background-color: #69DDED;
+    }
+  
+body{
+
+
+      margin-top: 5.6rem;
+      margin-left: 0;
+      margin-right: 0;
+      font-family: 'Roboto', sans-serif;
+  
+    }
+
+.bar{
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      background-color: #ffffff;
+    }
+.hamburger{
+      display: none;
+      cursor: pointer;
+    }
+
+h1 {
+color: #0a383f;
+font-size: 2.5rem;
+padding: 0px;
+font-weight: bold;
+font-family: 'Roboto', sans-serif;
+}
+
+.username{
+  position: absolute; left: 20%; top: 44%;
+}
+.toosexy{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 47%;
+  left: 5%;
+}
+
+.sexy-button {
+  background-color: #bebebe;
+  color: #000000;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 80%;
+}
+
+.sexy-button:hover {
+  background-color: #666666;
+}
+
+.throatgoat{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-around;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+
+}
+
+
+.gapfap{
+  flex-grow: 0.5;
+}
+
+.edit-bar{
+  width: 100%;
+  height: 5%;
+  position: fixed;
+}
+.logo{
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+ 
+}
+.logo img{
+  width: 100%;
+  
+}
+
+
+.litems{
+  font-size: large;
+}
+
+/* Updated CSS for a modern and visually appealing form */
+
+/* Style the form container */
+.form-container-one{
+  margin-top: 32px;
+  width: 50vw;
+  height: auto ;
+  background-color: #f6f6f692;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 26px;
+  
+}
+
+/* Style form rows */
+.form-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 10vw;
+  margin-bottom: 20px;
+}
+
+/* Style form fields */
+.form-group {
+  flex-basis: 50%; /* Adjust the width of each form group */
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+.form-inpt {
+  width: 500px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  border: none;
+  color: #333333;
+ 
+}
+ .city-inpt {
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  border: none;
+  color: #333333;
+ 
+ 
+}
+.state-inpt {
+  width: 100px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  border: none;
+  color: #333333;
+ 
+}
+.days-inpt {
+  width: 60px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  border: none;
+  color: #333333;
+ 
+}
+
+
+
+
+.form-inpt:focus {
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 123, 255, 0.4);
+}
+
+/* Style form button */
+.form-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Additional styles */
+/* Add your own custom styles here */
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 62vh;
+}
+
+
+
+
+
+
+.form-container-two {
+  width: 35vw;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f3f3f3b4;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#id_project_video {
+display: none;
+}
+
+
+.drag-drop-area {
+border: 2px dashed #666;
+background-color: #f9f9f9;
+color: #666;
+text-align: center;
+cursor: pointer;
+padding: 50px;
+}
+
+.drag-drop-area:hover {
+border-color: #333;
+background-color: #f5f5f5;
+}
+
+.drag-drop-area i {
+font-size: 48px;
+margin-bottom: 10px;
+}
+
+.browse-button {
+display: inline-block;
+padding: 10px 20px;
+background-color: #45a049;
+color: #fff;
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.browse-button:hover {
+background-color: #45a049ed;
+}
+
+.file-input {
+display: none;
+}
+
+#videoName {
+display: block;
+margin-top: 10px;
+font-style: italic;
+}
+
+
+
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.sexy-hr {
+border: none;
+height: 2px;
+background-color: #918b8c; /* Choose a color that fits your design */
+margin: 49vh, 0 ,0;
+}
+
+.pstyle{
+font-family: 'Open Sans', sans-serif; font-size: 1rem;font-weight: 400; color: gray; line-height: 2.5;
+}
+.estyle{
+font-family: 'Open Sans', sans-serif; font-size: 1rem;font-weight: 400; color: gray; line-height: 1.5;
+}
+.headingstyle{
+font-family: 'Open Sans', sans-serif; font-size: 1.3rem; font-weight: 400;margin-bottom: 0;
+}
+.kuntainer{
+display: flex; flex-direction: column; width: 500px; height: fit-content; background-color: #f1f1f1aa; padding-top: 10px;
+}
+.verifybutton{
+border: none; cursor: pointer; height: 2rem; background-color: rgb(157, 157, 157); transition: 0.2s ease-in; width: 100%;
+}
+.verifytext{
+height: 2rem; background-color: rgb(157, 157, 157); width: 100%;
+}
+.verifybutton:hover{
+background-color: gray;
+color: #ffffff;
+}
+
+.heding{
+font-size: 1.5rem; font-family: 'Raleway',sans-serif;
+}
+.beding{
+font-size: 1rem;font-family: 'Raleway',sans-serif; 
+}
+
+.ashaye{
+display: flex;
+justify-content: space-around;
+margin-top: 40px;
+margin-bottom: 20px;
+}
+.ashaye-target-date{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 80%;
+  
+  }
+
+.ashaye-description{
+display: flex;
+justify-content: space-around;
+margin-top: 40px;
+margin-bottom: 110px;
+
+}
+.ashaye-funding{
+display: flex;
+justify-content: space-around;
+margin-top: 40px;
+margin-bottom: 80px;
+
+}
+
+.ashaye-thumbnail{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  
+}
+
+.column {
+flex-basis: 33%;
+padding: 0px;
+margin: 0; 
+height: 200px;
+justify-content:flex-start ;
+}
+.lodaone {
+      
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 0px;
+  background-color: #027d67;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: 0.2s ease-in;
+
+}
+
+.lodatwo {
+ 
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 0px;
+  background-color: #027D67;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease-in;
+
+}
+
+@media(max-width: 999.6px){
+  .rip{
+    display: none;
+  }
+  .form-inpt {
+    width: 97.5%;
+  }
+  .city-inpt{
+    width: 40%;
+  }
+  .drag-drop-area{
+    width: 100%;
+    padding: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }  
+  .kuntainer{
+    width: 100%;
+  }
+  .verifybutton{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+}
+
+@media(min-width:999.5px){
+  .rip-phone{
+    display: none;
+  }
+}
+
+@media(max-width:998px){
+  .navbar-nav{
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 4.8rem;
+  }
+  body{
+    margin-top: 4.8rem;
+  }
+
+}
+@media(max-width:851px){
+
+  .logo{
+    width: 140px;
+    height: 140px;
+    top: 10px;
+  }
+
+}
+
+
+@media(max-width: 635px){
+  .lodaone,
+  .lodatwo{
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+  .heding{
+    font-size: 1.3rem;
+  }
+  .beding{
+    font-size: 0.9rem;
+  }
+  .pstyle{
+    font-size: 0.9rem;
+  }
+  .headingstyle{
+    font-size: 1.2rem;
+  }
+  .form-inpt{
+    font-size: 14px;
+  }
+  .state-inpt{
+    font-size: 14px;
+  }
+  .city-inpt{
+    font-size: 14px;
+  }
+  .estyle{
+    font-size: 14px;
+  }
+  .verifybutton{
+    font-size: 14px;
+  }
+  .verifybutton{
+    padding: 15px;
+  }
+}
+
+@media(max-width:600px){
+  .logo{
+    width: 125px;
+    height: 125px;
+    top: 10px;
+  }
+}
+
+@media(max-width:490px){
+  .navbar-nav{
+    height: 4rem;
+   }
+   .logo{
+      width: 120px;
+      height: 120px;
+      top: 8px;
+    }
+    .lodaone,
+    .lodatwo{
+      padding: 10px 15px;
+      font-size: 0.7rem;
+    }
+    .heding{
+      font-size: 1.2rem;
+    }
+    .beding{
+      font-size: 0.8rem;
+    }
+    .pstyle{
+      font-size: 0.8rem;
+    }
+    .headingstyle{
+      font-size: 1.1rem;
+    }
+    .form-inpt{
+      font-size: 12px;
+    }
+    .state-inpt{
+      font-size: 12px;
+    }
+    .city-inpt{
+      font-size: 12px;
+    }
+    .estyle{
+      font-size: 12px;
+    }
+    .verifybutton{
+      font-size: 12px;
+      padding: 12px;
+    }
+}
+
+@media(max-width:415px){
+  .navbar-nav{
+    height: 3.8rem;
+   }
+   .logo{
+      width: 100px;
+      height: auto;
+    
+    }
+    .lodaone,
+    .lodatwo{
+      padding: 7px 10px;
+      font-size: 0.6rem;
+    }
+    .heding{
+      font-size: 1.1rem;
+    }
+    .beding{
+      font-size: 0.7rem;
+    }
+    .pstyle{
+      font-size: 0.7rem;
+    }
+    .headingstyle{
+      font-size: 1rem;
+    }
+    .form-inpt{
+      font-size: 10px;
+    }
+    .state-inpt{
+      font-size: 10px;
+    }
+    .city-inpt{
+      font-size: 10px;
+    }
+    .estyle{
+      font-size: 10px;
+    }
+    .verifybutton{
+      font-size: 10px;
+    }
+}

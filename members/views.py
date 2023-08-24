@@ -471,19 +471,17 @@ def channel_customization(request):
                 cropped_image_data = request.POST.get('cropped_image_data')
 
                 if profile_pic and cropped_image_data:
-                        # Convert the base64 encoded data to an image file
-                        img_data = cropped_image_data.split(',')[1]
-                        img_file = ContentFile(base64.b64decode(img_data), name='cropped_image.png')
-                        profile.cropped_image_data = InMemoryUploadedFile(
-                            img_file, None, 'cropped_image.png', 'image/png', len(img_file), None
-                        )
+                    # Convert the base64 encoded data to an image file
+                    img_data = cropped_image_data.split(',')[1]
+                    img_bytes = base64.b64decode(img_data)
+                    img_file = ContentFile(img_bytes, name='cropped_image.png')
 
-                        # Save the profile picture and cropped image data
-                        profile.cropped_image_data = cropped_image_data
-                        profile.save()
+                    # Save the profile picture and cropped image data
+                    profile.cropped_image_data.save('cropped_image.png', img_file)
+                    profile.save()
 
-                        return redirect('channel_customization')
-            
+                    return redirect('channel_customization')
+
             elif 'submit_bio' in request.POST:
                 bio = request.POST.get('bio')
                 if bio:
