@@ -474,7 +474,8 @@ def channel_customization(request):
                     # Convert the base64 encoded data to an image file
                     img_data = cropped_image_data.split(',')[1]
                     img_bytes = base64.b64decode(img_data)
-                    img_file = ContentFile(img_bytes, name='cropped_image.png')
+                    unique_filename = f'{uuid.uuid4()}.png'
+                    img_file = ContentFile(img_bytes, name=unique_filename)
 
                     # Save the profile picture and cropped image data
                     profile.profile_pic = profile_pic
