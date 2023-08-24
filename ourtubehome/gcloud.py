@@ -5,7 +5,7 @@ from urllib.parse import urljoin
 
 class GoogleCloudMediaFileStorage(GoogleCloudStorage):
 
-    bucket_name = settings('GS_BUCKET_NAME')
+    bucket_name = settings.GS_BUCKET_NAME
 
     def url(self, name):
 
