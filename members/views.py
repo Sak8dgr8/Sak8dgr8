@@ -823,3 +823,6 @@ def payment_completed_view(request):
 
 def payment_failed_view(request):
     return redirect('home')
+
+def privacy_policy(request):
+    return render(request, 'footer/privacy_policy.html')

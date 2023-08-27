@@ -41,12 +41,13 @@ li:hover{
 }
 .navbar-testing {
   background-color: #42c09e;
-  width: 100%;
+  width: 100.5%;
   
   position: fixed;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   left: 0;
   top: 0;
+  right: 0;
 }
 
 
@@ -311,6 +312,80 @@ body{
 .headingstyle{
   font-family: 'Montserrat', sans-serif; font-size: 2rem; margin: 0; text-align: center; margin-bottom: 20px;
 }
+
+.privacy_container{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+ 
+}
+.privacy_heading{
+  background: linear-gradient(to right, #1500ff,#0062ff, #00d0ff);
+  color: white;
+  width: calc(100%-20px);
+  font-size:50px;
+  font-family: 'Lato',sans-serif;
+  padding-left: 20px;
+}
+
+.privacy_details{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.privacy_title{
+  color: #1500ff;
+  font-size: 25px;
+  margin: 20px 0;
+  font-family: 'Lato',sans-serif;
+}
+.privacy_info{
+  color: gray;
+  line-height: 1.5;
+  font-family: 'Raleway', sans-serif;
+}
+
+footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x:auto;
+  padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  right: 0;
+  
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+footer ul li {
+  font-size: 14px;
+  display: inline;
+  margin-right: 10px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
 
 @media(max-width:985px){
 .pstyle{

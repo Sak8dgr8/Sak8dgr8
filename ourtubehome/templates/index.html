@@ -122,32 +122,40 @@
 
 </header>
 <body>
+<section class="content">
  <div class="overall" id="overall">
-   
+
   <h1 class="cool-transition">Empowering communities</h1>
   <h1 class="cool-transition">to change lives</h1>
   <a href="{% url 'funding_info' %}"><button class="donate-btn-btn">Start a project</button></a>
   
-</div>  
+ </div>  
+</section>
+<footer style="margin-top:500px">
+  <p>&copy; 2023 <a href="{% url 'home' %}" style="text-decoration: underline; color: black;">our-tube.com</a>. All rights reserved.</p>
+  <ul>
+      <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+      <li>+1 (812)-671 6631</li>
+  </ul>
+</footer>
 
-  <br>
-  <script>
-    document.querySelector(".menu-btn").addEventListener("click", function () {
-      document.getElementById("overlay").style.display = "block";
-      document.getElementById("overall").classList.add("hidden");
-    });
-  
-    document.getElementById("overlay").addEventListener("click", function (event) {
-      if (event.target.classList.contains("overlay")) {
-        document.getElementById("overlay").style.display = "none";
-        document.getElementById("overall").classList.remove("hidden");
-      }
-    });
-  
-    document.querySelector(".close-btn").addEventListener("click", function () {
+</body> 
+<script>
+  document.querySelector(".menu-btn").addEventListener("click", function () {
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("overall").classList.add("hidden");
+  });
+
+  document.getElementById("overlay").addEventListener("click", function (event) {
+    if (event.target.classList.contains("overlay")) {
       document.getElementById("overlay").style.display = "none";
       document.getElementById("overall").classList.remove("hidden");
-    });
-  </script>
-</body> 
+    }
+  });
+
+  document.querySelector(".close-btn").addEventListener("click", function () {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("overall").classList.remove("hidden");
+  });
+</script>
 </html>
