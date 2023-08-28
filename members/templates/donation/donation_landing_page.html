@@ -310,10 +310,11 @@ input.donation-box::-webkit-outer-spin-button {
     }
   });
 </script>
+{% if paypal_payment_button_updated %}
 <script>
   // Automatically scroll to the bottom of the page
   window.scrollTo(0, document.body.scrollHeight);
 </script>
-
+{% endif %}
 </body>
 </html>
