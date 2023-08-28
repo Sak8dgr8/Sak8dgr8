@@ -179,23 +179,107 @@ input.donation-box::-webkit-outer-spin-button {
                       <hr style="width: 100%;">    
               {% endif %}
               
-         
+         <!-- start of Django-Paypal -->
                     {% if not paypal_payment_button_updated %}
+       
+          
                     <div style="display: flex; align-items: center; justify-content: center;">
                <button id="view-payment-options-button" class="payment-button"><i class="fa fa-lock" style="margin-right: 8px;"></i>View Payment Options</button>
                   </div>
                       {%endif%}
             </form>
-          
+          <!--
             {% if paypal_payment_button_updated %}
             <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
               {{ paypal_payment_button_updated.render }}
             </div>
             {% endif %}
+         
             <hr style="width: 100%; margin: 0;">
+              end of Django paypal-->
+
+      <!-- PayPal payment button javascript sdk -->
+      {% if paypal_payment_button_updated %}
+<div id="paypal-button-container"></div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AcMzYEICM5-Y2mRNGasEvXMDdS9duL5kRbfcYgqHpgJnhF_nnY2WBs5EsC7vy8zITfSflevCiwTqkH4S&disable-funding=credit"></script>
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    // Get the selected recipient's PayPal email or ID
+    var selectedRecipient = "sb-p0gtw26941351@business.example.com"; // Replace with the actual recipient
+    var donationId = '{{donation_id}}'
+    function completeDonation(){
+      var url = "{% url 'complete' %}"
+      fetch(url , {
+          method: 'POST',
+          headers: {
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+          },
+          body: JSON.stringify({'donationId':donationId})
+
+      })
+    }  
+    paypal.Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'rect',
+            label: 'pay',
+            height: 40,
+         
+        },
+
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{total_amount}}' // Replace with actual amount
+                    },
+                    payee: {
+                        email_address: selectedRecipient
+                    },
+                    custom_id: 'YOUR_DONATION_ID' // Replace with your generated donation_id
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            completeDonation()
+            {% if user.is_authenticated %}
+            window.location.href = "{% url 'donation_history' %}";
+            {% else %}
+            window.location.href = "{% url 'user_channel' username=project.user.username %}";
+            {% endif %}
+          });
+            // Handle the payment approval
+            // You can fetch the donation_id from data.orderID and update your database
+            // Then update the donor's page to reflect the changes
+
+        }
+    }).render('#paypal-button-container');
+</script>
+{%endif%}
+
             <p style="font-family: 'Lato',sans-serif; color: gray; font-size: 0.85rem; text-align: center; margin: 0 0;">Our-Tube charges organizers no platform fee, ensuring that 100% of all donations go directly to @{{project.user}} after deducting payment processing fees.</p>
             <hr style="width: 100%; margin: 0;">
-
+         
     </div>
     
  

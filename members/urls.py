@@ -47,6 +47,7 @@ urlpatterns = [
 
    path('project/<int:project_id>/update/<int:update_id>/', views.mark_update_as_seen, name='mark_update_as_seen'),
 
-   path('privacy_policy/', views.privacy_policy, name='privacy_policy' )
+   path('privacy_policy/', views.privacy_policy, name='privacy_policy' ),
+   path('complete/', views.paymentcomplete, name="complete"),
  
 ]

@@ -590,6 +590,8 @@ def donation_landing_page(request, project_id):
             'project': project,
             'form': form,
             'paypal_payment_button_updated': ExtPayPalPaymentsForm(initial=paypal_updated_dict),
+            'total_amount': total_amount,
+            'donation_id': donation_id,
         }
 
         # Return the updated context in the render function
@@ -603,7 +605,14 @@ def donation_landing_page(request, project_id):
     }
     return render(request, 'donation/donation_landing_page.html', context)
 
-   
+import json
+from django.http import JsonResponse
+def paymentcomplete(request):
+    body = json.loads(request.body)   
+    print('BODY:', body)
+    donation = Donation.objects.get(donation_id=body['donationId'])
+    donation.status = 'completed'
+    donation.save()
 
 @login_required
 def donation_history(request):
