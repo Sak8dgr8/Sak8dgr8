@@ -529,7 +529,6 @@ def donation_landing_page(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
     paypal_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': 200,
         'item_name': "Loda",
         'invoice': '69',
@@ -575,7 +574,7 @@ def donation_landing_page(request, project_id):
  
 
         paypal_updated_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
+
         'amount': total_amount,
 
         'item_name': "Loda",
