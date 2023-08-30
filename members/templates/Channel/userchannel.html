@@ -174,8 +174,24 @@ $(document).ready(function() {
            <a href="{% url 'edit_project' pk=project.pk %}"><button class="lodaone"><i class="fa fa-pen-to-square" style="color: #ffffff; margin-right: 10px;"></i>EDIT</button></a>
             
         
-            <a href="{% url 'go_live' project_id=project.pk %}"> <button class="lodatwo"><i class="fas fa-rocket" style="margin-right: 10px;"></i>LAUNCH</button> </a>
-  
+<button class="lodatwo" id="launchButton"><i class="fas fa-rocket" style="margin-right: 10px;"></i>LAUNCH</button>
+  <!-- start of agreement pop up -->
+  <div class="agreement-popup" id="agreementPopup">
+    <div class="agreement-content">
+      <span class="agreement-close">&times;</span>
+      <h2 style="text-align: center;">Our-Tube Revenue Reinvestment Agreement</h2>
+      <p>I, {{user.first_name}} {{user.last_name}}, the project owner/creator of {{project.project_title}}, hereby agree to reinvest 100% of all revenue generated from this Our-Tube project (ad revenue from other social media platforms or sponsorships) in the form of a donation to future Our-Tube projects on the platform, whether they are my own projects or those initiated by others.</p>
+      <p>I understand and agree to the principle of giving back to the community and furthering the mission of Our-Tube to create positive impact through philanthropy content.</p>
+      <p style="text-align: center;">By checking the box below, I confirm that I agree to the above terms.</p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 25px;">
+      <label for="agreeCheckbox">I agree <input type="checkbox" id="agreeCheckbox"></label>
+      <button id="confirmAgreement">Confirm</button>
+    </div>
+    </div>
+  </div>
+  <div class="agreement-overlay" id="agreement-overlay"></div>
+
+  <!--  end of agreement pop up-->
           {% elif project.status == 'live' %}
         <div style="position: absolute; left: 5%; align-self: center;">
             <form method="post" action="{% url 'complete_project' project_id=project.pk %}">{% csrf_token %}
@@ -615,7 +631,9 @@ $(document).ready(function() {
        
 
   {% else %}
-  This user has no ongoing projects... Stay tuned!
+<div style="display: flex; flex-direction: column; align-items: center; position: absolute; top: 75%; left: 50%;transform: translate(-50%,-75%);">
+  This user has no ongoing projects. Stay tuned!
+</div>
   {% endif %}
 {% elif project.status == 'live' %}
 
@@ -1579,7 +1597,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+<!-- agreement script -->
+<script>
+document.getElementById("launchButton").addEventListener("click", function(event) {
+  event.preventDefault();
+  document.getElementById("agreement-overlay").style.display = "block";
+  document.getElementById("agreementPopup").style.display = "block";
+  document.body.style.overflow = "hidden"; // Disable scrolling
+});
 
-
+document.getElementById("confirmAgreement").addEventListener("click", function() {
+  if (document.getElementById("agreeCheckbox").checked) {
+    // Proceed with launching the project
+    // You can add your launch logic here
+    document.getElementById("agreement-overlay").style.display = "none";
+    document.getElementById("agreementPopup").style.display = "none";
+    document.body.style.overflow = "auto"; // Enable scrolling
+    window.location.href = "{% url 'go_live' project_id=project.pk %}";
+  } else {
+    alert("Please agree to the terms.");
+  }
+});
+</script>
 </body>
 </html>

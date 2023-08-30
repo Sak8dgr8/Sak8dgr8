@@ -53,7 +53,7 @@ class ProjectForm(forms.ModelForm):
 
 	class Meta:
 		model = Project
-		fields = ('state','city','project_title', 'funding_goal', 'target_date','project_description', 'project_video', 'project_thumbnail')
+		fields = ('state','city','project_title', 'funding_goal', 'target_date','project_description', 'project_video', 'project_thumbnail',)
 
 
 	def __init__(self, *args, **kwargs):
@@ -64,6 +64,7 @@ class ProjectForm(forms.ModelForm):
 		self.fields['project_title'].widget.attrs['class'] = 'form-inpt'
 		self.fields['funding_goal'].widget.attrs['class'] = 'form-inpt'
 		self.fields['project_description'].widget.attrs['class'] = 'form-inpt'
+		
 
 class CommentForm(forms.ModelForm):
 
