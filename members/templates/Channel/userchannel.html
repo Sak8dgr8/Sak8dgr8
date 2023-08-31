@@ -1035,7 +1035,7 @@ $(document).ready(function() {
                       {% endif %}
                     </div>
                   
-               <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+               <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 10px;">
                   {% if user.profile.cropped_image_data %}
               <img src="{{ user.profile.cropped_image_data.url }}" class="update-img"> 
                   {% else %}
