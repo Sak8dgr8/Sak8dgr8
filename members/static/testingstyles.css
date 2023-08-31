@@ -535,7 +535,7 @@ body{
       margin-top: 5.6rem;
       margin-left: 0;
       margin-right: 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Lato', sans-serif; font-weight: 400;
   
     }
 
@@ -554,7 +554,7 @@ color: #0a383f;
 font-size: 2.5rem;
 padding: 0px;
 font-weight: bold;
-font-family: 'Roboto', sans-serif;
+font-family: 'Lato', sans-serif; font-weight: 400;
 }
 
 .toosexy{
@@ -988,7 +988,7 @@ font-family: 'Roboto', sans-serif;
 .donation-info {
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   font-size: 1rem;
   color: #333;
 }
@@ -1100,7 +1100,7 @@ background-color: #ebebeb;
 
 
 .comment-input {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -1109,7 +1109,7 @@ background-color: #ebebeb;
   resize: vertical;
   width: 50vw;
   height: 40px;
-  font-family: 'Roboto', sans-serif;
+  
   resize: none;
 }
 
@@ -1139,7 +1139,7 @@ background-color: #ebebeb;
 
 .comment-body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   font-size: 16px;
   color: #333;
   line-height: 1.5;
@@ -1516,10 +1516,10 @@ header{
  
   }
   .update-tit{
-    font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0; color: #000;
+    font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.3rem; margin-bottom: 0; color: #000;
   }
   .update-cok{
-    font-family: 'Roboto',sans-serif; color: gray; font-size: 1rem;
+    font-family: 'Lato',sans-serif; font-weight: 400; color: gray; font-size: 1rem;
   }
   .update-img{
     width: 50px; height: 50px; border-radius: 50%; position: relative; top: 20px;
