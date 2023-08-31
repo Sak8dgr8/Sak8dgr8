@@ -546,7 +546,7 @@ $(document).ready(function() {
                <div class="sexy-container">
 
                 <div style="display: flex; flex-direction: row; align-items: center; height: 30px; gap: 1vw; justify-content: center;">
-                <p style="font-size: 1.8rem; font-family: 'Lato', sans-serif;">${{project.total_donations}}</p>
+                <p style="font-size: 1.8rem; font-family: 'Lato', sans-serif; font-weight: 400;">${{project.total_donations}}</p>
            
                     <p class="pforfundinggoal">raised of ${{ project.funding_goal }} goal</p>
           
@@ -669,8 +669,8 @@ $(document).ready(function() {
                 <div class="popup-content">
                   <button class="close-button-phone" onclick="closePopup()"><i class="fas fa-times"></i></button>
                
-                  <p style="font-family: 'Lato', sans-serif; font-size: 1.2rem; margin-bottom: 0; margin-left: 5%; margin-right: 5%;">Help by sharing</p>
-                  <p style="font-family: 'Lato', sans-serif; font-size: 0.8rem; line-height: 1.5; margin-bottom: 0;margin-left: 5%; margin-right: 5%;">Paste the link anywhere to support {{user}}.<p>
+                  <p style="font-family: 'Lato', sans-serif; font-size: 1.2rem; margin-bottom: 0; margin-left: 5%; margin-right: 5%; font-weight: 400;">Help by sharing</p>
+                  <p style="font-family: 'Lato', sans-serif; font-size: 0.8rem; line-height: 1.5; margin-bottom: 0;margin-left: 5%; margin-right: 5%; font-weight: 400;">Paste the link anywhere to support {{user}}.<p>
                   <div style="display: flex; flex-direction: column; width: 90%; margin: auto;">
                   <hr style="width: 100%; margin-top: 0;">
                       <div style="display: flex; flex-direction: row ; gap: 20px; align-items: center; margin: 0;">
@@ -705,7 +705,7 @@ $(document).ready(function() {
                               {% else %}
                               <img src="{% static 'profilepic.png' %}" style="width: 35px; height: 35px; border-radius: 50%;">
                               {% endif %}
-                              <p style="margin: 0; font-family: 'Lato',sans-serif; font-size: 0.925rem; color: #000;">@{{user.username}}</p>
+                              <p style="margin: 0; font-family: 'Lato',sans-serif; font-size: 0.925rem; color: #000; font-weight: 400;">@{{user.username}}</p>
                             </div>
                           <p class="instagram-share-instructions">
                              {{project.project_title}}
@@ -713,14 +713,14 @@ $(document).ready(function() {
                           <div class="progress-bar-phone">
                             <div id="progress-bar-fill" style="width:{{ percentage }}%"></div>
                           </div>
-                          <p style="color: gray; font-family: 'Lato',sans-serif; font-size: 0.8rem; text-align: left;">${{project.total_donations}} raised</p>
+                          <p style="color: gray; font-family: 'Lato',sans-serif; font-size: 0.8rem; text-align: left; font-weight: 400;">${{project.total_donations}} raised</p>
                 </div>
 
 
                       </div>
             
             <div class="sharing-instructions-container">
-                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 600;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the link to your story! </p>
+                <p style="text-align: center; font-family: 'Lato',sans-serif; font-weight: 400;width: 80%; margin: auto; margin-top: 1em;">Take a screenshot and add the link to your story! </p>
                       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin:1em 0;">
                         <div class="form-input-container-two">
                           <input type="text" id="link-input-two" readonly>
@@ -909,9 +909,9 @@ $(document).ready(function() {
      <hr style="width: 100%;">
      <div style="display: flex; flex-direction: column;">
       <div style="display: flex; flex-direction: row;">
-      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500;">{{project.views}} views</p>
+      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500; font-weight: 400;">{{project.views}} views</p>
 
-      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500;">{{project.created_at|naturaltime}}</p>
+      <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500; font-weight: 400;">{{project.created_at|naturaltime}}</p>
       </div>
           
               <p class="yallah">{{ project.project_description }}</p>
@@ -1068,7 +1068,7 @@ $(document).ready(function() {
               <div class="sexy-container">
 
                 <div style="display: flex; flex-direction: row; align-items: center; height: 30px; gap: 1vw; justify-content: center;">
-                <p style="font-size: 1.8rem; font-family: 'Lato', sans-serif;">${{project.total_donations}}</p>
+                <p style="font-size: 1.8rem; font-family: 'Lato', sans-serif; font-weight: 400;">${{project.total_donations}}</p>
            
                     <p class="pforfundinggoal">raised of ${{ project.funding_goal }} goal</p>
           
@@ -1094,8 +1094,8 @@ $(document).ready(function() {
         <span id="close-btn">&times;</span>
         <div class="lightbox-content">
             <!-- Add your lightbox content here -->
-        <p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0;">Help by sharing</p>
-        <p style="font-family: 'Lato', sans-serif;">Paste the link anywhere to support {{user}}.<p>
+        <p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0; font-weight: 400;">Help by sharing</p>
+        <p style="font-family: 'Lato', sans-serif; font-weight: 400;">Paste the link anywhere to support {{user}}.<p>
           <hr style="width: 100%; margin-bottom: 2em;">
             <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
              <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
