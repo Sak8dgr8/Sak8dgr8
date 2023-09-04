@@ -179,7 +179,7 @@ h1 {
 }
 .cool-transition {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 400;
   color: #000;
   margin-bottom: 0em;
 }
@@ -472,7 +472,7 @@ background-attachment: fixed;
   margin-top: 4.4rem;
  }
  h1{
-  font-size: 2.4rem;
+  font-size: 2.2rem;
  }
  .lichenbg{
   min-height: 60vh ;
