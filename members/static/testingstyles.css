@@ -1519,7 +1519,7 @@ header{
     font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.3rem; margin-bottom: 0; color: #000;
   }
   .update-cok{
-    font-family: 'Lato',sans-serif; font-weight: 400; color: gray; font-size: 1rem;
+    font-family: 'Lato',sans-serif; font-weight: 400; color: gray; font-size: 1rem; margin: 0;
   }
   .update-img{
     width: 50px; height: 50px; border-radius: 50%; position: relative; top: 20px;

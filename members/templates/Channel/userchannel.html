@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   {% if project.status == 'live' %}
     <meta property="og:title" content="{{project.project_title}}">
     <meta property="og:description" content="{{project.project_description}}">
     <meta property="og:image" content="{{project.project_thumbnail.url}}">
   {% endif %}
+
+    
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
@@ -18,6 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@200;400&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Nunito&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lato&Raleway:wght@400;600&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -875,7 +879,7 @@ $(document).ready(function() {
                <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
                {% endif %}
                   <div style="display: flex; flex-direction: column; gap: 1.5vh;">
-            <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+            <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000; font-family: 'Lato', sans-serif;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
                        <div style="display: flex; flex-direction: row; gap: 2vw;">
                          <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
                          <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
@@ -886,7 +890,7 @@ $(document).ready(function() {
             <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
               <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
               <div style="display: flex; flex-direction: column; gap: 1.5vh;">
-              <p style="margin: 0;">{{ donation.name }}</p>     
+              <p style="margin: 0; font-family: 'Lato', sans-serif;">{{ donation.name }}</p>     
                            <div style="display: flex; flex-direction: row; gap: 2vw;">
                              <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
                              <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>
@@ -1218,7 +1222,7 @@ $(document).ready(function() {
                        <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
                        {% endif %}
                           <div style="display: flex; flex-direction: column; gap: 1.5vh;">
-                    <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0;">@{{ donation.donor.username }}</p></a>        
+                    <a href="{% url 'user_channel' username=donation.donor.username %}" style="text-decoration: none; color: #000000;"><p style="margin: 0; font-family: 'Lato', sans-serif;">@{{ donation.donor.username }}</p></a>        
                                <div style="display: flex; flex-direction: row; gap: 2vw;">
                                  <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
                                  <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}   </p>
@@ -1229,7 +1233,7 @@ $(document).ready(function() {
                     <div style="display: flex; flex-direction: row; gap: 2vw; align-items: center; margin-top: 15px;">
                       <img src="{% static 'profilepic.png' %}" style="width: 55px; height: 55px; border-radius: 50%;">
                       <div style="display: flex; flex-direction: column; gap: 1.5vh;">
-                      <p style="margin: 0;">{{ donation.name }}</p>     
+                      <p style="margin: 0; font-family: 'Lato', sans-serif;">{{ donation.name }}</p>     
                                    <div style="display: flex; flex-direction: row; gap: 2vw;">
                                      <p style="margin: 0; font-weight: bold;">${{donation.donation_amount}}</p>
                                      <p style="margin:0; color: gray; font-size: 0.8rem; align-self: flex-end; ">  {{donation.donation_date|naturaltime}}     </p>

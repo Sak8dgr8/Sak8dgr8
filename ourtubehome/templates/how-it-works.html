@@ -15,6 +15,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
           <title>How Our-tube works</title>
           <link rel="stylesheet" href="{% static 'stylingandallahh.css' %}">
          
@@ -53,7 +54,7 @@
           @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
       </head>
-      <header style="margin-bottom: 75px;">
+      <header>
       
         <nav class="navbar-testing">
           <div class="logo">
@@ -123,36 +124,36 @@
       </header>
 <body>
 
-    <p class="headingstyle">Empowering Philanthropy with a Personal Touch</p>
-<div class="juice">
-    
-<div style="display: flex; flex-direction: column; max-width: 50%; gap: 20px; margin-left: 5%;">
-
-<p class="pstyle">In today's fast-paced world, the landscape of philanthropy has become increasingly impersonal, lacking the heartfelt connections and accountability that donors seek. Sadly, this void has given rise to charity fraud, which siphons an alarming $2.2 billion each year from the pockets of well-intentioned individuals, leaving them disheartened and skeptical.</p>
-<p class="pstyle">Our-Tube is not just another fundraising platform; it's a place where you can fund projects of people you truly know and admire. Whether it's your favorite content creators, inspiring individuals, or passionate groups, Our-Tube aims to connect you to a plethora of projects that are making a difference in unique and creative ways. </p>
-
-<p class="pstyle">Step into a world where you can witness the smiles YOUR support brings to life. Our-Tube offers content creators a dedicated space to engage with their loyal followers. Creators can not only receive donations, but can also share updates and document progress on their own channel. We encourage you to leverage our platform to showcase the beauty and positivity you can create in the world through multiple projects on your channel. Join us on Our-Tube, and let's rewrite the narrative of giving together, one smile at a time.</p>
-
-
-</div>
-    <div style="display: flex; flex-direction: column; width: 50%; justify-content: center; gap: 50px; align-items: center; position: relative;top: 15px;">
-    <img src="{% static 'eight.svg' %}" class="exp">
-    <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold; width: 300px;"> Start a Project</button></a>
-    </div>
-</div>
-
-
-<div class="yachty">
-    <p class="pstyle">In today's fast-paced world, philanthropy often lacks a personal touch and a sense of accountability, resulting in charity fraud of $2.2 billion each year, leaving many generous hearts disillusioned.</p>
-    <img src="{% static 'eight.svg' %}" class="exp">
-    <p class="pstyle">Our-Tube is not just another fundraising platform; it's a place where you can fund projects of people you truly know and admire. Whether it's your favorite content creators, inspiring individuals, or passionate groups, Our-Tube aims to connect you to a plethora of projects that are making a difference in unique and creative ways. </p>
-    
-    <p class="pstyle">Step into a world where you can witness the smiles YOUR support brings to life. Our-Tube offers content creators a dedicated space to engage with their loyal followers. Creators can not only receive donations, but can also share updates and document progress on their own channel. We encourage you to leverage our platform to showcase the beauty and positivity you can create in the world through multiple projects on your channel. Join us on Our-Tube, and let's rewrite the narrative of giving together, one smile at a time.</p>
-    <a href="{% url 'funding_info' %}" style="align-self: center;"> <button class="donate-btn-burger" style="color: azure; font-weight: bold; width: 300px;"> Start a Project</button></a>
-  
+<div class="mission">
+  <div class="mission-header">
+    <strong><p class="missionairy">Join us in our mission to create a massive ripple of generosity.</p></strong>
+  </div>
+  <div class="mission-details-one">
+    <strong><p style="font-family: 'Playfair Display', serif; font-size: larger;">Philanthropy Promotes Philanthropy</p></strong>
+    <p style="font-family: 'Playfair Display', serif; margin: 0;">Our-Tube empowers content creators to drive positive change through a unique philanthropic cycle. Creators initiate projects, raising funds from Our-Tube's supportive community. They then document their philanthropic efforts and share inspiring videos on social platforms. Finally, any revenue generated from these videos is reinvested back into Our-Tube by fueling the launch of their next impactful project. Together, we create a sustainable cycle of highly transparent giving, higher awareness and greater difference.</p>
+  </div>
+  <div class="mission-details-one">
+    <strong><p style="font-family: 'Playfair Display', serif; font-size: larger;">Philanthropy With a Personal Touch</p></strong>
+    <p style="font-family: 'Playfair Display', serif; margin: 0;">Our-Tube is a place where you fund projects of people you truly know and admire. Whether it's your favorite content creators, inspiring individuals, or passionate groups, Our-Tube aims to connect you to a plethora of projects that are making a difference in unique and creative ways.</p>
+  </div>
+  <div class="mission-details-one">
+    <strong><p style="font-family: 'Playfair Display', serif; font-size: larger;">Philanthropy With the Highest Transparency</p></strong>
+    <p style="font-family: 'Playfair Display', serif; margin: 0;">Step into a world where you can witness the smiles YOUR support brings to life. Our-Tube offers content creators a dedicated space to engage with their loyal followers. Creators can not only receive donations but can also share updates and document progress on their own channel. We encourage you to leverage our platform to showcase the beauty and positivity you can create in the world through multiple projects on your channel. Join us on Our-Tube, and let's rewrite the narrative of giving together, one smile at a time.</p>
+  </div>
  
+  <a href="{% url 'funding_info' %}" style="align-self: center; margin-top: 1em; margin-bottom: 1em;"> <button class="donate-btn-burger" style="color: azure; font-weight: bold; width: 300px;"> Start a Project</button></a>
 
 </div>
+
+<footer style="margin-bottom: 0; padding-bottom: 0;">
+  <p>&copy; 2023 <a href="{% url 'home' %}" style="text-decoration: underline; color: black;">our-tube.com</a>. All rights reserved.</p>
+  <ul>
+      <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+      <li>+1 (812)-671 6631</li>
+  </ul>
+</footer>
+
+
 
 
 
