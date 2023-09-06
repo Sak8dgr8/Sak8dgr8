@@ -116,6 +116,7 @@ import dj_database_url
 DATABASES = {
    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+SECURE_SSL_REDIRECT = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -201,7 +202,7 @@ EMAIL_HOST_PASSWORD = 'iudpebiylxxciwue'  # Replace with your Gmail password or 
 
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
-SECURE_SSL_REDIRECT = True
+
 
 #SECURE_SSL_REDIRECT = True
 django_heroku.settings(locals())

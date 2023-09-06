@@ -1616,7 +1616,11 @@ document.getElementById("confirmAgreement").addEventListener("click", function()
     document.getElementById("agreement-overlay").style.display = "none";
     document.getElementById("agreementPopup").style.display = "none";
     document.body.style.overflow = "auto"; // Enable scrolling
+    {% if user == request.user %}
+          {% if project.status == 'draft' %}
     window.location.href = "{% url 'go_live' project_id=project.pk %}";
+    {% endif %}
+      {% endif %}
   } else {
     alert("Please agree to the terms.");
   }
