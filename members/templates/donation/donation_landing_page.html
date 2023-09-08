@@ -202,7 +202,7 @@ input.donation-box::-webkit-outer-spin-button {
       {% if paypal_payment_button_updated %}
 <div id="paypal-button-container"></div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AcMzYEICM5-Y2mRNGasEvXMDdS9duL5kRbfcYgqHpgJnhF_nnY2WBs5EsC7vy8zITfSflevCiwTqkH4S&disable-funding=credit"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AW7OtE6Bc3660EXqufBeLHWGAYfqRN9HoYko9tkt-QpdTa1dNkqIlNZLubfMd_MHBbm4EDub6YsMqWy8&disable-funding=credit"></script>
 <script>
     function getCookie(name) {
         let cookieValue = null;
@@ -222,7 +222,7 @@ input.donation-box::-webkit-outer-spin-button {
     const csrftoken = getCookie('csrftoken');
 
     // Get the selected recipient's PayPal email or ID
-    var selectedRecipient = "sb-p0gtw26941351@business.example.com"; // Replace with the actual recipient
+    var selectedRecipient = "no-reply@our-tube.com"; // Replace with the actual recipient
     var donationId = '{{donation_id}}'
     function completeDonation(){
       var url = "{% url 'complete' %}"
