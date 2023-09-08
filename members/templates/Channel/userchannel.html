@@ -996,11 +996,11 @@ $(document).ready(function() {
                 {% endif %}
                                 <div style="display: flex; flex-direction: column;"> 
                                     <div class="comment-header">
-                                    <strong> <a href="{% url 'user_channel' username=comment.user.username %}" style="text-decoration: none; cursor: pointer; color: inherit;"> <p>@{{ comment.user.username }}</p></a></strong>
+                                    <a href="{% url 'user_channel' username=comment.user.username %}" style="text-decoration: none; cursor: pointer; color: inherit;"> <p style="font-family: 'Lato',sans-serif; font-weight: 400;"><strong>@{{ comment.user.username }}</strong></p></a>
                                       <p style="color: gray;">{{ comment.created_at|naturaltime }}</p>
                                     </div>
                                     <div class="comment-body">
-                                      <p>{{ comment.body }}</p>
+                                      <p style="margin-top: 10px;">{{ comment.body }}</p>
                                     </div>
                                 </div>
                               </div>

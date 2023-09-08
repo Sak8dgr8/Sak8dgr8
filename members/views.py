@@ -137,7 +137,7 @@ from django.core.mail import EmailMessage
 def send_update_emails(update, project):
     subject = f"{project.user} posted a new update in {project.project_title}"
     from_email = settings.EMAIL_HOST_USER
-    recipient_list = [donor.email for donor in project.donations.filter(status='completed')] + [subscriber.email for subscriber in project.user.profile.subscribers.all()]
+    recipient_list = [donation.donor_email for donation in project.donations.filter(status='completed')] + [subscriber.email for subscriber in project.user.profile.subscribers.all()]
 
     context = {
         'project':project,

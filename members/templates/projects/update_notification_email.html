@@ -51,16 +51,7 @@
                     <tr>
                         <td><p style="font-size: 0.9rem; font-family: 'Raleway', sans-serif; margin-left: 15px; margin-right: 15px; margin-top: 0px; margin-bottom: 0px;">@{{project.user}} posted a new update in {{project.project_title}}</p></td>
                     </tr>
-                    <tr>
-                        {% if update.update_thumbnail %}
-                        <td align="center"><img src="{{update.update_thumbnail.url}}" style="width: 150px; height: auto; border-radius: 10px;"></td>
-                        {% else %}
-                        <td align="center"><img src="{{project.project_thumbnail.url}}" style="width: 150px; height: auto; border-radius: 10px;"></td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <td><p style="font-size: 1.2rem; font-family: 'Raleway', sans-serif; margin-left: 15px; margin-right: 15px; margin-top: 0px; margin-bottom: 0px; ">{{update.update_title}}</p></td>
-                    </tr>
+                    
                     <tr>
                         <td align="center">
 
