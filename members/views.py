@@ -678,7 +678,9 @@ def payment_info(request):
     return render(request, 'projects/payments.html', context)
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def verify_button(request):
     project = Project.objects.filter(user=request.user).first()
     if request.method == 'POST':
