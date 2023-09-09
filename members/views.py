@@ -679,9 +679,16 @@ def payment_info(request):
 
 def verify_button(request):
     project = Project.objects.filter(user=request.user).first()
+    username = request.user.username
+    context = {
+        'username': username,
+        'project': project,
+    }
     if request.method == 'POST':
         project.verification_status = 'verified'
         project.save()
+        return render(request, 'projects/payments.html', context)
+        
 
 
 
