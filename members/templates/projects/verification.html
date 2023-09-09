@@ -59,9 +59,9 @@
                     </tr>
                     <tr>
                         <td align="center">
-
-                              <a href="{% url 'verify_project' %}" style="text-decoration: none;">  <button style="border: none; width: 170px; height: 45px; background-color: #0a383f; color: #fff; border-radius: 15px; cursor: pointer; cursor: pointer;">VERIFY</button> </a>
- 
+                            <form method = 'POST'>{% csrf_token %}
+                              <a href="{% url 'verify_project' %}" style="text-decoration: none;">  <button style="border: none; width: 170px; height: 45px; background-color: #0a383f; color: #fff; border-radius: 15px; cursor: pointer; cursor: pointer;" type="submit">VERIFY</button> </a>
+                            </form>
                         </td>
                      </tr>
                 </table>
