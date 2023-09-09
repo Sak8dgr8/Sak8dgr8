@@ -685,7 +685,7 @@ def verify_button(request):
         project.verification_status = 'verified'
         project.save()
         return HttpResponseRedirect(reverse('payment_info'))
-        
+    return HttpResponse("Invalid request or project not found.")
 
 
 
