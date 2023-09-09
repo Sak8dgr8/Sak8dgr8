@@ -60,7 +60,7 @@
                     <tr>
                         <td align="center">
                             <form method = 'POST'>{% csrf_token %}
-                              <a href="{% url 'verify_project' %}" style="text-decoration: none;">  <button style="border: none; width: 170px; height: 45px; background-color: #0a383f; color: #fff; border-radius: 15px; cursor: pointer; cursor: pointer;" type="submit">VERIFY</button> </a>
+                              <a href="{{SITE_URL}}{% url 'verify_project' %}" style="text-decoration: none;">  <button style="border: none; width: 170px; height: 45px; background-color: #0a383f; color: #fff; border-radius: 15px; cursor: pointer; cursor: pointer;" type="submit">VERIFY</button> </a>
                             </form>
                         </td>
                      </tr>
