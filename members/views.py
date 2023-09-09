@@ -677,6 +677,14 @@ def payment_info(request):
 
     return render(request, 'projects/payments.html', context)
 
+def verify_button(request):
+    project = Project.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        project.verification_status = 'verified'
+        project.save()
+
+
+
 
 def completed_channel(request, username, project_id, error_message=None):
 
