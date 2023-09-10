@@ -61,9 +61,9 @@ class EditProjectView(UpdateView):
 
         return super().form_valid(form)
 
-
-def go_live(request, project_id):
-    project = get_object_or_404(Project, pk=project_id, user=request.user)
+@login_required
+def go_live(request):
+    project = get_object_or_404(Project, status='draft', user=request.user)
     profile = get_object_or_404(Profile, user=request.user)
 
     # Check if all required fields are filled

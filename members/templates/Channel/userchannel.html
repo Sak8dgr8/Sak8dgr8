@@ -1638,7 +1638,7 @@ document.getElementById("confirmAgreement").addEventListener("click", function()
     document.body.style.overflow = "auto"; // Enable scrolling
     {% if user == request.user %}
           {% if project.status == 'draft' %}
-    window.location.href = "{% url 'go_live' project_id=project.pk %}";
+    window.location.href = "{% url 'go_live' %}";
     {% endif %}
       {% endif %}
   } else {
