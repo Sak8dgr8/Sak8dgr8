@@ -61,14 +61,35 @@ class EditProjectView(UpdateView):
 
         return super().form_valid(form)
 
+from django.contrib import messages
+
 @login_required
 def go_live(request):
-    project = get_object_or_404(Project, status='Draft', user=request.user)
+    project = get_object_or_404(Project, status='draft', user=request.user)
     profile = get_object_or_404(Profile, user=request.user)
 
+    # Create an empty list to store error messages
+    error_messages = []
+
     # Check if all required fields are filled
-    if not project.project_title or not project.project_description or not project.project_thumbnail or not project.project_video or not project.funding_goal or not profile.VERIFICATION_STATUS == 'verified':
-        messages.error(request, 'Please fill in all required project details before going live.')
+    if not project.project_title:
+        error_messages.append('Project title is required.')
+    if not project.project_description:
+        error_messages.append('Project description is required.')
+    if not project.project_thumbnail:
+        error_messages.append('Project thumbnail is required.')
+    if not project.project_video:
+        error_messages.append('Project video is required.')
+    if not project.funding_goal:
+        error_messages.append('Funding goal is required.')
+    if profile.VERIFICATION_STATUS != 'verified':
+        error_messages.append('Your profile must be verified.')
+
+    # If there are error messages, display them
+    if error_messages:
+        for message in error_messages:
+            messages.error(request, message)
+
         return redirect('user_channel', username=request.user.username)
 
     # Update the project status to "Live"
