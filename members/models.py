@@ -13,11 +13,17 @@ from .constants import DAYS_CHOICES
 
 
 class Profile(models.Model):
+    VERIFICATION_STATUS = (
+        ('not_verified', 'Not Verified'),
+        ('email_sent', 'Email Sent'),
+        ('verified', 'Verified'),
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='profile')
     profile_pic = models.ImageField(null=True, blank=True)
     cropped_image_data = models.ImageField(null=True, blank=True)
     bio = models.CharField(null=True, blank=True, max_length=500)
     subscribers = models.ManyToManyField(User, blank=True, related_name='subscribers',)
+    verification_status = models.CharField(max_length=30, choices=VERIFICATION_STATUS, default='not_verified')
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
@@ -33,11 +39,7 @@ class Project(models.Model):
         ('funds_withdrawn', 'Funds Withdrawn'),
         ('completed', 'Completed'),
     )
-    VERIFICATION_STATUS = (
-        ('not_verified', 'Not Verified'),
-        ('email_sent', 'Email Sent'),
-        ('verified', 'Verified'),
-    )
+
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="project")
     state = models.CharField(null=True,max_length=3, choices=STATES_CHOICES)
@@ -49,7 +51,7 @@ class Project(models.Model):
     project_thumbnail = models.ImageField(null=True, blank=True)
     project_video = models.FileField(validators=[FileExtensionValidator(allowed_extensions=['mp4','avi','mov'])], null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='nonee')
-    verification_status = models.CharField(max_length=30, choices=VERIFICATION_STATUS, default='not_verified')
+
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
     

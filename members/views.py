@@ -660,13 +660,12 @@ def verify_button(request):
             # Verify and load the data from the token
             data = signing.loads(token)
             user_id = data.get('user_id')
-            project_id = data.get('project_id')
-            if user_id and project_id:
+            if user_id:
                 # Perform the verification using user_id and project_id
                 # Update the project status to 'verified'
-                project = Project.objects.get(id=project_id, user__id=user_id)
-                project.verification_status = 'verified'
-                project.save()
+                profile = Profile.objects.get(user__id=user_id)
+                profile.verification_status = 'verified'
+                profile.save()
                 return redirect('payment_info')  # Redirect to a thank-you page or your desired page
             else:
                 return HttpResponse("Invalid token data.")
@@ -682,17 +681,17 @@ def verify_button(request):
 def payment_info(request):
     user_email = request.user.email
     username = request.user.username
-    project = Project.objects.filter(user=request.user).first()
+    profile = Profile.objects.filter(user=request.user)
 
     # Generate a verification token
-    token = signing.dumps({'user_id': request.user.id, 'project_id': project.id})
+    token = signing.dumps({'user_id': request.user.id})
 
     # Include the token in the verification link URL
     verification_url = reverse('verify_button') + f'?token={token}'
 
     context = {
         'username': username,
-        'project': project,
+        'profile': profile,
         'verification_url': verification_url,  # Include this in the context
     }
 
@@ -703,8 +702,8 @@ def payment_info(request):
         email = EmailMessage(email_subject, email_body, to=[user_email])
         email.content_subtype = 'html'
         email.send()
-        project.verification_status = 'email_sent'
-        project.save()
+        profile.verification_status = 'email_sent'
+        profile.save()
 
     return render(request, 'projects/payments.html', context)
 

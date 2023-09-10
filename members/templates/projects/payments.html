@@ -110,7 +110,7 @@
       <p class="estyle">Confirm the email address that will be used to receive payments via PayPal. It should correspond to either a personal or checking account with PayPal.</p>
       <p class="estyle">If the incorrect email is shown here, <a href="{% url 'basic_info' %}" style="text-decoration: underline; color: gray;">update it on your account.</a></p>
     </div>
-    {% if project.verification_status == 'not_verified' %}
+    {% if profile.verification_status == 'not_verified' %}
             <div class="kuntainer" style="position: relative; top: 65px;">
               <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;">  {{user.email}} </p>
                 <form method="post">
@@ -118,7 +118,7 @@
                 <button class="verifybutton" type="submit">Send verification email<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
                 </form>
             </div>
-    {% elif project.verification_status == 'email_sent' %}
+    {% elif profile.verification_status == 'email_sent' %}
     <div class="kuntainer" style="position: relative; top: 65px;">
         <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
         </i>Verifying the email sent to {{user.email}}</p>
@@ -127,14 +127,12 @@
           <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
           </form>
       </div>
-      {% elif project.verification_status == 'verified' %}
+      {% elif profile.verification_status == 'verified' %}
       <div class="kuntainer" style="position: relative; top: 65px;">
-          <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
-          </i>Thank you! Your email has been verified</p>
-            <form method="post">
-            {% csrf_token %}
-            <button class="verifybutton" type="submit">and is ready to accept donations via PayPal.<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
-            </form>
+          <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-check" style="margin-right: 10px;"></i>
+          </i>Thank you for verifying your email {{user.email}}</p>
+            <button class="verifybutton" style="cursor: none;">Your project is ready to accept donations via PayPal.</button>
+
         </div>
     {% endif %}
 
