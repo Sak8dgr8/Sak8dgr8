@@ -682,6 +682,7 @@ def payment_info(request):
     user_email = request.user.email
     username = request.user.username
     profile = Profile.objects.filter(user=request.user)
+    project = Project.objects.filter(user=request.user).first()
 
     # Generate a verification token
     token = signing.dumps({'user_id': request.user.id})
@@ -693,6 +694,7 @@ def payment_info(request):
         'username': username,
         'profile': profile,
         'verification_url': verification_url,  # Include this in the context
+        'project' : project,
     }
 
     if request.method == 'POST':
