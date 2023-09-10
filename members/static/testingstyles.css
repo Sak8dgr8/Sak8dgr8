@@ -891,6 +891,36 @@ font-family: 'Lato', sans-serif; font-weight: 400;
 }
 
 
+/* read more css . */
+#project-description {
+    max-height: 3em; /* Set the maximum height for three lines of text */
+    overflow: hidden;
+    position: relative;
+}
+
+#read-more, #read-less {
+  display: none;
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  color: blue; /* Text color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  text-decoration: underline;
+  font-size: 16px;
+  margin-left: 5%;
+  margin-right: 5%;
+  
+  width: auto;
+  align-self: flex-end;
+
+}
+
+#read-more:hover, #read-less:hover {
+  text-decoration: none; /* Remove underline on hover */
+  transition: 0.2s ease-in-out;
+}
+/* read more css end */
+
 
 .yallah-phone{
   font-family: 'lato', sans-serif; font-size: 1rem;font-weight: 400; color: gray; line-height: 1.5;max-width: 100%; margin: 0;
@@ -1616,6 +1646,9 @@ header{
       
       max-width: 96vw;
     }
+    #read-more, #read-less {
+      font-size: 14px;
+    }
   }
 
 
@@ -1661,6 +1694,7 @@ header{
   width: auto;
   margin: initial;
 }
+
 
 
 }

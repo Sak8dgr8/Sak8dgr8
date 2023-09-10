@@ -534,8 +534,18 @@ $(document).ready(function() {
              </div>
               <hr style="width: 100%;">
                
-            
-                <p class="yallah">{{ project.project_description }}</p>
+           
+              <!--  <p class="yallah">{{ project.project_description }}</p> -->
+             <!-- testing read more-->
+
+             <p class="yallah" id="project-description">
+              {{ project.project_description }}
+          </p>
+          <button id="read-more" style="display: none;">Read More</button>
+          <button id="read-less" style="display: none;">Read Less</button>
+
+          
+            <!--end of testing readmore-->
          
         
               
@@ -918,7 +928,17 @@ $(document).ready(function() {
       <p style="font-family: 'Lato',sans-serif; font-size: 0.9rem; margin-top: 0.5em; margin-right: 2.5%; font-weight: 500; font-weight: 400;">{{project.created_at|naturaltime}}</p>
       </div>
           
-              <p class="yallah">{{ project.project_description }}</p>
+        <!--  <p class="yallah">{{ project.project_description }}</p> -->
+             <!-- testing read more-->
+
+             <p class="yallah" id="project-description">
+              {{ project.project_description }}
+          </p>
+          <button id="read-more" style="display: none;">Read More</button>
+          <button id="read-less" style="display: none;">Read Less</button>
+
+          
+            <!--end of testing readmore-->
            
      </div>
        <hr style="width: 100%;">
@@ -1625,6 +1645,36 @@ document.getElementById("confirmAgreement").addEventListener("click", function()
     alert("Please agree to the terms.");
   }
 });
+</script>
+
+<!-- read more jscript-->
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    var projectDescription = document.getElementById('project-description');
+    var readMoreButton = document.getElementById('read-more');
+    var readLessButton = document.getElementById('read-less');
+
+    // Check if the content overflows
+    if (projectDescription.scrollHeight > projectDescription.clientHeight) {
+        readMoreButton.style.display = 'block';
+    }
+
+    readMoreButton.addEventListener('click', function() {
+        projectDescription.style.maxHeight = 'none';
+        readMoreButton.style.display = 'none';
+        readLessButton.style.display = 'block';
+    });
+
+    readLessButton.addEventListener('click', function() {
+        projectDescription.style.maxHeight = '3em'; // Set it back to the original height
+        readMoreButton.style.display = 'block';
+        readLessButton.style.display = 'none';
+    });
+});
+
+
+
 </script>
 </body>
 </html>
