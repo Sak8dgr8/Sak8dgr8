@@ -64,9 +64,10 @@ class EditProjectView(UpdateView):
 
 def go_live(request, project_id):
     project = get_object_or_404(Project, pk=project_id, user=request.user)
+    profile = get_object_or_404(Profile, user=request.user)
 
     # Check if all required fields are filled
-    if not project.project_title or not project.project_description or not project.project_thumbnail or not project.project_video or not project.funding_goal:
+    if not project.project_title or not project.project_description or not project.project_thumbnail or not project.project_video or not project.funding_goal or not profile.VERIFICATION_STATUS == 'verified':
         messages.error(request, 'Please fill in all required project details before going live.')
         return redirect('user_channel', username=request.user.username)
 
