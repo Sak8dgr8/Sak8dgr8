@@ -82,7 +82,7 @@ def go_live(request):
         error_messages.append('Project video is required.')
     if not project.funding_goal:
         error_messages.append('Funding goal is required.')
-    if profile.VERIFICATION_STATUS != 'verified':
+    if profile.VERIFICATION_STATUS != 'Verified':
         error_messages.append('Your PayPal email must be verified.')
 
     # If there are error messages, display them
