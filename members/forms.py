@@ -59,7 +59,6 @@ class ProjectForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(ProjectForm, self).__init__(*args, **kwargs)
 		self.fields['city'].widget.attrs['class']='city-inpt'
-		self.fields['target_date'].widget.attrs['class']='days-inpt'
 		self.fields['state'].widget.attrs['class']='state-inpt'
 		self.fields['project_title'].widget.attrs['class'] = 'form-inpt'
 		self.fields['funding_goal'].widget.attrs['class'] = 'form-inpt'
