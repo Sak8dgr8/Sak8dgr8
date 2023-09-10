@@ -66,7 +66,7 @@ from django.contrib import messages
 @login_required
 def go_live(request):
     project = get_object_or_404(Project, status='draft', user=request.user)
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = request.user.profile
 
     # Create an empty list to store error messages
     error_messages = []
@@ -83,7 +83,7 @@ def go_live(request):
     if not project.funding_goal:
         error_messages.append('Funding goal is required.')
     if profile.VERIFICATION_STATUS != 'verified':
-        error_messages.append('Your profile must be verified.')
+        error_messages.append('Your PayPal email must be verified.')
 
     # If there are error messages, display them
     if error_messages:
