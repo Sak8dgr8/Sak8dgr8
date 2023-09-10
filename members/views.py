@@ -649,51 +649,64 @@ def mark_update_as_seen(request, update_id):
 from django.template.loader import render_to_string    
 from django.core.mail import EmailMessage
 
-
+from django.core import signing
 
 @login_required
 def payment_info(request):
     user_email = request.user.email
     username = request.user.username
-    email_subject = 'Verify your email address'
     project = Project.objects.filter(user=request.user).first()
+
+    # Generate a verification token
+    token = signing.dumps({'user_id': request.user.id, 'project_id': project.id})
+
+    # Include the token in the verification link URL
+    verification_url = reverse('verify_button') + f'?token={token}'
 
     context = {
         'username': username,
         'project': project,
+        'verification_url': verification_url,  # Include this in the context
     }
 
     if request.method == 'POST':
-        
-
-            # Send the email with the verification link
-            email_body = render_to_string('projects/verification.html', context)
-            email = EmailMessage(email_subject, email_body, to=[user_email])
-            email.content_subtype = 'html'
-            email.send()
-            project.verification_status = 'email_sent'
-            project.save()
-
+        # Send the email with the verification link
+        email_subject = 'Verify your email address'
+        email_body = render_to_string('projects/verification.html', context)
+        email = EmailMessage(email_subject, email_body, to=[user_email])
+        email.content_subtype = 'html'
+        email.send()
+        project.verification_status = 'email_sent'
+        project.save()
 
     return render(request, 'projects/payments.html', context)
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
 def verify_button(request):
-    project = Project.objects.filter(user=request.user).first()
-    username = request.user.username
-    context = {
-        'username': username,
-        'project': project,
-    }
-    
-    if request.method == 'POST':
-        project.verification_status = 'verified'
-        project.save()
-        return HttpResponseRedirect(reverse('payment_info'), context)
-    return HttpResponse("Invalid request or project not found.")
+    # Get the token from the GET parameters
+    token = request.GET.get('token')
+    if token:
+        try:
+            # Verify and load the data from the token
+            data = signing.loads(token)
+            user_id = data.get('user_id')
+            project_id = data.get('project_id')
+            if user_id and project_id:
+                # Perform the verification using user_id and project_id
+                # Update the project status to 'verified'
+                project = Project.objects.get(id=project_id, user__id=user_id)
+                project.verification_status = 'verified'
+                project.save()
+                return redirect('payment_info')  # Redirect to a thank-you page or your desired page
+            else:
+                return HttpResponse("Invalid token data.")
+        except signing.BadSignature:
+            return HttpResponse("Invalid token signature.")
+    else:
+        return HttpResponse("Invalid request or missing token parameter.")
+
 
 
 
