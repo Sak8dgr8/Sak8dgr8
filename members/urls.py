@@ -36,7 +36,7 @@ urlpatterns = [
    path('donation_history', views.donation_history, name='donation_history'),
    path('donate/<int:project_id>/', views.donation_landing_page, name='donation_landing_page'),
    path('payment_info/', views.payment_info, name='payment_info'),
-   path('verify_project', views.verify_button, name='verify_project'), 
+   path('verify_button', views.verify_button, name='verify_button'), 
    
 
    path('update/<int:project_id>/', views.update_project, name='project_update'),
