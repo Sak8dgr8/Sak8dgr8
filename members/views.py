@@ -682,7 +682,7 @@ def payment_info(request):
     user_email = request.user.email
     username = request.user.username
     profile = Profile.objects.filter(user=request.user)
-    project = Project.objects.filter(user=request.user).first()
+    project = Project.objects.filter(user=request.user, status='draft').first()
 
     # Generate a verification token
     token = signing.dumps({'user_id': request.user.id})
