@@ -127,6 +127,15 @@
           <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
           </form>
       </div>
+      {% elif project.verification_status == 'verified' %}
+      <div class="kuntainer" style="position: relative; top: 65px;">
+          <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
+          </i>Thank you! Your email has been verified</p>
+            <form method="post">
+            {% csrf_token %}
+            <button class="verifybutton" type="submit">and is ready to accept donations via PayPal.<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
+            </form>
+        </div>
     {% endif %}
 
     </div>
