@@ -651,6 +651,33 @@ from django.core.mail import EmailMessage
 
 from django.core import signing
 
+
+def verify_button(request):
+    # Get the token from the GET parameters
+    token = request.GET.get('token')
+    if token:
+        try:
+            # Verify and load the data from the token
+            data = signing.loads(token)
+            user_id = data.get('user_id')
+            project_id = data.get('project_id')
+            if user_id and project_id:
+                # Perform the verification using user_id and project_id
+                # Update the project status to 'verified'
+                project = Project.objects.get(id=project_id, user__id=user_id)
+                project.verification_status = 'verified'
+                project.save()
+                return redirect('payment_info')  # Redirect to a thank-you page or your desired page
+            else:
+                return HttpResponse("Invalid token data.")
+        except signing.BadSignature:
+            return HttpResponse("Invalid token signature.")
+    else:
+        return HttpResponse("Invalid request or missing token parameter.")
+
+
+
+
 @login_required
 def payment_info(request):
     user_email = request.user.email
@@ -684,28 +711,6 @@ def payment_info(request):
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
-def verify_button(request):
-    # Get the token from the GET parameters
-    token = request.GET.get('token')
-    if token:
-        try:
-            # Verify and load the data from the token
-            data = signing.loads(token)
-            user_id = data.get('user_id')
-            project_id = data.get('project_id')
-            if user_id and project_id:
-                # Perform the verification using user_id and project_id
-                # Update the project status to 'verified'
-                project = Project.objects.get(id=project_id, user__id=user_id)
-                project.verification_status = 'verified'
-                project.save()
-                return redirect('payment_info')  # Redirect to a thank-you page or your desired page
-            else:
-                return HttpResponse("Invalid token data.")
-        except signing.BadSignature:
-            return HttpResponse("Invalid token signature.")
-    else:
-        return HttpResponse("Invalid request or missing token parameter.")
 
 
 
