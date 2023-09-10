@@ -30,7 +30,7 @@ urlpatterns = [
 
    path('edit_project/<int:pk>/', EditProjectView.as_view(), name='edit_project'),
    path('funding_now/', views.FundingNowView.as_view(), name='funding_now'),
-   path('go_live/<int:project_id>/', views.go_live, name='go_live'),
+   path('go_live/', views.go_live, name='go_live'),
    
    path('search/', views.ProjectSearchView.as_view(), name='search_projects'),
    path('donation_history', views.donation_history, name='donation_history'),
