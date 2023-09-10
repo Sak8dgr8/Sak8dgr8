@@ -85,9 +85,11 @@
           
         <a href="{% url 'user_channel' username=request.user.username %}">  <button class="lodaone"><i class="fa fas-light fa-eye fa-lg" style="margin-right: 10px;"></i>Preview</button></a>
           
-           
+          {% if project %}
             <a href="{% url 'edit_project' pk=project.pk %}"><button class="lodatwo"><i class="fa fa-pen-to-square fa-lg" style="margin-right: 10px;"></i>Edit Project</button> </a>
-         
+          {% else %}
+          <a href="{% url 'funding_info' %}"><button class="lodatwo"><i class="fa fa-pen-to-square fa-lg" style="margin-right: 10px;"></i>Edit Project</button> </a>
+          {% endif %}
   
            
   

@@ -687,8 +687,6 @@ def payment_info(request):
     user_email = request.user.email
     username = request.user.username
     project = Project.objects.filter(user=request.user, status='draft').first()
-    if not project:
-        project = Project.objects.filter(user=request.user).first()
     profile = get_object_or_404(Profile, user=request.user)
 
     # Generate a verification token
