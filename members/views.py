@@ -681,8 +681,8 @@ def verify_button(request):
 def payment_info(request):
     user_email = request.user.email
     username = request.user.username
-    profile = Profile.objects.filter(user=request.user)
     project = Project.objects.filter(user=request.user, status='draft').first()
+    profile = get_object_or_404(Profile, user=request.user)
 
     # Generate a verification token
     token = signing.dumps({'user_id': request.user.id})
