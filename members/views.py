@@ -63,7 +63,7 @@ class EditProjectView(UpdateView):
 
 @login_required
 def go_live(request):
-    project = get_object_or_404(Project, status='draft', user=request.user)
+    project = get_object_or_404(Project, status='Draft', user=request.user)
     profile = get_object_or_404(Profile, user=request.user)
 
     # Check if all required fields are filled
