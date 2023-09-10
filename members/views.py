@@ -375,6 +375,10 @@ def update_detail(request, project_id, update_id):
 def complete_project(request, project_id):
     project = get_object_or_404(Project, id=project_id, user=request.user)
     user = request.user
+    if not project.update:
+        messages.error(request, 'Please post an update before copmleting your project')
+        return redirect('user_channel', username=request.user.username)
+    
     if request.method == 'POST':
         # Update the project status to "completed"
         project.status = 'completed'

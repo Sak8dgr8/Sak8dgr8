@@ -182,7 +182,7 @@ $(document).ready(function() {
   <!-- start of agreement pop up -->
   <div class="agreement-popup" id="agreementPopup">
     <div class="agreement-content">
-      <span class="agreement-close">&times;</span>
+      <span class="agreement-close" id="closeAgreementPopup">&times;</span>
       <h2 style="text-align: center;">Our-Tube Revenue Reinvestment Agreement</h2>
       <p>I, {{user.first_name}} {{user.last_name}}, the project owner/creator of {{project.project_title}}, hereby agree to reinvest 100% of all revenue generated from this Our-Tube project (ad revenue from other social media platforms or sponsorships) in the form of a donation to future Our-Tube projects on the platform, whether they are my own projects or those initiated by others.</p>
       <p>I understand and agree to the principle of giving back to the community and furthering the mission of Our-Tube to create positive impact through philanthropy content.</p>
@@ -1644,6 +1644,15 @@ document.getElementById("confirmAgreement").addEventListener("click", function()
   } else {
     alert("Please agree to the terms.");
   }
+});
+
+function closeAgreementPopup() {
+    document.getElementById("agreement-overlay").style.display = "none";
+    document.getElementById("agreementPopup").style.display = "none";
+    document.body.style.overflow = "auto"; // Enable scrolling
+}
+document.getElementById("closeAgreementPopup").addEventListener("click", function() {
+    closeAgreementPopup();
 });
 </script>
 
