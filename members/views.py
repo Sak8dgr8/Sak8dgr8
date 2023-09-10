@@ -73,23 +73,22 @@ def go_live(request):
 
     # Check if all required fields are filled
     if not project.project_title:
-        error_messages.append('Project title is required.')
+        error_messages.append('A title is required.')
     if not project.project_description:
-        error_messages.append('Project description is required.')
+        error_messages.append('A description is required.')
     if not project.project_thumbnail:
-        error_messages.append('Project thumbnail is required.')
+        error_messages.append('A project thumbnail is required.')
     if not project.project_video:
-        error_messages.append('Project video is required.')
+        error_messages.append('A project video is required.')
     if not project.funding_goal:
-        error_messages.append('Funding goal is required.')
+        error_messages.append('A funding goal is required.')
     if profile.VERIFICATION_STATUS != 'Verified':
         error_messages.append('Your PayPal email must be verified.')
 
     # If there are error messages, display them
     if error_messages:
-        for message in error_messages:
-            messages.error(request, message)
-
+        error_message = ' '.join(error_messages)
+        messages.error(request, error_message)
         return redirect('user_channel', username=request.user.username)
 
     # Update the project status to "Live"
