@@ -46,7 +46,6 @@ class Project(models.Model):
     city = models.CharField(null=True, max_length=100)
     project_title = models.CharField(null=True, max_length=400)
     funding_goal = models.IntegerField(null=True)
-    target_date = models.CharField(null=True, choices=DAYS_CHOICES, max_length=3)
     project_description = models.TextField(null=True)
     project_thumbnail = models.ImageField(null=True, blank=True)
     project_video = models.FileField(validators=[FileExtensionValidator(allowed_extensions=['mp4','avi','mov'])], null=True, blank=True)

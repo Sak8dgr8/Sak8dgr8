@@ -53,7 +53,7 @@ class ProjectForm(forms.ModelForm):
 
 	class Meta:
 		model = Project
-		fields = ('state','city','project_title', 'funding_goal', 'target_date','project_description', 'project_video', 'project_thumbnail',)
+		fields = ('state','city','project_title', 'funding_goal','project_description', 'project_video', 'project_thumbnail',)
 
 
 	def __init__(self, *args, **kwargs):
