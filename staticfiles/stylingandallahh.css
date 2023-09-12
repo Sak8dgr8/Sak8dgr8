@@ -1,6 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 
+.mission{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  justify-content: center;
+  z-index: 1;
+}
+.mission-header{
+  display: flex;
+  width:100vw;
+  height: 100vh;
+  text-align: center;
+  justify-content: center;
+  justify-self: center;
+  color: #fff;
+  background-image: url('ripple.jpg.jpg');
+  background-size: 100% 100%;
+}
+.missionairy{
+  font-size: 34px; font-family: 'Playfair Display', serif; justify-self: center; align-self: center; color: black; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 95vw;
+}
+
+.mission-details-one{
+  width: 80%;
+  line-height: 2;
+  align-self: center;
+  justify-self: center;
+}
+.mission-boxes-area{
+  width: 80%;
+  background-color: #ccc;
+  height: 70vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
+}
+.key-feature-container{
+  background-color: white;
+
+  width: 30%;
+  height: 100%;
+  margin:0 auto;
+}
+.ripple{
+  width: 100vw;
+  height:70vh;
+  margin: 0;
+  padding: 0;
+  
+}
 .logo{
     width: 150px;
     height: 150px;
@@ -41,12 +93,13 @@ li:hover{
 }
 .navbar-testing {
   background-color: #42c09e;
-  width: 100%;
-  
+  width: 100.5%;
+  z-index: 999;
   position: fixed;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   left: 0;
   top: 0;
+  right: 0;
 }
 
 
@@ -127,7 +180,7 @@ li:hover{
 }
 
 .exp{
-  width: 90%; height:auto;
+  width: 40%; height:auto;
 }
 .juice{
   display: flex; flex-direction: row; margin: 0; align-items: center; gap: 0px;
@@ -143,10 +196,6 @@ flex-direction: column; margin-left: 5%; gap:20px; display: none; margin-right: 
 
 body::-webkit-scrollbar {
   width: 0.5rem;
-}
-
-main{
-  margin-top: 5rem;
 }
 
 
@@ -199,9 +248,7 @@ h1 {
   }
 }
 
-body{
-  margin-top: 8rem;
-}
+
 .lichenbgg{
   display: flex;
   flex-direction: column;
@@ -312,12 +359,89 @@ body{
   font-family: 'Montserrat', sans-serif; font-size: 2rem; margin: 0; text-align: center; margin-bottom: 20px;
 }
 
+.privacy_container{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+ 
+}
+.privacy_heading{
+  background: linear-gradient(to right, #1500ff,#0062ff, #00d0ff);
+  color: white;
+  width: calc(100%-20px);
+  font-size:50px;
+  font-family: 'Lato',sans-serif;
+  padding-left: 20px;
+}
+
+.privacy_details{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.privacy_title{
+  color: #1500ff;
+  font-size: 25px;
+  margin: 20px 0;
+  font-family: 'Lato',sans-serif;
+}
+.privacy_info{
+  color: gray;
+  line-height: 1.5;
+  font-family: 'Raleway', sans-serif;
+}
+
+footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x:auto;
+  padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  right: 0;
+  
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+footer ul li {
+  font-size: 14px;
+  display: inline;
+  margin-right: 10px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+
 @media(max-width:985px){
 .pstyle{
   font-size: 0.9rem;
 }
 .headingstyle{
   font-size: 1.8rem;
+}
+.missionairy{
+  font-size: 30px;
 }
 }
 @media(max-width:890px){
@@ -332,6 +456,9 @@ body{
     align-self: center;
   
   }
+  .missionairy{
+    font-size: 27px;
+  }
 }
 @media(max-width:730px){
   .pstyle{
@@ -342,6 +469,9 @@ body{
   }
   .exp{
     width: 420px;
+  }
+  .missionairy{
+    font-size: 25px;
   }
 }
 @media(max-width:635px){
@@ -354,6 +484,9 @@ body{
   .exp{
     width: 360px;
   }
+  .missionairy{
+    font-size: 22px;
+  }
 }
 @media(max-width:480px){
   .pstyle{
@@ -365,6 +498,9 @@ body{
   .exp{
     width: 300px;
   }
+  .missionairy{
+    font-size: 18px;
+  }
 }
 
 @media(max-width:851px){
@@ -374,9 +510,7 @@ body{
     margin-right: 6vw;
     margin-left: 6vw;
    }
-   body{
-    margin-top: 4.8rem;
-   }
+
    h1{
     font-size: 2.5rem;
    }
@@ -419,15 +553,14 @@ body{
   margin-left: 2rem;
 
  }
+
  .logo{
     width: 125px;
     height: 125px;
     top: 10px;
   }
 
- body{
-  margin-top: 4.4rem;
- }
+
  h1{
   font-size: 2rem;
  }
@@ -474,9 +607,7 @@ body{
     top: 8px;
   }
 
- body{
-  margin-top: 4rem;
- }
+
  h1{
   font-size: 1.6rem;
  }

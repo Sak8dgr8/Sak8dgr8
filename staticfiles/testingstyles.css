@@ -1,3 +1,56 @@
+
+/* Dark overlay */
+.agreement-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.agreement-popup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+  border: 8px solid  #69dded ;
+}
+
+.agreeCheckbox {
+  margin-right: 5px;
+}
+
+#confirmAgreement {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.agreement-close {
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  font-size: 25px;
+  color: #888;
+  cursor: pointer;
+}
+
+
+
+
+
 .screenshot-overlay {
   position: fixed;
   top: 0;
@@ -43,9 +96,9 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   align-self: center;
   position: fixed;
-  top: 25%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%,-25%);
+  transform: translate(-50%,-50%);
 }
 .popupflex{
 
@@ -73,7 +126,7 @@
 .instagram-share-instructions {
   font-size: 1.1rem;
 
-  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 600;
+  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 400;
   text-align: left;
   margin-bottom: 8px;
   margin-top: 8px;
@@ -482,7 +535,7 @@ body{
       margin-top: 5.6rem;
       margin-left: 0;
       margin-right: 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Lato', sans-serif; font-weight: 400;
   
     }
 
@@ -501,7 +554,7 @@ color: #0a383f;
 font-size: 2.5rem;
 padding: 0px;
 font-weight: bold;
-font-family: 'Roboto', sans-serif;
+font-family: 'Lato', sans-serif; font-weight: 400;
 }
 
 .toosexy{
@@ -714,7 +767,7 @@ font-family: 'Roboto', sans-serif;
   position: absolute; top: 310px; left:5%
 }
 .title-update{
-  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 600;
+  font-family: 'Lato', sans-serif;   color: #000000; font-weight: 400;
   font-size: 1.8rem; margin-top: 0.3em; margin-bottom: 0.5em;
 }
 
@@ -838,6 +891,36 @@ font-family: 'Roboto', sans-serif;
 }
 
 
+/* read more css . */
+#project-description {
+    max-height: 3em; /* Set the maximum height for three lines of text */
+    overflow: hidden;
+    position: relative;
+}
+
+#read-more, #read-less {
+  display: none;
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  color: blue; /* Text color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  text-decoration: underline;
+  font-size: 16px;
+  margin-left: 5%;
+  margin-right: 5%;
+  
+  width: auto;
+  align-self: flex-end;
+
+}
+
+#read-more:hover, #read-less:hover {
+  text-decoration: none; /* Remove underline on hover */
+  transition: 0.2s ease-in-out;
+}
+/* read more css end */
+
 
 .yallah-phone{
   font-family: 'lato', sans-serif; font-size: 1rem;font-weight: 400; color: gray; line-height: 1.5;max-width: 100%; margin: 0;
@@ -849,10 +932,10 @@ font-family: 'Roboto', sans-serif;
 
 
 .pforfundinggoal{
-  font-size: 1rem; color: gray; font-family: 'Lato', sans-serif;
+  font-size: 1rem; color: gray; font-family: 'Lato', sans-serif; font-weight: 400;
 }
 .pforfundinggoal-phone{
-  font-size: 1.2rem; color: gray; font-family: 'Lato', sans-serif; margin: 0; 
+  font-size: 1.2rem; color: gray; font-family: 'Lato', sans-serif; margin: 0; font-weight: 400;
 }
 
 
@@ -885,6 +968,7 @@ font-family: 'Roboto', sans-serif;
   width: 24vw;
   height: 50px;
   font-family: 'Lato', sans-serif;
+  font-weight: 400;
   font-size: 1.2rem;
   color: #ffffff;
   border: none;
@@ -902,6 +986,7 @@ font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 50px;
   font-family: 'Lato', sans-serif;
+  font-weight: 400;
   font-size: 1.2rem;
   color: #ffffff;
   border: none;
@@ -933,7 +1018,7 @@ font-family: 'Roboto', sans-serif;
 .donation-info {
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   font-size: 1rem;
   color: #333;
 }
@@ -945,10 +1030,10 @@ font-family: 'Roboto', sans-serif;
 }
 
 .donation-text {
-  margin: 0; font-family: 'Lato', sans-serif;
+  margin: 0; font-family: 'Lato', sans-serif; font-weight: 400;
 }
 .donation-text-phone {
-  margin: 0; font-family: 'Lato', sans-serif; font-size: 1.5rem;
+  margin: 0; font-family: 'Lato', sans-serif; font-size: 1.5rem; font-weight: 400;
 }
 
 .loda {
@@ -1016,6 +1101,7 @@ text-align: center;
 cursor: pointer;
 transition: background-color 0.3s;
 font-family: 'Lato', sans-serif;
+font-weight: 400;
 font-size: 1rem;
 }
 
@@ -1044,7 +1130,7 @@ background-color: #ebebeb;
 
 
 .comment-input {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -1053,7 +1139,7 @@ background-color: #ebebeb;
   resize: vertical;
   width: 50vw;
   height: 40px;
-  font-family: 'Roboto', sans-serif;
+  
   resize: none;
 }
 
@@ -1083,7 +1169,7 @@ background-color: #ebebeb;
 
 .comment-body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif; font-weight: 400;
   font-size: 16px;
   color: #333;
   line-height: 1.5;
@@ -1314,7 +1400,7 @@ header{
   position: relative; top: 35px;
 }
 .total-donations{
-  font-size: 1.45rem; font-family: 'Lato', sans-serif; margin: 0; align-self: flex-end;
+  font-size: 1.45rem; font-family: 'Lato', sans-serif; margin: 0; align-self: flex-end; font-weight: 400;
 }
 
 .update-title-input {
@@ -1460,10 +1546,10 @@ header{
  
   }
   .update-tit{
-    font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0; color: #000;
+    font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.3rem; margin-bottom: 0; color: #000;
   }
   .update-cok{
-    font-family: 'Roboto',sans-serif; color: gray; font-size: 1rem;
+    font-family: 'Lato',sans-serif; font-weight: 400; color: gray; font-size: 1rem; margin: 0;
   }
   .update-img{
     width: 50px; height: 50px; border-radius: 50%; position: relative; top: 20px;
@@ -1494,7 +1580,7 @@ header{
     margin: -2vw;
   }
   .titss{
-    font-family: 'Lato', sans-serif; font-size: 1.4rem; margin-left: 10px; margin-right: 10px; font-weight: 300;
+    font-family: 'Lato', sans-serif; font-size: 1.4rem; margin-left: 10px; margin-right: 10px; font-weight: 400;
   }
      
   .col-md-4 {
@@ -1560,6 +1646,9 @@ header{
       
       max-width: 96vw;
     }
+    #read-more, #read-less {
+      font-size: 14px;
+    }
   }
 
 
@@ -1605,6 +1694,7 @@ header{
   width: auto;
   margin: initial;
 }
+
 
 
 }
@@ -1798,7 +1888,7 @@ header{
     top: 70px;
   }
   .donation-text-phone {
-    margin: 0; font-family: 'Lato', sans-serif; font-size: 1.3rem;
+    margin: 0; font-family: 'Lato', sans-serif; font-size: 1.3rem; font-weight: 400;
   }
   .pforfundinggoal-phone{
     font-size: 0.95rem;

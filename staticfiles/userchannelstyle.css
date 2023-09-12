@@ -1,3 +1,43 @@
+footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x:auto;
+  padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  z-index: 999;
+  
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+footer ul li {
+  font-size: 14px;
+  display: inline;
+  margin-right: 10px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+
+
+
+
 .namae {
   width: 50vw;
   border-radius: 10px;
