@@ -53,6 +53,7 @@ class Project(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
+    page_qr_code = models.ImageField(upload_to='qrcodes/', null=True, blank=True)
     
     @property
     def total_donations(self):

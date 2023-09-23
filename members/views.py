@@ -39,7 +39,12 @@ from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from paypal.standard.forms import PayPalPaymentsForm        
-from django.http import HttpResponse       
+from django.http import HttpResponse 
+import qrcode      
+from io import BytesIO
+from django.core.files import File
+
+
 
 class EditProjectView(UpdateView):
      
@@ -93,6 +98,24 @@ def go_live(request):
 
     # Update the project status to "Live"
     project.status = 'live'
+
+    qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+    qr.add_data(f'https://www.our-tube.com/members/user_channel/{request.user}')  # Replace with your actual URL
+    qr.make(fit=True)
+
+        # Create an in-memory image
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+
+    buffer = BytesIO()
+    qr_img.save(buffer, format="PNG")
+    project.page_qr_code.save(f'qrcode_{project.id}.png', File(buffer))
+
+
     project.save()
 
     # Add success message
@@ -304,6 +327,7 @@ def user_channel(request, username, error_message=None):
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
         completed_donation_count = project.donations.filter(status='completed').count()
         updates = Update.objects.filter(project=project)
+
 
         context.update({
             'data2': data2,

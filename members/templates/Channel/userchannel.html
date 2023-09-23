@@ -778,7 +778,11 @@ $(document).ready(function() {
                             </div>
                             <button id="copy-button">Copy link</button>
                           </div>
-                 
+                          <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                            {% if project.page_qr_code %}
+                            <img src="{{project.page_qr_code.url}}" style="width: 140px; height: 140px;">
+                            {% endif %}
+                          </div>
                   
                   </div>
                 </div>
@@ -1117,8 +1121,17 @@ $(document).ready(function() {
         <span id="close-btn">&times;</span>
         <div class="lightbox-content">
             <!-- Add your lightbox content here -->
+      <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-right: 10%;">
+        <div>
         <p style="font-family: 'Lato', sans-serif; font-size: 1.5rem; margin-bottom: 0; font-weight: 400;">Help by sharing</p>
         <p style="font-family: 'Lato', sans-serif; font-weight: 400;">Paste the link anywhere to support {{user}}.<p>
+        </div>
+        <div>
+          {% if project.page_qr_code %}
+          <img src="{{project.page_qr_code.url}}" style="width: 100px; height: 100px;">
+          {% endif %}
+        </div>
+      </div>
           <hr style="width: 100%; margin-bottom: 2em;">
             <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
              <a href="https://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" style="text-decoration: none;" target="_blank"> <i class="fab fa-facebook fa-2xl" style="color: #1877F2; cursor: pointer;"></i></a>
@@ -1134,6 +1147,7 @@ $(document).ready(function() {
           </div>
           <button id="copy-button-com">Copy link</button>
         </div>
+
       </div>
     </div>
 
