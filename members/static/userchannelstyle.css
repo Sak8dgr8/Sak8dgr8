@@ -11,7 +11,9 @@ footer {
   z-index: 999;
   
 }
-
+.vaishu{
+  display: none;
+}
 footer p {
   margin: 0;
   font-size: 14px;

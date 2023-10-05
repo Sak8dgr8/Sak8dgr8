@@ -39,6 +39,7 @@ class ChannelCustomizationForm(forms.ModelForm):
 		widgets = {
             'profile_pic': forms.FileInput(attrs={'class': 'custom-profile-pic-input', 'accept': 'image/*'}),
 	   				'bio': forms.Textarea(attrs={'class': 'form-container'}),
+			'cropped_image_data': forms.FileInput(attrs={'class': 'vaishu', 'accept': 'image/*'}),
 	     
         }
 

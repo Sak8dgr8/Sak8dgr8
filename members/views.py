@@ -508,7 +508,6 @@ import base64
 from django.shortcuts import render, redirect
 from django.core.files.base import ContentFile
 
-@login_required
 def channel_customization(request):
     if request.user.is_authenticated:
         profile = request.user.profile
@@ -523,7 +522,7 @@ def channel_customization(request):
                     # Convert the base64 encoded data to an image file
                     img_data = cropped_image_data.split(',')[1]
                     img_bytes = base64.b64decode(img_data)
-                    unique_filename = f'{uuid.uuid4()}.png'
+                    unique_filename = f'{uuid.uuid4()}.jpeg'
                     img_file = ContentFile(img_bytes, name=unique_filename)
 
                     # Save the profile picture and cropped image data
@@ -544,7 +543,6 @@ def channel_customization(request):
         return render(request, 'Channel/channel_customization.html', {
             'form': form,
         })
-
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .forms import UserUpdateForm
