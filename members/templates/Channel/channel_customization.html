@@ -242,7 +242,7 @@
   // Add a click event listener to the crop button
   cropButton.addEventListener('click', function() {
     // Get the cropped image data from the cropping library
-    const croppedImageData = cropper.getCroppedCanvas().toDataURL('image/jpeg', 0.7);
+    const croppedImageData = cropper.getCroppedCanvas().toDataURL('image/jpeg', 0.8);
 
     // Update the hidden input field with the cropped image data
     document.getElementById('cropped-image-data').value = croppedImageData;
