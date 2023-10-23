@@ -1,6 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+.form-errors {
+  margin:0;
+  background-color: #ffced1;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+.error-message {
+  color: #bc3042;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
 
+.form-successes {
+  margin: 0;
+  background-color: #28a745; /* Green color */
+  color: #ffffff; /* White text color */
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+
+.success-message {
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
 .logo{
     width: 150px;
     height: 150px;
@@ -252,7 +285,7 @@ display: flex; flex-direction: row; justify-content: space-between;
     padding-bottom: 40px;
 }
 .kodakblack{
-  display: flex; flex-direction: row; justify-content: center; margin-top: 25vh;
+  display: flex; flex-direction: row; justify-content: center; 
 }
 .boat{
   display: flex; flex-direction: column; max-width: 70%; align-items: center;

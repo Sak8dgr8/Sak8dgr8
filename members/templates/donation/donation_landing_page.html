@@ -92,7 +92,7 @@ input.donation-box::-webkit-outer-spin-button {
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
   </style>
 </head>
-<header>
+<header style="padding-bottom: 17.5px;">
 
       <nav class="navbar-testing">
         <div class="logo">
@@ -129,7 +129,27 @@ input.donation-box::-webkit-outer-spin-button {
 </header>
 
 <body>
-  
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+  <br>
+  <div class="form-errors">
+    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+    <i class="fas fa-exclamation-circle fa-lg"></i>
+    <p class="error-message">{{ message }}</p>
+    </div>
+  </div>
+  {% elif message.tags == 'success' %}
+  <br>
+  <div class="form-successes">
+   <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+   <i class="fas fa-check-circle fa-lg"></i>
+   <p class="success-message">{{ message }}</p>
+   </div>
+ </div>
+ {% endif %}
+  {% endfor %}
+  {% endif %}
 <div class="kodakblack">
     <div class="container">
         <div style="display: flex; flex-direction: column; align-items: center;">
@@ -145,13 +165,7 @@ input.donation-box::-webkit-outer-spin-button {
         
             <img src="{{project.project_thumbnail.url}}" class="thumbnail" style="margin-top: 1em;">
 
-            
-              
-             
-
-          
-       
-        
+           
        </div>
        <form method="POST" action="" id="donation-form">
         {% csrf_token %}
@@ -163,18 +177,29 @@ input.donation-box::-webkit-outer-spin-button {
         
         
 
-               
-              {%  if not request.user.is_authenticated%}
+                 
+            {%  if not request.user.is_authenticated%}
+              {% if not paypal_payment_button_updated %} 
               <hr style="width: 100%;">
-                <p style="font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;">Consider <a href="{% url 'register_user' %}" style="color: gray;"> signing up for free </a> to <strong>track your donations</strong> and <strong>recieve updates</strong> on projects you've funded.</p>
+                    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;">
+                <p style="font-size: 0.88rem; color: gray; font-family: 'Lato',sans-serif;"><strong>Sign up for free</strong> to track your donations by checking the box to your right.</p>
+             
+                <input type="checkbox" name="register" value="register" id="registerCheckbox">
+                  </div>
                 <hr style="width: 100%;">
+                {% endif %}
                    <div class="nunu"> 
                           <div class="bab">
                             {{form.first_name}}
                             {{form.last_name}}
                           </div>
                           {{form.donor_email}}
-                           
+                              <div id="passwordField" style="display: none;">
+
+                                {{register_form.username}}
+                              {{register_form.password1}}
+                             
+                            </div>
                       </div>
                       <hr style="width: 100%;">    
               {% endif %}
@@ -316,5 +341,20 @@ input.donation-box::-webkit-outer-spin-button {
   window.scrollTo(0, document.body.scrollHeight);
 </script>
 {% endif %}
+<script>
+  const registerCheckbox = document.getElementById('registerCheckbox');
+  const passwordField = document.getElementById('passwordField');
+
+  // Listen for changes to the checkbox
+  registerCheckbox.addEventListener('change', function () {
+      if (registerCheckbox.checked) {
+          // If the checkbox is checked, display the password field
+          passwordField.style.display = 'block';
+      } else {
+          // If the checkbox is unchecked, hide the password field
+          passwordField.style.display = 'none';
+      }
+  });
+</script>
 </body>
 </html>

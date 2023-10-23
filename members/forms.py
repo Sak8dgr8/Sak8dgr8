@@ -15,7 +15,8 @@ class RegisterUserForm(UserCreationForm):
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
 	first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
 	last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
-	
+	username = forms.CharField(required=False)
+	password1 = forms.CharField(required=False)
 
 	class Meta:
 		model = User
@@ -26,8 +27,10 @@ class RegisterUserForm(UserCreationForm):
 		super(RegisterUserForm, self).__init__(*args, **kwargs)
 
 
-		self.fields['username'].widget.attrs['class'] = 'form-control'
-		self.fields['password1'].widget.attrs['class'] = 'form-control'
+		self.fields['username'].widget.attrs['class'] = 'form-control email-box'
+		self.fields['username'].widget.attrs['placeholder'] = 'Username'
+		self.fields['password1'].widget.attrs['class'] = 'form-control email-box'
+		self.fields['password1'].widget.attrs['placeholder'] = 'Password'
 		self.fields['password2'].widget.attrs['class'] = 'form-control'
 	
         

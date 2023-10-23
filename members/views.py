@@ -575,6 +575,7 @@ from decimal import Decimal  # Import Decimal to handle currency amounts accurat
 def donation_landing_page(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     form = DonationForm(request.POST or None)
+    register_form = RegisterUserForm(request.POST or None)
     paypal_dict = {
         'amount': 200,
         'item_name': "Loda",
@@ -588,7 +589,7 @@ def donation_landing_page(request, project_id):
 
     if request.method == 'POST' and form.is_valid():
         # Save the donation instance before accessing the donation_id
-        if request.user.is_authenticated:
+        if request.user.is_authenticated :
             donation = form.save(commit=False)
             donation.project = project
             donation.donor = request.user
@@ -596,10 +597,44 @@ def donation_landing_page(request, project_id):
             donation.donor_email = request.user.email
             donation.status = 'pending'
             donation.save()
+        elif 'register' in request.POST:
+            donor_first_name = form.cleaned_data['first_name']
+            donor_last_name = form.cleaned_data['last_name']
+            donor_email = form.cleaned_data['donor_email']
+
+            register_form = RegisterUserForm({
+                'username': request.POST['username'],  # You need to define the username value
+                'first_name': donor_first_name,
+                'last_name': donor_last_name,
+                'email': donor_email,
+                'password1': request.POST['password1'],
+                'password2': request.POST['password1'],
+            })
+            if register_form.is_valid():
+                user = register_form.save()
+                username = register_form.cleaned_data['username']
+                password = register_form.cleaned_data['password1']
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                messages.success(request, f'Welcome to our-tube! Complete your donation as @{request.user}')
+                return redirect('donation_landing_page', project_id=project.id)
+            else:
+                context = {
+                    'project': project,
+                    'form': form,
+                    'paypal_payment_button': paypal_payment_button,
+                    'register_form': register_form,
+                }
+                for field, errors in register_form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{error}")
+                return render(request, 'donation/donation_landing_page.html', context)
+            
+
         else:
             donor_first_name = form.cleaned_data['first_name']
             donor_last_name = form.cleaned_data['last_name']
-
+            donor_email = form.cleaned_data['donor_email']
             donation = form.save(commit=False)
             donation.project = project
             if not donor_first_name and not donor_last_name:
@@ -608,6 +643,7 @@ def donation_landing_page(request, project_id):
                 donation.name = f"{donor_first_name} {donor_last_name}"
             donation.donor = None
             donation.donation_date = timezone.now()
+            donation.donor_email = donor_email
             donation.status = 'pending'
             donation.save()
 
@@ -638,6 +674,7 @@ def donation_landing_page(request, project_id):
             'paypal_payment_button_updated': ExtPayPalPaymentsForm(initial=paypal_updated_dict),
             'total_amount': total_amount,
             'donation_id': donation_id,
+            'register_form': register_form,
         }
 
         # Return the updated context in the render function
@@ -648,6 +685,7 @@ def donation_landing_page(request, project_id):
         'project': project,
         'form': form,
         'paypal_payment_button': paypal_payment_button,
+        'register_form': register_form,
     }
     return render(request, 'donation/donation_landing_page.html', context)
 

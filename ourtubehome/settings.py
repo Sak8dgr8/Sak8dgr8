@@ -106,20 +106,20 @@ WSGI_APPLICATION = 'ourtubehome.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),  # Example: 'db.sqlite3' in your project's base directory
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),  # Example: 'db.sqlite3' in your project's base directory
+    }
+}
 
 
 import dj_database_url
 
-DATABASES = {
-   'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
-SECURE_SSL_REDIRECT = True
+#DATABASES = {
+#   'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+#}
+#SECURE_SSL_REDIRECT = True
 
 SITE_URL = 'https://www.our-tube.com'
 
