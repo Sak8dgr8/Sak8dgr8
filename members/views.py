@@ -601,8 +601,6 @@ def donation_landing_page(request, project_id):
             donor_first_name = form.cleaned_data['first_name']
             donor_last_name = form.cleaned_data['last_name']
             donor_email = form.cleaned_data['donor_email']
-            donation_amount = form.cleaned_data.get('donation_amount', 0)
-            total_amount = donation_amount
 
             register_form = RegisterUserForm({
                 'username': request.POST['username'],  # You need to define the username value
@@ -616,10 +614,8 @@ def donation_landing_page(request, project_id):
                 updated_context = {
                     'project': project,
                     'form': form,
-                    'paypal_payment_button_updated': ExtPayPalPaymentsForm(initial=paypal_updated_dict),
-                    'total_amount': total_amount,
-                    'donation_id': donation_id,
                     'register_form': register_form,
+                    'paypal_payment_button': paypal_payment_button,
                 }
                 user = register_form.save()
                 username = register_form.cleaned_data['username']
