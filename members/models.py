@@ -111,7 +111,7 @@ class Donation(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
-    donation_amount = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(50000)])
+    donation_amount = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(50000)])
     donation_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
         ('pending', 'Pending'),
