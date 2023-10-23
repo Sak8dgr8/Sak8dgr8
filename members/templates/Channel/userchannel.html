@@ -581,9 +581,9 @@ $(document).ready(function() {
        
 
   {% else %}
-<div style="display: flex; flex-direction: column; align-items: center; position: absolute; top: 75%; left: 50%;transform: translate(-50%,-75%);">
-  This user has no ongoing projects. Stay tuned!
-</div>
+  <div style="display: flex; flex-direction: column; align-items: center; position: absolute; top: 70vh; width: 100%; justify-content: center; gap: 20px;">
+    <p class="shenanigans" style="color: black;"> @{{user}} has no ongoing projects.</p>
+  </div>
   {% endif %}
 {% elif project.status == 'live' %}
 
