@@ -601,6 +601,8 @@ def donation_landing_page(request, project_id):
             donor_first_name = form.cleaned_data['first_name']
             donor_last_name = form.cleaned_data['last_name']
             donor_email = form.cleaned_data['donor_email']
+            donation_amount = form.cleaned_data.get('donation_amount', 0)
+            total_amount = donation_amount
 
             register_form = RegisterUserForm({
                 'username': request.POST['username'],  # You need to define the username value
@@ -611,13 +613,21 @@ def donation_landing_page(request, project_id):
                 'password2': request.POST['password1'],
             })
             if register_form.is_valid():
+                updated_context = {
+                    'project': project,
+                    'form': form,
+                    'paypal_payment_button_updated': ExtPayPalPaymentsForm(initial=paypal_updated_dict),
+                    'total_amount': total_amount,
+                    'donation_id': donation_id,
+                    'register_form': register_form,
+                }
                 user = register_form.save()
                 username = register_form.cleaned_data['username']
                 password = register_form.cleaned_data['password1']
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 messages.success(request, f'Welcome to our-tube! Complete your donation as @{request.user}')
-                return redirect('donation_landing_page', project_id=project.id)
+                return render(request, 'donation/donation_landing_page.html', updated_context)
             else:
                 context = {
                     'project': project,
