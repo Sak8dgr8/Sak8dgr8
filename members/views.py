@@ -611,19 +611,14 @@ def donation_landing_page(request, project_id):
                 'password2': request.POST['password1'],
             })
             if register_form.is_valid():
-                updated_context = {
-                    'project': project,
-                    'form': form,
-                    'register_form': register_form,
-                    'paypal_payment_button': paypal_payment_button,
-                }
+
                 user = register_form.save()
                 username = register_form.cleaned_data['username']
                 password = register_form.cleaned_data['password1']
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 messages.success(request, f'Welcome to our-tube! Complete your donation as @{request.user}')
-                return render(request, 'donation/donation_landing_page.html', updated_context)
+                return redirect('donation_landing_page', project_id=project.pk)
             else:
                 context = {
                     'project': project,
