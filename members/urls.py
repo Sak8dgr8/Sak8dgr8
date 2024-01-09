@@ -49,5 +49,10 @@ urlpatterns = [
 
    path('privacy_policy/', views.privacy_policy, name='privacy_policy' ),
    path('complete/', views.paymentcomplete, name="complete"),
+   path('withdraw_funds/<int:project_id>/<str:username>', views.withdrawal_page, name='withdrawal_page'),
+   path('withdrawal_instructions/<int:project_id>/<str:username>', views.withdrawal_instructions, name='withdrawal_instructions'),
+   path('withdraw/<int:project_id>/<str:username>', views.withdraw, name='withdraw'),
+   path('track_withdrawals/<int:project_id>/<str:username>', views.track_withdrawals, name='track_withdrawals'),
+   path('edit_withdrawal/<int:withdrawal_id>/<int:project_id>', views.edit_withdrawal, name='edit_withdrawal'),
  
 ]

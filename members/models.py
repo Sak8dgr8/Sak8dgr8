@@ -7,6 +7,10 @@ from django.dispatch import receiver
 from django.db.models import Sum
 from .constants import STATES_CHOICES
 from .constants import DAYS_CHOICES
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator
+import uuid
 # Create your models here.
 
 
@@ -42,6 +46,7 @@ class Project(models.Model):
 
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="project")
+    collaborator = models.ManyToManyField(User, blank=True, related_name='collaborators')
     state = models.CharField(null=True,max_length=3, choices=STATES_CHOICES)
     city = models.CharField(null=True, max_length=100)
     project_title = models.CharField(null=True, max_length=400)
@@ -50,7 +55,6 @@ class Project(models.Model):
     project_thumbnail = models.ImageField(null=True, blank=True)
     project_video = models.FileField(validators=[FileExtensionValidator(allowed_extensions=['mp4','avi','mov'])], null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='nonee')
-
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
     page_qr_code = models.ImageField(upload_to='qrcodes/', null=True, blank=True)
@@ -80,6 +84,34 @@ class Update(models.Model):
     def __str__(self):
         return f"{self.update_title} - {self.project}"
 
+class Withdrawl(models.Model):
+     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='withdrawls')
+     withdrawl_id = models.AutoField(primary_key=True)
+     withdrawl_date_time = models.DateTimeField(auto_now=True)
+     withdrawl_description = models.TextField(null=True, blank=True)
+     withdrawl_amount = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(50000)])
+     withdrawl_proof = models.FileField(upload_to="proof/%y", null=True, blank=True)
+
+class Bank(models.Model):
+    PERSONAL = 'Personal'
+    CHECKING = 'Checking'
+
+    ACCOUNT_TYPE_CHOICES = [
+        (PERSONAL, 'Personal'),
+        (CHECKING, 'Checking'),
+    ]
+
+    routing_number = models.IntegerField(
+    )
+    account_number = models.IntegerField()
+    bank_name = models.CharField(max_length=255)
+    account_type = models.CharField(
+        max_length=10, 
+        choices=ACCOUNT_TYPE_CHOICES,
+        default=PERSONAL
+    )
+    
+    
 
 class Comment(models.Model):
       project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
@@ -100,9 +132,6 @@ class UpdateComment(models.Model):
             return '%s - %s' % (self.update.update_title, self.user)
 
 
-from django.core.validators import MinValueValidator
-from django.core.validators import MaxValueValidator
-import uuid
 
 
 class Donation(models.Model):

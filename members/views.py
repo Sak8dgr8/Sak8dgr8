@@ -31,7 +31,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from .forms import UpdateForm
-from .models import Update
+from .models import Update, Withdrawl
 from .forms import UpdateCommentForm
 from .models import UpdateComment
 from django.core.files.base import ContentFile
@@ -43,6 +43,7 @@ from django.http import HttpResponse
 import qrcode      
 from io import BytesIO
 from django.core.files import File
+from .forms import WithdrawForm
 
 
 
@@ -327,7 +328,12 @@ def user_channel(request, username, error_message=None):
         channel_owner_donation = Donation.objects.filter(project=project, donor=channel_owner, status='completed').first()
         completed_donation_count = project.donations.filter(status='completed').count()
         updates = Update.objects.filter(project=project)
-
+        withdrawls = Withdrawl.objects.filter(project=project)
+        total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+        ourtube_balance = total_donations - total_withdrawals
+        untracked_withdrawals = Withdrawl.objects.filter(project=project, withdrawl_proof="")
+        total_untracked_amount = untracked_withdrawals.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+        collaborators = project.collaborator.all()
 
         context.update({
             'data2': data2,
@@ -335,7 +341,8 @@ def user_channel(request, username, error_message=None):
             'comment_count': comment_count,
             'comments': comments,
             'profile_id': profile_id,
-
+            'withdrawls': withdrawls,
+            'total_withdrawls': total_withdrawals,
             'percentage': percentage,
             'channel_owner': channel_owner,
             'highest_donation': highest_donation,
@@ -346,6 +353,9 @@ def user_channel(request, username, error_message=None):
             'completed_donation_count': completed_donation_count,
             'all_donations': all_donations,
             'logo_image_url': "{% static 'Our-TubeLogo.svg' %}",
+            'ourtube_balance' : ourtube_balance,
+            'total_untracked_amount': total_untracked_amount,
+            'collaborators': collaborators,
         })
 
         if not request.user.is_authenticated:
@@ -353,7 +363,225 @@ def user_channel(request, username, error_message=None):
 
     return render(request, 'Channel/userchannel.html', context)
 
+@login_required
+def withdrawal_page(request, username, project_id):
+    user = get_object_or_404(User, username=username)
+    completed_projects = Project.objects.filter(user=user, status='completed')
 
+    completed_projects_count = completed_projects.count()
+    data2 = Profile.objects.get(user=user)
+    subscribers = data2.subscribers.all()
+    number_of_subscribers = len(subscribers)
+    is_subscribed = False
+    for subscriber in subscribers:
+        if subscriber == request.user:
+            is_subscribed = True
+            break
+    is_subscribed = request.user in subscribers
+    project = get_object_or_404(Project, id=project_id)
+    total_donations = project.total_donations or 0
+    withdrawls = Withdrawl.objects.filter(project=project)
+    total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    ourtube_balance = total_donations - total_withdrawals
+    request.session['project_id'] = project_id  # Replace 123 with the actual project_id
+
+    context={
+        'user':user,
+        'completed_projects_count':completed_projects_count,
+        'completed_projects':completed_projects,
+        'data2':data2,
+        'number_of_subscribers': number_of_subscribers,
+        'is_subscribed': is_subscribed,
+        'project': project,
+        'total_donations': total_donations,
+        'total_withdrawals':total_withdrawals,
+        'ourtube_balance':ourtube_balance,
+        'withdrawals': withdrawls,
+    }   
+
+    return render(request, 'Channel/withdrawal_page.html', context)
+
+
+
+@login_required
+def withdrawal_instructions(request, username, project_id):
+    user = get_object_or_404(User, username=username)
+    completed_projects = Project.objects.filter(user=user, status='completed')
+
+    completed_projects_count = completed_projects.count()
+    data2 = Profile.objects.get(user=user)
+    subscribers = data2.subscribers.all()
+    number_of_subscribers = len(subscribers)
+    is_subscribed = False
+    for subscriber in subscribers:
+        if subscriber == request.user:
+            is_subscribed = True
+            break
+    is_subscribed = request.user in subscribers
+    project = get_object_or_404(Project, id=project_id)
+    total_donations = project.total_donations or 0
+    withdrawls = Withdrawl.objects.filter(project=project)
+    total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    ourtube_balance = total_donations - total_withdrawals
+    request.session['project_id'] = project_id  # Replace 123 with the actual project_id
+
+    context={
+        'user':user,
+        'completed_projects_count':completed_projects_count,
+        'completed_projects':completed_projects,
+        'data2':data2,
+        'number_of_subscribers': number_of_subscribers,
+        'is_subscribed': is_subscribed,
+        'project': project,
+        'total_donations': total_donations,
+        'total_withdrawals':total_withdrawals,
+        'ourtube_balance':ourtube_balance,
+        'withdrawals': withdrawls,
+    }   
+
+    return render(request, 'Channel/withdrawal_instructions.html', context)
+
+
+
+@login_required
+def withdraw(request, username, project_id):
+    user = get_object_or_404(User, username=username)
+    completed_projects = Project.objects.filter(user=user, status='completed')
+
+    completed_projects_count = completed_projects.count()
+    data2 = Profile.objects.get(user=user)
+    subscribers = data2.subscribers.all()
+    number_of_subscribers = len(subscribers)
+    is_subscribed = False
+    for subscriber in subscribers:
+        if subscriber == request.user:
+            is_subscribed = True
+            break
+    is_subscribed = request.user in subscribers
+    project = get_object_or_404(Project, id=project_id)
+    total_donations = project.total_donations or 0
+    withdrawls = Withdrawl.objects.filter(project=project)
+    total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    ourtube_balance = total_donations - total_withdrawals
+    request.session['project_id'] = project_id  # Replace 123 with the actual project_id
+    form = WithdrawForm()
+    if request.method == 'POST':
+        form = WithdrawForm(request.POST, request.FILES)
+        if form.is_valid:
+            withdraw_data = form.save(commit=False)
+            withdraw_data.project = project
+            withdraw_data.save()
+            send_withdrawal_email(withdraw_data, project)
+            messages.success(request, "Withdrawal request initiated succesfully. Expect changes to reflect in your bank account in 1-5 business days.")
+            return redirect('user_channel', username=request.user.username)
+        else:
+            messages.error(request, "Correct errors boi")
+            return redirect('withdraw', username=request.user, project_id=project.pk)
+
+    context={
+        'user':user,
+        'completed_projects_count':completed_projects_count,
+        'completed_projects':completed_projects,
+        'data2':data2,
+        'number_of_subscribers': number_of_subscribers,
+        'is_subscribed': is_subscribed,
+        'project': project,
+        'total_donations': total_donations,
+        'total_withdrawals':total_withdrawals,
+        'ourtube_balance':ourtube_balance,
+        'withdrawals': withdrawls,
+        'form': form,
+    }   
+
+    return render(request, 'Channel/withdraw.html', context)
+
+
+@login_required
+def track_withdrawals(request, username, project_id):
+    user = get_object_or_404(User, username=username)
+    completed_projects = Project.objects.filter(user=user, status='completed')
+    completed_projects_count = completed_projects.count()
+    data2 = Profile.objects.get(user=user)
+    subscribers = data2.subscribers.all()
+    number_of_subscribers = len(subscribers)
+    is_subscribed = False
+    for subscriber in subscribers:
+        if subscriber == request.user:
+            is_subscribed = True
+            break
+    is_subscribed = request.user in subscribers
+    project = get_object_or_404(Project, id=project_id)
+    total_donations = project.total_donations or 0
+    withdrawls = Withdrawl.objects.filter(project=project)
+    total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    ourtube_balance = total_donations - total_withdrawals
+    request.session['project_id'] = project_id  # Replace 123 with the actual project_id
+    untracked_withdrawals = Withdrawl.objects.filter(project=project, withdrawl_proof="")
+    total_untracked_amount = untracked_withdrawals.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    
+    context={
+        'user':user,
+        'completed_projects_count':completed_projects_count,
+        'completed_projects':completed_projects,
+        'data2':data2,
+        'number_of_subscribers': number_of_subscribers,
+        'is_subscribed': is_subscribed,
+        'project': project,
+        'total_donations': total_donations,
+        'total_withdrawals':total_withdrawals,
+        'ourtube_balance':ourtube_balance,
+        'withdrawls': withdrawls,
+        'untracked_withdrawals':untracked_withdrawals,
+        'total_untracked_amount':total_untracked_amount,
+    }   
+
+    return render(request, 'Channel/track_withdrawals.html', context)
+
+def send_withdrawal_email(withdrawal, project):
+    subject = f"{project.user} request a withdrawal"
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = ['bvssaket6000@gmail.com']
+
+    context = {
+        'project':project,
+        'withdrawal': withdrawal,
+     }
+    email_body = render_to_string('projects/withdrawal_email.html', context)
+    email = EmailMessage(subject, email_body, from_email, recipient_list)
+    email.content_subtype = 'html'
+    email.send()
+
+@login_required
+def edit_withdrawal(request, withdrawal_id, project_id):
+    withdrawal = get_object_or_404(Withdrawl, withdrawl_id = withdrawal_id)
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'POST':
+        form = WithdrawForm(request.POST, request.FILES, instance=withdrawal)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Withdrawal tracked succesfully!")
+            return redirect('user_channel', username=request.user)
+        else:
+            print(form.errors)
+            messages.error(request, 'correct errors boi.')
+    else:
+        form = WithdrawForm(instance=withdrawal)
+    total_donations = project.total_donations or 0
+    withdrawls = Withdrawl.objects.filter(project=project)
+    total_withdrawals = withdrawls.aggregate(Sum('withdrawl_amount'))['withdrawl_amount__sum'] or 0
+    ourtube_balance = total_donations - total_withdrawals
+    request.session['project_id'] = project_id
+
+    context = {
+        'form':form,
+        'withdrawal':withdrawal,
+        'project':project,
+        'total_donations': total_donations,
+        'total_withdrawals':total_withdrawals,
+        'ourtube_balance':ourtube_balance,
+        'withdrawls': withdrawls,
+    }
+    return render(request, 'Channel/edit_withdrawal.html', context)
 
 def update_detail(request, project_id, update_id):
     project = get_object_or_404(Project, id=project_id)
@@ -453,7 +681,7 @@ def completed_projects(request, username):
 
 
     context = {
-        'user': user,  # Add the user to the context
+        'user': user,  
         'completed_projects': completed_projects,
         'number_of_subscribers': number_of_subscribers,
         'is_subscribed': is_subscribed,
@@ -471,7 +699,6 @@ class AddSubscriber(LoginRequiredMixin, View):
         profile = Profile.objects.get(user=user)
         profile.subscribers.add(request.user)
 
-        # Get the 'next' parameter from the request
         next_url = request.GET.get('next', None)
         if next_url:
             return redirect(next_url)
@@ -484,7 +711,6 @@ class RemoveSubscriber(LoginRequiredMixin, View):
         profile = Profile.objects.get(user=user)
         profile.subscribers.remove(request.user)
 
-        # Get the 'next' parameter from the request
         next_url = request.GET.get('next', None)
         if next_url:
             return redirect(next_url)
@@ -761,37 +987,38 @@ def verify_button(request):
         return HttpResponse("Invalid request or missing token parameter.")
 
 
-
+from .forms import BankForm
 
 @login_required
 def payment_info(request):
-    user_email = request.user.email
     username = request.user.username
-    project = Project.objects.filter(user=request.user, status='draft').first()
+    user= request.user
+    completed_projects = Project.objects.filter(user=user, status='completed')
+
+    completed_projects_count = completed_projects.count()
+    project_id = request.session.get('project_id')
     profile = get_object_or_404(Profile, user=request.user)
 
-    # Generate a verification token
-    token = signing.dumps({'user_id': request.user.id})
-
-    # Include the token in the verification link URL
-    verification_url = reverse('verify_button') + f'?token={token}'
+    if request.method == 'POST':
+        form = BankForm(request.POST)
+        if form.is_valid:
+            form.save()
+            profile.verification_status = 'verified'
+            profile.save()
+            messages.success(request, 'Succesfully saved. Make a Withdrawal!')
+            return redirect('withdrawal_page', username=username, project_id=project_id )
+        else:
+            messages.error(request, f'')
+            return render(request, 'projects/payments.html', {'form': form, 'profile': profile})
+    else:
+        form = BankForm()
 
     context = {
         'username': username,
         'profile': profile,
-        'verification_url': verification_url,  # Include this in the context
-        'project' : project,
+        'completed_projects_count': completed_projects_count,
+        'form': form,
     }
-
-    if request.method == 'POST':
-        # Send the email with the verification link
-        email_subject = 'Verify your email address'
-        email_body = render_to_string('projects/verification.html', context)
-        email = EmailMessage(email_subject, email_body, to=[user_email])
-        email.content_subtype = 'html'
-        email.send()
-        profile.verification_status = 'email_sent'
-        profile.save()
 
     return render(request, 'projects/payments.html', context)
 
@@ -959,3 +1186,4 @@ def payment_failed_view(request):
 
 def privacy_policy(request):
     return render(request, 'footer/privacy_policy.html')
+

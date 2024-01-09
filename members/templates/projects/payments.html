@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <script src="https://kit.fontawesome.com/4db88b2900.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment verification - Our-Tube</title>
-    {% load widget_tweaks %}
+    <title>Channel customization -Our-Tube</title>
     {% load static %}
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'site.webmanifest'%}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{%static 'fundinginfostyle.css'%}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mCE1kFjAF8wwDZTG0apORHo2O5RAIDFZkHj7XQPhyY12hNl0ttxQ1uqg29UC9H/b" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{%static 'userchannelstyle.css'%}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
+    <!-- Include Cropper.js library -->
    
-    <script>
-        window.addEventListener('scroll', function() {
-          var navbar = document.querySelector('.navbar-testing');
-          var menuItems= document.querySelector('.menu-items');
-          if (window.scrollY > 0) {
-            navbar.classList.add('scrolled');
-            menuItems.classList.add('scrolled');
-          } else {
-            navbar.classList.remove('scrolled');
-            menuItems.classList.remove('scrolled');
-          }
-        });
-      </script>
+  
       <script>
         document.addEventListener("DOMContentLoaded", function() {
         var dropdown = document.getElementById("dropdown");
@@ -52,126 +34,133 @@
         });
       });
       </script>
-      <script>
-        function handleFileSelect(event) {
-          var files = event.target.files;
-          if (files.length > 0) {
-            var fileName = files[0].name;
-            document.getElementById("videoName").textContent = fileName;
-            document.getElementById("hiddenFormVideo").files = event.target.files;
-          }
-        }
-      
-        function openFileSelector() {
-          document.getElementById("fileInput").click();
-        }
-      </script>
       <style>
         @import url('https://fonts.cdnfonts.com/css/youtube-sans');
         </style>
       <link href="https://fonts.cdnfonts.com/css/youtube-sans" rel="stylesheet">
-      
      
-  </head>
-     
-  <header>
-  
-    <nav class="navbar-testing">
-      <div class="logo">
-        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
-      </div> 
-      <ul class="navbar-nav">
-  
-          
-        <a href="{% url 'user_channel' username=request.user.username %}">  <button class="lodaone"><i class="fa fas-light fa-eye fa-lg" style="margin-right: 10px;"></i>Preview</button></a>
-          
-          {% if project %}
-            <a href="{% url 'edit_project' pk=project.pk %}"><button class="lodatwo"><i class="fa fa-pen-to-square fa-lg" style="margin-right: 10px;"></i>Edit Project</button> </a>
+
+</head>
+   
+<nav class="navbar-testing">
+  <div class="logo">
+    <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}"></a>
+  </div> 
+  <ul class="navbar-nav">
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+     <div class="hudini">  <a href="{% url 'loda' %}" class="vinsmoke"><li>How it Works</li></a></div>
+     <div class="hudini">    <a href="{% url 'funding_now' %}" class="vinsmoke"><li><i class="fa fa-search"></i> Funding Now</li></a>  </div>  
+      <li></li>
+      <li></li>
+     <div class="hudini"><a href="{% url 'funding_info' %}"> <button class="donate-btn" style="color: azure; font-weight: bold;"> Start a Project</button></a></div>
+       {% if user.is_authenticated %}
+       <li>
+        <div class="dropdown">
+          {% if user.profile.cropped_image_data %}
+          <img src="{{ user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
+          <div class="dropdown-content" id="dropdown-content">
+            <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+            <a href="{% url 'donation_history' %}">Your Donations</a>
+            <a href="{% url 'logout'%}">Log Out</a>
           {% else %}
-          <a href="{% url 'funding_info' %}"><button class="lodatwo"><i class="fa fa-pen-to-square fa-lg" style="margin-right: 10px;"></i>Edit Project</button> </a>
+          <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
+          <div class="dropdown-content" id="dropdown-content">
+            <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
+            <a href="{% url 'donation_history' %}">Your Donations</a>
+            <a href="{% url 'logout'%}">Log Out</a>
           {% endif %}
-  
-           
-  
-       </ul>
-  </header>
-<body>
-    
-    <div style=" display: flex; flex-direction: column; align-items: center;">
-    <h2  class="heding" style="text-align: center;">Verify your details and link a bank account</h2>
-    <h3  class="beding" style="width: 70%; text-align: center; color: gray; font-weight: 300;">Confirm who’s raising funds and receiving them if this project reaches its funding goal. Double-check your information—you agree the details you provide are true to your fullest knowledge.</h3>
-    </div>
-    
-   <hr>
-
-
-   <div class="rip">
-<div class="ashaye">
-    <div class="column">
-      <h2 class="headingstyle">Contact Email</h2>
-      <p class="estyle">Confirm the email address that will be used to receive payments via PayPal. It should correspond to either a personal or checking account with PayPal.</p>
-      <p class="estyle">If the incorrect email is shown here, <a href="{% url 'basic_info' %}" style="text-decoration: underline; color: gray;">update it on your account.</a></p>
-    </div>
-    {% if profile.verification_status == 'not_verified' %}
-            <div class="kuntainer" style="position: relative; top: 65px;">
-              <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;">  {{user.email}} </p>
-                <form method="post">
-                {% csrf_token %}
-                <button class="verifybutton" type="submit">Send verification email<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
-                </form>
-            </div>
-    {% elif profile.verification_status == 'email_sent' %}
-    <div class="kuntainer" style="position: relative; top: 65px;">
-        <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
-        </i>Verifying the email sent to {{user.email}}</p>
-          <form method="post">
-          {% csrf_token %}
-          <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
-          </form>
-      </div>
-      {% elif profile.verification_status == 'verified' %}
-      <div class="kuntainer" style="position: relative; top: 65px;">
-          <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px; font-size: 0.9rem;"><i class="fas fa-check" style="margin-right: 10px;"></i>
-          </i>Thank you for verifying your email {{user.email}}</p>
-            <button class="verifybutton" style="cursor: none;">Your project is ready to accept donations via PayPal.</button>
-
+          </div>
         </div>
+     </li>
+       {% else %}
+       <a href="{% url 'login_user' %}" class="vinsmoke"><li>Login</li></a>
+       {% endif %}
+       
+
+   </ul>
+
+   <div class="overlay" id="overlay">
+    <div class="close-btn">
+      <i class="fas fa-times fa-lg"></i>
+    </div>
+    <div class="menu">
+        <a href="{% url 'home' %}"><img src="{% static 'Our-TubeLogo.svg' %}" style="width: 150px; height:auto;"></a>
+      
+      <a href="{% url 'funding_now' %}" class="fuck" style="color: black;"> Discover <i class="fa fa-search" style="rotate: 90deg;"></i></a> 
+      <a href="{% url 'loda' %}" style="color: black;" class="fuck">How it Works<i class="fas fa-book" style="margin-left: 10px;"></i></a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout'%}"  class="fuck" style="color: black;">Log Out</a>
+      {% else %}
+       <a href="{% url 'login_user' %}"  class="fuck" style="color: black;">Login <i class="fas fa-user" style="margin-left: 10px;"></i></a>
+       {% endif %}
+     <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <a href="{% url 'funding_info' %}"> <button class="donate-btn-burger" style="color: azure; font-weight: bold;"> Start a Project</button></a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'donation_history' %}"> <button class="sign-btn-burger">Donation History</button></a>
+    {% else %}
+    <a href="{% url 'register_user' %}"> <button class="sign-btn-burger">Sign up</button></a>
     {% endif %}
-
+  </div> 
     </div>
   </div>
-</div>
+</nav>
+</header>
+<body>
 
-<div class="rip-phone">
-
-  <div style="display: flex; flex-direction: column; margin-left: 5%; margin-right: 5%; margin-bottom: 60px;margin-top: 20px;">
-    <h2 class="headingstyle">Contact Email</h2>
-    <div style="display: flex; flex-direction: column;">
-    <p class="pstyle" style="margin-bottom: 0;">Confirm the email address we should use for correspondence about this project.</p>
-    <p class="pstyle" style="margin-top: 0;">If the incorrect email is shown here, <a href="{%url 'basic_info'%}">update it on your account.</a></p>
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+  <div class="form-errors hara">
+    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+    <i class="fas fa-exclamation-circle fa-lg"></i>
+    <p class="error-message">{{ message }}</p>
     </div>
+  </div>
+  {% elif message.tags == 'success' %}
+  <div class="form-successes hara">
+   <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center;">
+   <i class="fas fa-check-circle fa-lg"></i>
+   <p class="success-message">{{ message }}</p>
+   </div>
+ </div>
+ {% endif %}
+  {% endfor %}
+  {% endif %}
 
-    {% if project.verification_status == 'not_verified' %}
-    <div class="kuntainer">
-      <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;">  {{user.email}} </p>
-        <form method="post">
-        {% csrf_token %}
-        <button class="verifybutton" type="submit">Send verification email<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
-        </form>
-    </div>
-    {% elif project.verification_status == 'email_sent' %}
-    <div class="kuntainer">
-        <p class="estyle" style="margin: 0; color: #000; padding-left: 10px; margin-bottom: 10px;"><i class="fas fa-clock" style="margin-right: 10px;"></i>
-        </i>Verifying the email sent to {{user.email}}</p>
-          <form method="post">
-          {% csrf_token %}
-          <button class="verifybutton" type="submit">Didn't receive it? Resend<i class="fas fa-paper-plane fa-lg" style="margin-left: 10px;"></i></button>
-          </form>
+    <nav class="edit-bar">
+        <ul class="throatgoat">
+            <h1 class="escanor">Set up Withdrawals</h1>
+              <div style="display: flex; flex-direction: row; gap: 20px;">
+              <a href="{% url 'channel_customization' %}" style="text-decoration: none;">  <li class="litems">Untracked Withdrawals</li> </a>
+               <a href="{% url 'basic_info' %}" style="text-decoration: none;"><li class="litems">Collaborators</li></a>
+              </div>
+        </ul>
+    </nav>
+<form method="POST">{% csrf_token %}
+<div class="green-container">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+    <p style="font-family: 'Lato', sans-serif; font-size: 1.6rem; margin-bottom: 0;">Connect Your Bank Account</p>
+    <img src="https://cdn.wallethub.com/wallethub/images/posts/11997/check-routing-account-number.png" style="width: 350px; height: auto;">
+      <div style="display: flex; flex-direction: column; width: 50%; align-items: flex-start;">
+        <p style="font-weight: bold; font-family: 'Lato',sans-serif; margin-bottom: 0em;">Bank Information</p>
+        <hr style="width: 100%;">
+        <p>Routing Number</p>
+        {{form.routing_number}}
+        <p>Account Number</p>
+        {{form.account_number}}
+        <p>Bank Name</p>
+        {{form.bank_name}}
+        <p>Account Type</p>
+        {{form.account_type}}
+     
+        <button class="button-connect">Connect</button>
+
       </div>
-
   </div>
-
-
-
-{% endif %}
 </div>
+</form>
+</body>
+</html>

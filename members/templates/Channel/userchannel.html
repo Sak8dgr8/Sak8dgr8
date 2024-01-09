@@ -53,6 +53,8 @@ $(document).ready(function() {
   // Show Description content by default
   $('#comment-content').show();
   $('#updates-content').hide();
+  $('#withdrawls-content').hide();
+
 
   // Handle tab clicks
   $('.blogflex li').click(function() {
@@ -81,6 +83,12 @@ $(document).ready(function() {
     $('#description-content').show(); // Show Description content
   });
 
+    // Show Withdrawls content on tab click
+    $('#withdrawls-tab').click(function() {
+    $('.tab-content').hide(); // Hide all content sections
+    $('#withdrawls-content').show(); // Show Comments content
+  });
+
   // Show Comments content on tab click
   $('#comment-tab').click(function() {
     $('.tab-content').hide(); // Hide all content sections
@@ -102,6 +110,7 @@ $(document).ready(function() {
     // Show Description content by default
     $('#comment-content-phone').show();
     $('#updates-content-phone').hide();
+    $('#withdrawls-content-phone').hide();
   
     // Handle tab clicks
     $('.blogflex li').click(function() {
@@ -132,6 +141,12 @@ $(document).ready(function() {
     $('#comment-tab-phone').click(function() {
       $('.tab-content-phone').hide(); // Hide all content sections
       $('#comment-content-phone').show(); // Show Comments content
+    });
+
+        // Show Comments content on tab click
+    $('#withdrawls-tab-phone').click(function() {
+      $('.tab-content-phone').hide(); // Hide all content sections
+      $('#withdrawls-content-phone').show(); // Show Comments content
     });
   
     // Show Updates content on tab click
@@ -199,28 +214,13 @@ $(document).ready(function() {
           {% elif project.status == 'live' %}
         <div style="position: absolute; left: 5%; align-self: center;">
             <form method="post" action="{% url 'complete_project' project_id=project.pk %}">{% csrf_token %}
-            <button class="lodatwo" type="submit"><i class="fas fa-building-columns" style="margin-right: 10px; @media(max-width:571px){display: none;}"></i>Complete Project</button>
+            <button class="lodatwo" type="submit"><i class="fas fa-check" style="margin-right: 10px; @media(max-width:571px){display: none;}"></i>Complete Project</button>
             </form>   
           </div>
         <div style="position: absolute; right: 10%; align-self: center;">
-            <li>
-              <div class="dropdown">
-                {% if request.user.profile.cropped_image_data %}
-                <img src="{{ request.user.profile.cropped_image_data.url }}" alt="Button Image" id="dropdown" style="border-radius: 50%; align-self: center;">
-                <div class="dropdown-content" id="dropdown-content">
-                  <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
-                  <a href="{% url 'donation_history' %}">Your Donations</a>
-                  <a href="{% url 'logout'%}">Log Out</a>
-                {% else %}
-                <img src="{% static 'profilepic.png' %}" alt="Button Image" id="dropdown" style="border-radius: 50%;">
-                <div class="dropdown-content" id="dropdown-content">
-                  <a href="{% url 'user_channel' username=request.user.username %}">Your Channel</a>
-                  <a href="{% url 'donation_history' %}">Your Donations</a>
-                  <a href="{% url 'logout'%}">Log Out</a>
-                {% endif %}
-                </div>
-              </div>
-           </li>
+          <a href="{% url 'withdrawal_page' username=request.user project_id=project.pk %}">
+          <button class="lodatwo" type="submit"><i class="fas fa-building-columns" style="margin-right: 10px; @media(max-width:571px){display: none;}"></i>Withdraw Funds</button>
+          </a>
           </div>
        
           {% else %}
@@ -468,7 +468,7 @@ $(document).ready(function() {
                    </div>
                    <div style="display: flex; flex-direction: row; gap: 5px; align-items: flex-end; margin-top: 0.5em;">
                      <p class="donation-text-phone">${{project.total_donations}}</p>
-                     <p class="pforfundinggoal-phone">raised of ${{ project.funding_goal }} goal</p>
+                     <p class="pforfundinggoal-phone">raised | ${{ project.total_donations }} tracked</p>
                      
                    </div>
                    <p class="pforfundinggoal-phone" style="color: black; margin-top: 0.4em; margin-bottom: 0.6em;">{{completed_donation_count}} people donated</p>
@@ -520,8 +520,8 @@ $(document).ready(function() {
                 <hr style="width: 100%;">
                 <nav class="bloginteractions" style="margin-top: 10px;">
                  <ul class="blogflex">
+                   <li id="withdrawls-tab">Withdrawals ({{project.withdrawls.count}})</li>
                    <li id="comment-tab">Comments ({{ comment_count }})</li>
-                   <li id="updates-tab">Updates ({{project.updates.count}})</li>
                  </ul>
                </nav>
            </div>
@@ -598,6 +598,20 @@ $(document).ready(function() {
         <source src="{{ project.project_video.url }}" type="{{ project.project_video.content_type }}">
        </video>
         {% endif %}
+      {% if collaborators %}
+      {% for collaborator in collaborators %}
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 5px;">
+       {% if collaborator.profile.cropped_image_data %}
+      <img src="{{collaborator.profile.cropped_image_data.url}}" style="width: 40px; height: 40px; border-radius: 50%;">
+      {% else %}
+      <img src="{% static 'profilepic.png' %}" style="width: 35px; height: 35px; border-radius: 50%;">
+      {% endif %}
+      <p style="margin-top: 0.8em; margin-bottom: 0.8em; font-family: 'Lato', sans-serif;">Project in collaboration with <a href="{% url 'user_channel' username=collaborator.username %}" style="text-decoration: underline; color: black;"> @{{collaborator.username}} </a></p>
+    </div>
+    {% endfor %}
+    <hr class="yosha">
+       {% endif %}
+      
     <div class="peace">
        <p class="title-phone">{{project.project_title}}</p>
 
@@ -884,12 +898,10 @@ $(document).ready(function() {
        <hr style="width: 100%;">
        <nav class="bloginteractions" style="margin-top: 10px; margin-bottom: 0;">
         <ul class="blogflex">
+          <li id="withdrawls-tab">Withdrawals ({{project.withdrawls.count}})</li>
           <li id="comment-tab">Comments ({{ comment_count }})</li>
-          <li id="updates-tab">Updates ({{project.updates.count}})</li>
         </ul>
       </nav>
-    
-       
 
             <div class="tab-content" id="comment-content"> 
             
@@ -974,6 +986,72 @@ $(document).ready(function() {
 
             </div>
 
+            <!-- Withdrawls history -->
+
+            <div class="tab-content" id="withdrawls-content">
+        {% if withdrawls %}
+                  <div class="withdrawals-container">
+                    <div class="withdrawal-header">
+                        <div style="flex: 1;">ID</div>
+                        <div style="flex: 2;">Date/Time</div>
+                        <div style="flex: 4;">Description</div>
+                        <div style="flex: 2">Proof/Invoice</div>
+                        <div style="flex: 1">Amount</div>
+                    </div>
+
+
+                    {% for withdrawl in withdrawls %}
+                    <div class="withdrawal-row {% if withdrawl.withdrawl_proof %}tracked{% else %}untracked{% endif %}">
+
+                        <div style="flex: 1;">{{ withdrawl.withdrawl_id }}</div>
+                        <div style="flex: 2;">{{ withdrawl.withdrawl_date_time|naturaltime }}</div>
+                        <div style="flex: 4;">{{ withdrawl.withdrawl_description }}</div>
+                        {% if withdrawl.withdrawl_proof %}
+                        <div style="flex: 2;"><a href="{{withdrawl.withdrawl_proof.url}}" style="text-decoration: underline; color: black;" target="_blank">Link</a></div>
+                        {% else %}
+                        <div style="flex: 2;">
+                          {% if project.user == request.user %}
+                          <a href="{% url 'edit_withdrawal' withdrawal_id=withdrawl.withdrawl_id project_id=project.pk %}" style="text-decoration: underline; color: blue;">Track Now!</a>
+                          {%endif%}
+                        </div>
+                        {% endif %}
+                        <div style="flex: 1;">${{ withdrawl.withdrawl_amount }}</div>
+                    </div>
+                    {% endfor %}
+          
+                           
+                    
+                            <div class="withdrawal-total">
+                              <div style="flex: 1;"></div>
+                              <div style="flex: 2;"></div>
+                              <div style="flex: 4;"></div>
+                              <div style="flex: 2;">Total Spent</div>
+                              <div style="flex: 1;">${{total_withdrawls}}</div>
+                          </div>
+
+                          <div class="withdrawal-total">
+                            <div style="flex: 1;"></div>
+                            <div style="flex: 2;"></div>
+                            <div style="flex: 4;"></div>
+                            <div style="flex: 2;">Untracked</div>
+                            <div style="color: red; flex: 1;">${{total_untracked_amount}}</div>
+                        </div>
+
+                          <div class="withdrawal-total">
+                            <div style="flex: 1;"></div>
+                            <div style="flex: 2;"></div>
+                            <div style="flex: 4;"></div>
+                            <div style="flex: 2;">Our-Tube Balance</div>
+                            <div style="flex: 1;">${{ourtube_balance}}</div>
+                        </div>
+
+
+
+                  </div>
+            {% else %}
+                    @{{project.user}} has not made any withdrawals yet.
+            {% endif %}
+            </div>
                   
                 
                   <div class="tab-content" id="updates-content">
@@ -1033,7 +1111,7 @@ $(document).ready(function() {
                 <div style="display: flex; flex-direction: row; align-items: center; height: 30px; gap: 1vw; justify-content: center;">
                 <p style="font-size: 1.8rem; font-family: 'Lato', sans-serif; font-weight: 400;">${{project.total_donations}}</p>
            
-                    <p class="pforfundinggoal">raised of ${{ project.funding_goal }} goal</p>
+                    <p class="pforfundinggoal">raised | ${{ project.total_donations }} tracked</p>
           
             
                 </div>

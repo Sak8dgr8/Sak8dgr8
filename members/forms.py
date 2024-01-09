@@ -8,7 +8,9 @@ from .models import Project
 from .models import Comment, UpdateComment
 from. models import Donation
 from .models import Update
+from .models import Bank
 from django.forms import ImageField, FileInput
+from .models import Withdrawl
 
 
 class RegisterUserForm(UserCreationForm):
@@ -141,6 +143,30 @@ class UpdateForm(forms.ModelForm):
 		self.fields['update_title'].widget.attrs['class'] = 'update-title-input'
 		self.fields['update_description'].widget.attrs['class'] = 'update-description-input'
 		
+class BankForm(forms.ModelForm):
+
+	class Meta:
+		model = Bank
+		fields = ['account_number', 'routing_number', 'bank_name', 'account_type']
+	
+	def __init__(self, *args, **kwargs):
+		super(BankForm, self).__init__(*args, **kwargs)
+		self.fields['account_number'].widget.attrs['class'] = 'container-one'
+		self.fields['routing_number'].widget.attrs['class'] = 'container-one'
+		self.fields['bank_name'].widget.attrs['class'] = 'container-one'
+		self.fields['account_type'].widget.attrs['class'] = 'container-one'
+
+class WithdrawForm(forms.ModelForm):
+
+	class Meta:
+		model = Withdrawl
+		fields = ['withdrawl_description', 'withdrawl_proof', 'withdrawl_amount']
+	
+	def __init__(self, *args, **kwargs):
+		super(WithdrawForm, self).__init__(*args, **kwargs)
+		self.fields['withdrawl_amount'].widget.attrs['class'] = 'donation-box'
+		self.fields['withdrawl_amount'].widget.attrs['placeholder'] = '00.00'
+
 
 from paypal.standard.forms import PayPalPaymentsForm
 

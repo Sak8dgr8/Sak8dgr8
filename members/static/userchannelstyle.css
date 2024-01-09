@@ -1,3 +1,46 @@
+.withdrawals-container {
+  width: 52vw;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.withdrawal-header {
+  display: flex;
+  background-color: #f0f0f0;
+  padding: 10px;
+  font-weight: bold;
+}
+
+
+.withdrawal-total {
+  display: flex;
+  background-color: #f3f3f3;
+  padding: 10px;
+  font-weight: bold;
+}
+.tracked {
+  background-color: #ceffd3;
+}
+.untracked {
+  background-color: #ffced1;
+}
+
+.withdrawal-total div {
+  flex: 1;
+}
+
+
+.withdrawal-row {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+
 footer {
   background-color: #f4f4f4;
   text-align: center;
@@ -11,6 +54,22 @@ footer {
   z-index: 999;
   
 }
+.donation-box{
+    
+  width: 180px;
+  text-align: center;
+  height: 61px;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-family: 'Lato', sans-serif;
+  
+}
+
 .vaishu{
   display: none;
 }
@@ -301,7 +360,58 @@ textarea :focus {
   .pstyle{
     font-family: 'Open Sans', sans-serif; font-size: 1rem;font-weight: 400; color: gray; 
   }
-  
+  .button-connect {
+    background-color: #4CAF50; /* Green color */
+    color: #fff; /* White text color */
+    padding: 12px 24px; /* Adjusted padding for better spacing */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style on hover */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition effect */
+
+    /* Center the button and add margin */
+    display: inline-block;
+    margin: 15px auto;
+}
+.green-container {
+ 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 0 auto;
+}
+
+/* Optional: Add hover effect for interactivity */
+.green-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.button-connect:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.button-connect:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3; /* Darker border color on hover */
+}
+  .container-one {
+    border: 1px solid #ddd; /* Use a lighter color for the border */
+    background-color: #f6f6f6; /* Adjust the background color */
+    padding: 10px; /* Increase padding for better spacing */
+    border-radius: 8px; /* Slightly increase border-radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+    width: calc(100% - 20px); /* You can use 100% instead of calc(100% - 8px) */
+    margin-bottom: 10px; /* Add margin-bottom for spacing between containers */
+}
+
+/* Optional: Add hover effect for interactivity */
+.container-one:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    transition: box-shadow 0.3s ease-in-out;
+}
 
   .gapfap{
     flex-grow: 0.1;
@@ -313,6 +423,43 @@ textarea :focus {
     background-color: #ffffff;
     
   }
+  
+.form-errors {
+  margin:0;
+  background-color: #ffced1;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+.error-message {
+  color: #bc3042;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.form-successes {
+  margin: 0;
+  background-color: #28a745; /* Green color */
+  color: #ffffff; /* White text color */
+  padding: 15px;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+}
+
+.success-message {
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+
 
   .litems{
     font-size: large;

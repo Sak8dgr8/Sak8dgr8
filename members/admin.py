@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group, User
 from .models import Project, Donation
 from django.contrib.auth.models import User
-from .models import Comment, Update
+from .models import Comment, Update, Withdrawl
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -39,6 +39,7 @@ admin.site.register(Update)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Comment)
+admin.site.register(Withdrawl)
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):
